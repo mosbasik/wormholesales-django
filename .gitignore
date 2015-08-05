@@ -65,3 +65,6 @@ target/
 
 # Secret application settings
 settings_secret.py
+
+# SQLite3 database files
+*.sqlite3
