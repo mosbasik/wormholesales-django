@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <form action="{% url 'main:order_form' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_ul }}
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>

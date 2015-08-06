@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        {% for order in object_list %}
+            <p>{{ order.created }}</p>
+            <p>{{ order.modified }}</p>
+            <p>{{ order.contact_name }}</p>
+            <p>{{ order.j_code }}</p>
+            <p>{{ order.price }}</p>
+            <p>{{ order.wormhole_class }}</p>
+            <p>{{ order.wormhole_effect }}</p>
+            <p>{{ order.information }}</p>
+            <hr>
+        {% endfor %}
+    </body>
+</html>

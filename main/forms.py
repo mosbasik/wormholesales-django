@@ -1,3 +1,9 @@
 from django.forms import ModelForm
 
-# Create your forms here.
+from main.models import Order
+
+
+class OrderModelForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = '__all__'
