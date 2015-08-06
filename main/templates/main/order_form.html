@@ -1,13 +1,61 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <form action="{% url 'main:order_form' %}" method="POST">
-            {% csrf_token %}
-            {{ form.as_ul }}
-            <button type="submit">Submit</button>
-        </form>
-    </body>
-</html>
+{% extends "project/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <form action="{% url 'main:order_form' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="id_contact_name" class="sr-only">Contact name:</label>
+                        <input id="id_contact_name" class="form-control" maxlength="255" name="contact_name" type="text" placeholder="Contact character name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_j_code" class="sr-only">J-Code</label>
+                        <input id="id_j_code" class="form-control" maxlength="7" name="j_code" type="text" placeholder="Jxxxxxx">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_price" class="sr-only">Price</label>
+                        <input id="id_price" class="form-control" name="price" type="number" placeholder="Price">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_wormhole_class" class="sr-only">Wormhole Class</label>
+                        <select id="id_wormhole_class" class="form-control" name="wormhole_class">
+                            <option value selected="selected">Wormhole class</option>
+                            <option value="1">Class 1</option>
+                            <option value="2">Class 2</option>
+                            <option value="3">Class 3</option>
+                            <option value="4">Class 4</option>
+                            <option value="5">Class 5</option>
+                            <option value="6">Class 6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_wormhole_effect" class="sr-only">Wormhole Effect</label>
+                        <select id="id_wormhole_effect" class="form-control" name="wormhole_effect">
+                            <option value="no_effect">No Effect</option>
+                            <option value="black_hole">Black Hole</option>
+                            <option value="cataclysmic_variable">Cataclysmic Variable</option>
+                            <option value="magnetar">Magnetar</option>
+                            <option value="pulsar">Pulsar</option>
+                            <option value="red_giant">Red Giant</option>
+                            <option value="wolf_rayet">Wolf Rayet</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_information" class="sr-only">Information</label>
+                        <textarea id="id_information" class="form-control" name="information" type="text" placeholder="Additional information" rows="10"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary pull-right" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
