@@ -1,19 +1,38 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        {% for order in object_list %}
-            <p>{{ order.created }}</p>
-            <p>{{ order.modified }}</p>
-            <p>{{ order.contact_name }}</p>
-            <p>{{ order.j_code }}</p>
-            <p>{{ order.price }}</p>
-            <p>{{ order.wormhole_class }}</p>
-            <p>{{ order.wormhole_effect }}</p>
-            <p>{{ order.information }}</p>
-            <hr>
-        {% endfor %}
-    </body>
-</html>
+{% extends "project/base.html" %}
+
+{% load humanize %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <table class="table table-striped table-responsive">
+                    <tr>
+                        <th>Modified</th>
+                        <th>Contact Name</th>
+                        <th>J-Code</th>
+                        <th>Price</th>
+                        <th>Class</th>
+                        <th>Effect</th>
+                        <th>Information</th>
+                    </tr>
+                    {% for order in object_list %}
+                        <tr>
+                            <td>{{ order.modified|date:'Y-m-d' }}</td>
+                            <td>{{ order.contact_name }}</td>
+                            <td>{{ order.j_code }}</td>
+                            <td>{{ order.price|floatformat:2|intcomma }}</td>
+                            <td>{{ order.wormhole_class }}</td>
+                            <td>{{ order.wormhole_effect }}</td>
+                            <td>{{ order.information|truncatewords:5 }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

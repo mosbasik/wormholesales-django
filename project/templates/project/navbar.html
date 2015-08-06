@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#message-board-nav-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Wormhole Sales Beta</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="message-board-nav-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="{% url 'main:order_form' %}">Sell</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logged in as {{ user.username }}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Logout (TODO)</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="#" class="text-primary">Login (TODO)</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

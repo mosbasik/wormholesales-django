@@ -1,0 +1,26 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Wormhole Sales Beta</title>
+        
+        <link rel="stylesheet" href="{% static 'project/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'project/css/wormholesales.css' %}">
+        {% block css %}{% endblock css %}
+    </head>
+
+    <body>
+
+        {% include "project/navbar.html" %}
+
+        {% block content %}
+        {% endblock content %}
+
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="{% static 'project/bootstrap/js/bootstrap.min.js' %}"></script>
+        {% block js %}{% endblock js %}
+    </body>
+
+</html>
