@@ -11,15 +11,10 @@ def home(request):
 
 
 class OrderListView(ListView):
-
     model = Order
 
-    # def get(self, request):
-    #     orders = Order.objects.all()
-    #     context = {}
-    #     context['orders'] = order
-    #     return render(request, 'main/order_list')
-
+    def get_queryset(self):
+        return Order.objects.all().order_by('-modified')
 
 
 class OrderModelFormView(View):
