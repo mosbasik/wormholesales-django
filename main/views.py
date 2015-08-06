@@ -1,13 +1,13 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
 from django.views.generic import View
 from django.views.generic.list import ListView
 
 from main.forms import OrderModelForm
-from main.models import Order
+from main.models import Order, System
 
-
-def home(request):
-    return render(request, 'main/home.html')
+import json
 
 
 class OrderListView(ListView):
@@ -24,7 +24,6 @@ class OrderModelFormView(View):
         context = {}
         context['form'] = form
         return render(request, 'main/order_form.html', context)
-        # return render(request, 'main/home.html')
 
     def post(self, request):
         context = {}
@@ -35,3 +34,20 @@ class OrderModelFormView(View):
         else:
             context['form'] = form
             return render(request, 'main/order_form.html', context)
+
+
+def wormhole_details_json(request, j_code=None):
+    if request.method == 'GET':
+        system = System.objects.get(j_code=j_code)
+        data = json.dumps({
+            'wormhole_class': {
+                'value': system.space.id,
+                'name': system.space.name,
+            },
+            'wormhole_effect': {
+                'value': system.effect.id,
+                'name': system.effect.name,
+            },
+        })
+        return HttpResponse(data, content_type='application/json')
+    return HttpResponse(status=405)
