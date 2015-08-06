@@ -5,8 +5,8 @@ Proof-of-concept clone of existing site "wormholesales.com".
 
 (Duplication of basic functionality of the original site)
 
-- [ ] user can post a sell order
-- [ ] user can view recent sell orders
+- [x] user can post a sell order
+- [x] user can view recent sell orders
 - [ ] user can view recently completed sell orders
 - [ ] user can sort sell orders by attribute
 - [ ] user can mark a sell order as completed by using their removal code
