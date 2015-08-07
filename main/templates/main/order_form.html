@@ -5,44 +5,58 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
-                <form action="{% url 'main:order_form' %}" method="POST">
-                    {% csrf_token %}
+            <div class="col-sm-12">
+                <h2 class="text-center">List your wormhole</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-6 col-sm-offset-3">
 
-                    <div class="form-group">
-                        <label for="id_contact_name" class="sr-only">Contact name:</label>
-                        <input id="id_contact_name" class="form-control" maxlength="255" name="contact_name" type="text" placeholder="Contact character name">
-                    </div>
+                    <form action="{% url 'main:order_form' %}" method="POST">
+                        {% csrf_token %}
+                        {# {{ form.non_field.errors }} #}
 
-                    <div class="form-group">
-                        <label for="id_j_code" class="sr-only">Wormhole J-Code</label>
-                        <input id="id_j_code" class="form-control" maxlength="7" name="j_code" type="text" placeholder="Wormhole J-code (Jxxxxxx)">
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="id_wormhole_class" class="sr-only">Wormhole Class</label>
-                        <div class="col-xs-6">
-                            <input id="id_wormhole_class" class="form-control col-xs-6" disabled name="wormhole_class" type="text" placeholder="Wormhole Class">
+                        <div class="form-group">
+                            {{ form.contact_name.errors }}
+                            <label for="id_contact_name" class="sr-only">Contact name:</label>
+                            <!-- <input id="id_contact_name" class="form-control" maxlength="255" name="contact_name" type="text" placeholder="Contact character name"> -->
+                            {{ form.contact_name }}
                         </div>
 
-                        <label for="id_wormhole_effect" class="sr-only">Wormhole Effect</label>
-                        <div class="col-xs-6">
-                            <input id="id_wormhole_effect" class="form-control" disabled name="wormhole_effect" type="text" placeholder="Wormhole Effect">
+                        <div class="form-group">
+                            {{ form.system.errors }}
+                            <label for="id_system" class="sr-only">Wormhole J-Code</label>
+                            <input id="id_system" class="form-control" maxlength="7" name="system" type="text" placeholder="Wormhole J-code">
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="id_price" class="sr-only">Price</label>
-                        <input id="id_price" class="form-control" name="price" type="number" placeholder="Price">
-                    </div>
+                        <div class="form-group row">
+                            <label for="id_wormhole_class" class="sr-only">Wormhole Class</label>
+                            <div class="col-xs-6">
+                                <input id="id_wormhole_class" class="form-control col-xs-6" disabled name="wormhole_class" type="text" placeholder="Wormhole Class">
+                            </div>
 
-                    <div class="form-group">
-                        <label for="id_information" class="sr-only">Information</label>
-                        <textarea id="id_information" class="form-control" name="information" type="text" placeholder="Additional information" rows="10"></textarea>
-                    </div>
+                            <label for="id_wormhole_effect" class="sr-only">Wormhole Effect</label>
+                            <div class="col-xs-6">
+                                <input id="id_wormhole_effect" class="form-control" disabled name="wormhole_effect" type="text" placeholder="Wormhole Effect">
+                            </div>
+                        </div>
 
-                    <button class="btn btn-primary pull-right" type="submit">Submit</button>
-                </form>
+                        <div class="form-group">
+                            {{ form.price.errors }}
+                            <label for="id_price" class="sr-only">Price</label>
+                            <input id="id_price" class="form-control" name="price" type="number" placeholder="Price">
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.information.errors }}
+                            <label for="id_information" class="sr-only">Information</label>
+                            <textarea id="id_information" class="form-control" name="information" type="text" placeholder="Additional information" rows="10"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary pull-right" type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

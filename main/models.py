@@ -1,26 +1,6 @@
 from django.db import models
 
 
-class Order(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-    contact_name = models.CharField(max_length=255)
-    j_code = models.ForeignKey('main.System')
-    price = models.FloatField()
-    information = models.TextField(null=True, blank=True)
-
-
-class Wormhole(models.Model):
-    name = models.CharField(max_length=4, unique=True)
-    life = models.IntegerField()
-    space = models.ForeignKey('main.Space')
-    mass = models.BigIntegerField()
-    jump = models.IntegerField()
-
-    def __unicode__(self):
-        return self.name
-
-
 class Effect(models.Model):
     name = models.CharField(max_length=30, unique=True)
     effect_elements = models.ManyToManyField('main.EffectElement',
@@ -39,6 +19,31 @@ class EffectElement(models.Model):
         return "{0}, {1}".format(self.name, self.base)
 
 
+class Order(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    contact_name = models.CharField(max_length=255)
+    system = models.ForeignKey('main.System')
+    price = models.FloatField()
+    information = models.TextField(null=True, blank=True)
+
+    @property
+    def evewho_link(self):
+        url_stub = 'http://evewho.com/pilot/'
+        name = self.contact_name.replace(' ', '+')
+        return url_stub + name
+
+    def __unicode__(self):
+        return "{1} :: {0}".format(self.created, self.system.j_code)
+
+
+class Space(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+
 class System(models.Model):
     id = models.IntegerField(primary_key=True)
     j_code = models.CharField(max_length=7, unique=True)
@@ -51,8 +56,12 @@ class System(models.Model):
         return "{0} {1} {2}".format(self.j_code, self.space, self.effect)
 
 
-class Space(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+class Wormhole(models.Model):
+    name = models.CharField(max_length=4, unique=True)
+    life = models.IntegerField()
+    space = models.ForeignKey('main.Space')
+    mass = models.BigIntegerField()
+    jump = models.IntegerField()
 
     def __unicode__(self):
         return self.name

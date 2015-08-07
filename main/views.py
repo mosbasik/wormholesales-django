@@ -30,7 +30,7 @@ class OrderModelFormView(View):
         form = OrderModelForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('main:order_form')
+            return redirect('main:order_list')
         else:
             context['form'] = form
             return render(request, 'main/order_form.html', context)

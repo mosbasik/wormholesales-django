@@ -21,11 +21,11 @@
                     {% for order in object_list %}
                         <tr>
                             <td>{{ order.modified|date:'Y-m-d' }}</td>
-                            <td>{{ order.contact_name }}</td>
-                            <td>{{ order.j_code }}</td>
+                            <td><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></td>
+                            <td>{{ order.system.j_code }}</td>
                             <td>{{ order.price|floatformat:2|intcomma }}</td>
-                            <td>{{ order.wormhole_class }}</td>
-                            <td>{{ order.wormhole_effect }}</td>
+                            <td>{{ order.system.space.name }}</td>
+                            <td>{{ order.system.effect.name }}</td>
                             <td>{{ order.information|truncatewords:5 }}</td>
                         </tr>
                     {% endfor %}
