@@ -19,8 +19,8 @@ function autofill_wh_data() {
                 $('#id_system').parent().removeClass('has-error').addClass('has-success')
             },
             error: function() {
-                $('#id_wormhole_class').val('')
-                $('#id_wormhole_effect').val('')
+                $('#id_wormhole_class').val('Error')
+                $('#id_wormhole_effect').val('Error')
                 $('#id_system').parent().removeClass('has-success').addClass('has-error')
             }
         })
@@ -31,8 +31,8 @@ function autofill_wh_data() {
 /**
  * Manages the number formatting of the price field
  */
-// $('#id_price').autoNumeric('init', {
-//     aSep: ',',
-//     aDec: '.',
-//     aSign: '',
-// })
+$('#id_price').autoNumeric('init', {
+    aSep: ',',
+    aDec: '.',
+    aSign: '',
+})
