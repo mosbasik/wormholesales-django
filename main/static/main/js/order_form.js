@@ -14,14 +14,25 @@ function autofill_wh_data() {
             url: '/order-form/autofill/' + input_j_code + '/',
             method: 'GET',
             success: function(data) {
-                $('#id_wormhole_class').val(data.wormhole_class.name)
-                $('#id_wormhole_effect').val(data.wormhole_effect.name)
                 $('#id_system').parent().removeClass('has-error').addClass('has-success')
+                $('#system-details').show()
+                $('#id_wormhole_class').html(data.class)
+                $('#id_wormhole_effect').html(data.effect.name)
+
+                var static_html = ''
+                for (var i = 0; i < data.statics.length; i++) {
+                    if (i !== 0) {static_html += ', '}
+                    // console.log(i)
+                    // console.log(data.statics[i].name)
+                    static_html += data.statics[i].name
+                }
+                // console.log(static_html)
+
+                $('#id_wormhole_statics').html(static_html)
             },
             error: function() {
-                $('#id_wormhole_class').val('Error')
-                $('#id_wormhole_effect').val('Error')
                 $('#id_system').parent().removeClass('has-success').addClass('has-error')
+                $('#system-details').hide()
             }
         })
     }

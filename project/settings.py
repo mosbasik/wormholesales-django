@@ -95,4 +95,7 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# constant factor for wormhole effect strength:
+EFFECT_CONST = 15.0 / 7.0
+
 from settings_secret import *

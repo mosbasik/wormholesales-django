@@ -1,5 +1,7 @@
 from django.db import models
 
+import re
+
 
 class Effect(models.Model):
     name = models.CharField(max_length=30, unique=True)
@@ -39,6 +41,13 @@ class Order(models.Model):
 
 class Space(models.Model):
     name = models.CharField(max_length=50, unique=True)
+
+    @property
+    def multiplier(self):
+        regex = re.compile(r'[^\d]+')
+        int_class = int(regex.sub('', self.name))
+        multiplier = (int_class - 1) if int_class <= 6 else 5
+        return multiplier
 
     def __unicode__(self):
         return self.name

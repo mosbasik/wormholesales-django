@@ -11,6 +11,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+#system-details {
+    display: none;
+}
+#system-details .panel,
+#system-details p {
+    margin-bottom: 0px;
+}
+
+
 .navbar-default {
     background-color: #50a8dc;
     border-color: #50a8dc;
