@@ -20,3 +20,13 @@ function autofill_wh_data() {
         })
     }
 }
+
+
+/**
+ * Manages the number formatting of the price field
+ */
+$('#id_price').autoNumeric('init', {
+    aSep: ',',
+    aDec: '.',
+    aSign: '',
+})
