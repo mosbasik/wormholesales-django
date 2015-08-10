@@ -1,0 +1,45 @@
+{% extends "project/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">Wormhole Sales Registration</h1>
+        </div>
+        <hr>
+
+        <div class="row">
+
+            <form action="{% url 'main:register' %}" id="register-form" method="POST" class="col-sm-offset-3 col-sm-6">
+                {% csrf_token %}
+                <span class="text-danger">{{ form.non_field_errors }}</span>
+
+                <div class="form-group {% if form.username.errors %}has-error{% endif %}">
+                    <p class="text-danger">{{ form.username.errors.as_text }}</p>
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                    <p class="text-danger">{{ form.email.errors.as_text }}</p>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group {% if form.password1.errors %}has-error{% endif %}">
+                    <p class="text-danger">{{ form.password1.errors.as_text }}</p>
+                    {{ form.password1 }}
+                </div>
+
+                <div class="form-group {% if form.password2.errors %}has-error{% endif %}">
+                    <p class="text-danger">{{ form.password2.errors.as_text }}</p>
+                    {{ form.password2 }}
+                </div>
+
+                <button type="submit" id="register-button" name="register-button" class="btn btn-primary pull-right">Register</button>
+
+            </form>
+
+        </div>
+    </div>
+
+{% endblock content %}
