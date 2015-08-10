@@ -95,6 +95,10 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Login redirecting settings
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/wormholes/'
+
 # constant factor for wormhole effect strength:
 EFFECT_CONST = 15.0 / 7.0
 
