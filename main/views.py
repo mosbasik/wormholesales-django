@@ -151,6 +151,7 @@ def wormhole_details_json(request, j_code=None):
         statics = [{'name': s.name,
                     'mass': s.mass,
                     'jump': s.jump,
+                    'space': s.space.name,
                     'life': s.life} for s in system.statics.all()]
 
         # make a list of its effect elements
