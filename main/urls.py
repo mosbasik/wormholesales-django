@@ -12,7 +12,7 @@ from main.views import (
 
 urlpatterns = [
     # Home page URLS
-    url(r'^$', OrderListView.as_view(), name='order_list'),
+    url(r'^$', OrderListView.as_view(), name='home'),
     url(r'^wormholes/$', OrderListView.as_view(), name='order_list'),
 
     # Order form URLS

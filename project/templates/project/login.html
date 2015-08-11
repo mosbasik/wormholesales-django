@@ -10,10 +10,9 @@
         <hr>
 
         <div id='wrapper' class="row">
-
-            <form action="{% url 'login' %}" id="login-form" method="POST" class="col-sm-offset-3 col-sm-6">
+                <form action="{% url 'login' %}" id="login-form" method="POST" class="col-sm-offset-3 col-sm-6">
                 {% csrf_token %}
-
+                <input type='hidden' name='next' value='{{ next }}'>
                 <p class="text-center text-danger">{{ error }}</p>
 
                 <div class="form-group">

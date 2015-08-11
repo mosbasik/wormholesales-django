@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # user authentication
@@ -70,7 +70,10 @@ class RegisterView(View):
 class LoginView(View):
 
     def get(self, request):
-        return render(request, 'project/login.html')
+        context = {}
+        context['next'] = request.GET.get('next', '/')
+        print context
+        return render(request, 'project/login.html', context)
 
     def post(self, request):
 
@@ -90,10 +93,11 @@ class LoginView(View):
 
             # and the user's account is active
             if user.is_active:
+                auth_login(request, user)
+
+                return redirect(request.POST.get('next', None))
 
                 # then go ahead and log the user in and redirect to front page
-                auth_login(request, user)
-                return redirect('main:order_list')
 
             # if the user's account is not active
             else:
