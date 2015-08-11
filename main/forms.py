@@ -128,7 +128,6 @@ class UserCreationForm(forms.ModelForm):
                                         'placeholder': 'Password Verification',
                                     }))
 
-
     class Meta:
         model = User
         fields = ('username', 'email',)

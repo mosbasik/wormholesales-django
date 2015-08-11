@@ -8,6 +8,7 @@ from main.views import (
     OrderModelFormView,
     wormhole_details_json,
     validate_contact_name,
+    order_details,
 )
 
 urlpatterns = [
@@ -25,4 +26,7 @@ urlpatterns = [
     url(r'^validate-contact-name/$',
         validate_contact_name,
         name='validate_contact_name'),
+    url(r'^order-details/(?P<id>[0-9]+)/$',
+        order_details,
+        name='order_details'),
 ]
