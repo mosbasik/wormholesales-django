@@ -43,13 +43,21 @@ class Space(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
     @property
-    def wh_class(self):
+    def abbrev(self):
+        if self.name == 'High-Sec':
+            return 'Hs'
+        if self.name == 'Low-Sec':
+            return 'Ls'
+        if self.name == 'Null-Sec':
+            return 'Ns'
         regex = re.compile(r'[^\d]+')
         return int(regex.sub('', self.name))
 
     @property
     def multiplier(self):
-        return (self.wh_class - 1) if self.wh_class <= 6 else 5
+        abbrev = self.abbrev
+        assert type(abbrev) is IntType, 'Attempt to get effect multiplier in %s.' % abbrev
+        return (abbrev - 1) if abbrev < 6 else 5
 
     def __unicode__(self):
         return self.name

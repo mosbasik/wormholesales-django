@@ -24,7 +24,12 @@
                             <td><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></td>
                             <td>{{ order.system.j_code }}</td>
                             <td>{{ order.price|floatformat:2|intcomma }}</td>
-                            <td>{{ order.system.space.name }}</td>
+                            <td>
+                                C{{ order.system.space.abbrev }}
+                                {% for static in order.system.statics.all %}
+                                    / {{ static.space.abbrev }}
+                                {% endfor %}
+                            </td>
                             <td>{{ order.system.effect.name }}</td>
                             <td>{{ order.information|truncatewords:5 }}</td>
                         </tr>
