@@ -21,7 +21,7 @@
                     </tr>
                     {% for order in object_list %}
                         <tr>
-                            <td>{{ order.modified|date:'Y-m-d' }}</td>
+                            <td><a href="{% url 'main:order_details' order.id %}" id='{{ order.id }}'>{{ order.modified|date:'Y-m-d' }}</a></td>
                             <td><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></td>
                             <td>{{ order.system.j_code }}</td>
                             <td>{{ order.price|floatformat:2|intcomma }}</td>
