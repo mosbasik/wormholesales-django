@@ -44,6 +44,10 @@ class Space(models.Model):
 
     @property
     def abbrev(self):
+        '''
+        Returns a two-character string abbreviation of the type of space
+        ('Hs', 'Ls', 'Ns', 'C1', 'C13', etc).
+        '''
         if self.name == 'High-Sec':
             return 'Hs'
         if self.name == 'Low-Sec':
@@ -51,12 +55,17 @@ class Space(models.Model):
         if self.name == 'Null-Sec':
             return 'Ns'
         regex = re.compile(r'[^\d]+')
-        return int(regex.sub('', self.name))
+        return '{0}{1}'.format('C', self.name[6:])
 
     @property
     def multiplier(self):
-        abbrev = self.abbrev
-        assert type(abbrev) is IntType, 'Attempt to get effect multiplier in %s.' % abbrev
+        '''
+        Returns an integer one less than the space's class value (that is, a
+        Class 5 space will return a 4x multiplier value).  A blanket exception
+        exists for all "shattered" wormhole classes (C13, C18, etc).  All of
+        these x5 multiplier.
+        '''
+        abbrev = int(self.abbrev[1:])
         return (abbrev - 1) if abbrev < 6 else 5
 
     def __unicode__(self):
