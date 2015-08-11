@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 
 from main.models import Order, System
 
+import requests
+import urllib
+
 
 class OrderModelForm(forms.ModelForm):
 
@@ -19,6 +22,15 @@ class OrderModelForm(forms.ModelForm):
                 'placeholder': 'Contact character name (required)',
             }))
 
+    # Override system from foreignkey to char (resolved in clean_system)
+    system = forms.RegexField(
+        regex=r'^J\d{6}$',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Wormhole J-code (required)',
+            }))
+
     # Override price widget to get bootstrap formatting
     price = forms.CharField(
         widget=forms.TextInput(
@@ -27,17 +39,34 @@ class OrderModelForm(forms.ModelForm):
                 'placeholder': 'Price (required)',
             }))
 
-    # Override system from foreignkey to char (resolved in clean_system)
-    system = forms.RegexField(
-        regex=r'^J\d{6}$',
-        widget=forms.TextInput(
+    # Override information widget to get textarea and bootstrap formatting
+    information = forms.CharField(
+        widget=forms.Textarea(
             attrs={
                 'class': 'form-control',
+                'placeholder': 'Information',
+                'rows': '10',
             }))
 
     # TODO
     # error_css_class = 'has-error'
     # required_css_class = 'has-error'
+
+    def clean_contact_name(self):
+        '''
+        Gets the contact name from the form data and checks to see if a profile
+        page under this name exists on evegate.com (by checking the response
+        code).  If it exists, return without error; otherwise raises a
+        ValidationError.
+        '''
+        data = self.cleaned_data['contact_name']
+        name = urllib.quote(data)
+        url_stub = 'https://gate.eveonline.com/Profile/'
+        response = requests.head(url_stub + name)
+        if response.status_code < 400:
+            return data
+        else:
+            raise forms.ValidationError('Character does not exist.')
 
     def clean_system(self):
         '''
