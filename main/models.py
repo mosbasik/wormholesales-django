@@ -80,6 +80,11 @@ class System(models.Model):
     effect = models.ForeignKey('main.Effect', related_name='systems')
     statics = models.ManyToManyField('main.Wormhole', related_name='systems')
 
+    @property
+    def eveplanet_URL(self):
+        url_stub = 'http://eveplanets.com/eve/system/index/?show='
+        return url_stub + self.j_code
+
     def __unicode__(self):
         return "{0} {1} {2}".format(self.j_code, self.space, self.effect)
 
