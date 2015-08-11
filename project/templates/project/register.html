@@ -11,7 +11,7 @@
 
         <div class="row">
 
-            <form action="{% url 'main:register' %}" id="register-form" method="POST" class="col-sm-offset-3 col-sm-6">
+            <form action="{% url 'register' %}" id="register-form" method="POST" class="col-sm-offset-3 col-sm-6">
                 {% csrf_token %}
                 <span class="text-danger">{{ form.non_field_errors }}</span>
 

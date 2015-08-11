@@ -32,7 +32,7 @@ class RegisterView(View):
 
         # save a blank user creation form in the context and reload page
         context = {'form': UserCreationForm}
-        return render(request, 'main/register.html', context)
+        return render(request, 'project/register.html', context)
 
     def post(self, request):
 
@@ -68,7 +68,7 @@ class RegisterView(View):
 class LoginView(View):
 
     def get(self, request):
-        return render(request, 'main/login.html')
+        return render(request, 'project/login.html')
 
     def post(self, request):
 

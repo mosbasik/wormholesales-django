@@ -11,7 +11,7 @@
 
         <div class="row">
 
-            <form action="{% url 'main:login' %}" id="login-form" method="POST" class="col-sm-offset-3 col-sm-6">
+            <form action="{% url 'login' %}" id="login-form" method="POST" class="col-sm-offset-3 col-sm-6">
                 {% csrf_token %}
 
                 <p class="text-center text-danger">{{ error }}</p>
