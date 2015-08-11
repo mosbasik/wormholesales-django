@@ -20,6 +20,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+#id_contact_name_validation,
+#id_system_validation
+{
+    display: none;
+}
+
+
 .navbar-default {
     background-color: #50a8dc;
     border-color: #50a8dc;

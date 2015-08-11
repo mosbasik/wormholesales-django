@@ -16,7 +16,7 @@ class OrderModelForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Contact character name',
+                'placeholder': 'Contact character name (required)',
             }))
 
     # Override price widget to get bootstrap formatting
@@ -24,7 +24,7 @@ class OrderModelForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Price',
+                'placeholder': 'Price (required)',
             }))
 
     # Override system from foreignkey to char (resolved in clean_system)
@@ -33,7 +33,6 @@ class OrderModelForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Price',
             }))
 
     # TODO

@@ -19,14 +19,16 @@
 
                         <div class="form-group">
                             {{ form.contact_name.errors }}
-                            <label for="id_contact_name" class="sr-only">Contact name:</label>
+                            <p id="id_contact_name_validation" class="text-danger">Character does not exist.</p>
+                            <label for="id_contact_name" class="sr-only">Contact character name:</label>
                             {{ form.contact_name }}
                         </div>
 
                         <div class="form-group">
                             {{ form.system.errors }}
-                            <label for="id_system" class="sr-only">Wormhole J-Code</label>
-                            <input id="id_system" class="form-control" maxlength="7" name="system" type="text" placeholder="Wormhole J-code">
+                            <p id="id_system_validation" class="text-danger">Wormhole does not exist.</p>
+                            <label for="id_system" class="sr-only">Wormhole J-code:</label>
+                            <input id="id_system" class="form-control" maxlength="7" name="system" type="text" placeholder="Wormhole J-code (required)">
                             <div id="system-details" class="row">
                                 <div class="col-sm-12">
                                     <div class="panel panel-default">
