@@ -16,7 +16,8 @@
                         <th>Price</th>
                         <th>Class</th>
                         <th>Effect</th>
-                        <th>Information</th>
+                        <th>Planets</th>
+                        <!--<th>Information</th>-->
                     </tr>
                     {% for order in object_list %}
                         <tr>
@@ -26,7 +27,8 @@
                             <td>{{ order.price|floatformat:2|intcomma }}</td>
                             <td>{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</td>
                             <td>{{ order.system.effect.name }}</td>
-                            <td>{{ order.information|truncatewords:5 }}</td>
+                            <td><a href="{{ order.system.eveplanet_URL }}" target="_blank">Link</a></td>
+                            <!--<td>{{ order.information|truncatewords:5 }}</td>-->
                         </tr>
                     {% endfor %}
                 </table>
