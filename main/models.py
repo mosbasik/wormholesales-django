@@ -43,11 +43,13 @@ class Space(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
     @property
-    def multiplier(self):
+    def wh_class(self):
         regex = re.compile(r'[^\d]+')
-        int_class = int(regex.sub('', self.name))
-        multiplier = (int_class - 1) if int_class <= 6 else 5
-        return multiplier
+        return int(regex.sub('', self.name))
+
+    @property
+    def multiplier(self):
+        return (self.wh_class - 1) if self.wh_class <= 6 else 5
 
     def __unicode__(self):
         return self.name
