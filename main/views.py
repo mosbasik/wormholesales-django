@@ -21,6 +21,8 @@ from main.models import Order, System
 from project.settings import EFFECT_CONST
 
 import json
+import requests
+import urllib
 
 
 class RegisterView(View):
@@ -184,3 +186,17 @@ def wormhole_details_json(request, j_code=None):
         })
         return HttpResponse(data, content_type='application/json')
     return HttpResponse(status=405)
+
+
+def validate_contact_name(request):
+    if request.method == 'GET':
+        name = urllib.quote(request.GET['name'])
+        url_stub = 'https://gate.eveonline.com/Profile/'
+        response = requests.head(url_stub + name)
+
+        if response.status_code < 400:
+            return HttpResponse(status=200)  # contact name is valid
+        else:
+            return HttpResponse(status=404)  # contact name is not valid
+    else:
+        return HttpResponse(status=400)  # client made bad request
