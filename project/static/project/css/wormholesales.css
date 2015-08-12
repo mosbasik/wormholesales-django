@@ -101,7 +101,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     text-rendering: optimizelegibility;
     font-weight: bold;
-    /* settings for the look of the footer */
+    /* settings for the position of the footer */
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -124,4 +124,17 @@ h1, h2, h3, h4, h5, h6 {
 table, th, td {
     border-bottom:1px solid #ccc;
     border
+}
+.glyphicon-info-sign {
+    font-size: 13pt;
+    color: #1B63FF;
+}
+
+.btn-default:hover {
+    color: #1B63FF;
+}
+
+.glyphicon-globe {
+    font-size: 13pt;
+    color: #1B63FF;
 }
