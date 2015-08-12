@@ -121,10 +121,15 @@ class LogoutView(View):
         return redirect('main:order_list')
 
 
-def order_details(request, id=None):
-    context = {'id': id}
+class OrderDetails(View):
 
-    return render(request, 'main/order_details.html', context)
+    def get(self, request, id=None):
+        context = {}
+        context['order'] = Order.objects.get(id=id)
+        return render(request, 'main/order_details.html', context)
+
+    def post(self, request, id=None):
+        pass
 
 
 class OrderListView(ListView):
