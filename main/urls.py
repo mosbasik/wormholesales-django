@@ -5,10 +5,10 @@ from django.contrib.auth.decorators import login_required
 from main.views import RegisterView, LoginView, LogoutView
 from main.views import (
     OrderListView,
+    OrderDetails,
     OrderModelFormView,
     wormhole_details_json,
     validate_contact_name,
-    order_details,
 )
 
 urlpatterns = [
@@ -26,7 +26,9 @@ urlpatterns = [
     url(r'^validate-contact-name/$',
         validate_contact_name,
         name='validate_contact_name'),
+
+    # Order Details
     url(r'^order-details/(?P<id>[0-9]+)/$',
-        order_details,
+        OrderDetails.as_view(),
         name='order_details'),
 ]

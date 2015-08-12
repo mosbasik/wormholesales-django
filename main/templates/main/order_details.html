@@ -1,0 +1,59 @@
+{% extends "project/base.html" %}
+
+{% load staticfiles %}
+{% load humanize %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="text-center">Order #{{ order.id }}</h2>
+                <hr>
+                
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">General order information</div>
+                            <div class="panel-body">
+                                <p>Created on: {{ order.created }}</p>
+                                <p>Modified on: {{ order.modified }}</p>
+                                <p>Contact name: {{ order.contact_name }}</p>
+                                <p>System: {{ order.system.j_code }}</p>
+                                <p>Price: {{ order.price|floatformat:2|intcomma }} ISK</p>
+                                <p>Information: {{ order.information }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                        
+
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Static 1 information</div>
+                            <div class="panel-body">
+                                Basic panel example
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Static 2 information</div>
+                            <div class="panel-body">
+                                Basic panel example
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <!-- <script type="text/javascript" src="{% static 'main/js/order_form.js' %}"></script> -->
+{% endblock js %}
