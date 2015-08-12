@@ -125,3 +125,16 @@ table, th, td {
     border-bottom:1px solid #ccc;
     border
 }
+.glyphicon-info-sign {
+    font-size: 13pt;
+    color: #1B63FF;
+}
+
+.btn-default:hover {
+    color: #1B63FF;
+}
+
+.glyphicon-globe {
+    font-size: 13pt;
+    color: #1B63FF;
+}
