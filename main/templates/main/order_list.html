@@ -10,6 +10,7 @@
 
                 <table class="table table-striped table-responsive">
                     <tr>
+                        <th>Info</th>
                         <th>Modified</th>
                         <th>Contact Name</th>
                         <th>J-Code</th>
@@ -21,13 +22,14 @@
                     </tr>
                     {% for order in object_list %}
                         <tr>
-                            <td><a href="{% url 'main:order_details' order.id %}" id='{{ order.id }}'>{{ order.modified|date:'Y-m-d' }}</a></td>
+                            <td><a href="{% url 'main:order_details' order.id %}" class='glyphicon glyphicon-info-sign'></a></td>
+                            <td>{{ order.modified|date:'Y-m-d' }}</td>
                             <td><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></td>
                             <td>{{ order.system.j_code }}</td>
                             <td>{{ order.price|floatformat:2|intcomma }}</td>
                             <td>{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</td>
                             <td>{{ order.system.effect.name }}</td>
-                            <td><a href="{{ order.system.eveplanet_URL }}" target="_blank">Link</a></td>
+                            <td><a href="{{ order.system.eveplanet_URL }}" target="_blank" class='glyphicon glyphicon-globe' style='text-align: center'></a></td>
                             <!--<td>{{ order.information|truncatewords:5 }}</td>-->
                         </tr>
                     {% endfor %}

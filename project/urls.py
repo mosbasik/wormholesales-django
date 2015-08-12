@@ -32,19 +32,19 @@ urlpatterns = [
 
     url(r'^password/reset/$',
         django.contrib.auth.views.password_reset,
-        {"template_name": "password_reset/password_reset_form.html"},
+        {"template_name": "project/password_reset/password_reset_form.html"},
         name="password_reset"
         ),
     url(r'^password/reset/done/$',
         django.contrib.auth.views.password_reset_done,
-        {"template_name": "password_reset/password_reset_form_done.html"},
+        {"template_name": "project/password_reset/password_reset_form_done.html"},
         name="password_reset_done"),
     url(r'^password/reset/confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$',
         django.contrib.auth.views.password_reset_confirm,
-        {"template_name": "password_reset/password_reset_confirm.html"},
+        {"template_name": "project/password_reset/password_reset_confirm.html"},
         name="password_reset_confirm"),
     url(r'^password/reset/confirm/done/$',
         django.contrib.auth.views.password_reset_complete,
-        {"template_name": "password_reset/password_reset_complete.html"},
+        {"template_name": "project/password_reset/password_reset_complete.html"},
         name="password_reset_complete"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

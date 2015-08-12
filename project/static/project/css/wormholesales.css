@@ -10,6 +10,13 @@ h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizelegibility;
 }
 
+.table>tbody>tr>td, .table>tbody>tr>th,
+.table>tfoot>tr>td, .table>tfoot>tr>th, 
+.table>thead>tr>td, .table>thead>tr>th {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 
 #system-details {
     display: none;
@@ -81,4 +88,12 @@ h1, h2, h3, h4, h5, h6 {
     -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
     box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
     margin-bottom: 50px;
+}
+
+.footer {
+    text-align: center;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #317eac;
+    text-rendering: optimizelegibility;
+    font-weight: bold;
 }
