@@ -16,8 +16,8 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">General order information</div>
                             <div class="panel-body">
-                                <p>Created on: {{ order.created }}</p>
-                                <p>Modified on: {{ order.modified }}</p>
+                                <p>Created <abbr class="timeago" title="{{ order.created|date:'c' }}"></abbr></p>
+                                <p>Modified <abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></p>
                                 <p>Contact name: {{ order.contact_name }}</p>
                                 <p>System: {{ order.system.j_code }}</p>
                                 <p>Price: {{ order.price|floatformat:2|intcomma }} ISK</p>
@@ -50,5 +50,5 @@
 {% endblock content %}
 
 {% block js %}
-    <!-- <script type="text/javascript" src="{% static 'main/js/order_form.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'main/js/initialize.timeago.js' %}"></script>
 {% endblock js %}
