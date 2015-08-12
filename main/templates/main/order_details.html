@@ -28,16 +28,22 @@
 
                 <div class="row">
                         
-
-                    <div class="col-sm-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Static 1 information</div>
-                            <div class="panel-body">
-                                Basic panel example
+                    {% for static in order.system.statics.all %}
+                        <div class="col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Static information</div>
+                                <div class="panel-body">
+                                    <p>{{static.name}}</p>
+                                    <p>{{static.life}} hour lifetime</p>
+                                    <p>Leads to {{static.space.name}}</p>
+                                    <p>Max mass: {{static.mass|intcomma }}</p>
+                                    <p>Jump mass: {{static.jump|intcomma }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endfor %}
 
+                    <!--
                     <div class="col-sm-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">Static 2 information</div>
@@ -46,6 +52,7 @@
                             </div>
                         </div>
                     </div>
+                    -->
 
                 </div>
 
