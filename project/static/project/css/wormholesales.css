@@ -1,5 +1,11 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-bottom: 60px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -93,7 +99,20 @@ h1, h2, h3, h4, h5, h6 {
 .footer {
     text-align: center;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: #317eac;
     text-rendering: optimizelegibility;
     font-weight: bold;
+    /* settings for the look of the footer */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 100px;
+    background-color: #ddd;
+}
+
+/*settings for aligning text inside the footer*/
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 15px;
 }
