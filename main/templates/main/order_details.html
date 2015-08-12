@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load humanize %}
+{% load mathfilters %}
 
 {% block content %}
     <div class="container">
@@ -31,28 +32,15 @@
                     {% for static in order.system.statics.all %}
                         <div class="col-sm-6">
                             <div class="panel panel-default">
-                                <div class="panel-heading">Static information</div>
+                                <div class="panel-heading">{{ static.space.name }} Static ({{ static.name }})</div>
                                 <div class="panel-body">
-                                    <p>{{static.name}}</p>
                                     <p>{{static.life}} hour lifetime</p>
-                                    <p>Leads to {{static.space.name}}</p>
-                                    <p>Max mass: {{static.mass|intcomma }}</p>
-                                    <p>Jump mass: {{static.jump|intcomma }}</p>
+                                    <p>Total mass: {{static.mass|intcomma }} Kg  ({{ static.mass|div:1000000|floatformat:0 }} Gg)</p>
+                                    <p>Jump mass: {{static.jump|intcomma }} Kg ({{ static.jump|div:1000000|floatformat:0 }} Gg)</p>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
-
-                    <!--
-                    <div class="col-sm-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Static 2 information</div>
-                            <div class="panel-body">
-                                Basic panel example
-                            </div>
-                        </div>
-                    </div>
-                    -->
 
                 </div>
 
