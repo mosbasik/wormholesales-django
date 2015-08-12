@@ -106,7 +106,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 100px;
+    height: 46px;
     background-color: #ddd;
 }
 
@@ -115,4 +115,8 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 15px;
   padding-left: 15px;
   padding-top: 15px;
+}
+
+.footer li {
+    display: inline;
 }
