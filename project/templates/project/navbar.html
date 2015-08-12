@@ -14,8 +14,19 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="message-board-nav-collapse">
             <ul class="nav navbar-nav">
-                <li class="active">
+                {% if request.path == '/order-form/' %}
+                    <li class="active">
+                {% else %}
+                    <li>
+                {% endif %}
                     <a href="{% url 'main:order_form' %}">Sell</a>
+                </li>
+                {% if request.path == 'buy-path-here' %}
+                    <li class="active">
+                {% else %}
+                    <li>
+                {% endif %}
+                    <a href="#">Buy</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
