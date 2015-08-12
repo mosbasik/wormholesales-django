@@ -75,8 +75,10 @@ function autofill_wh_data() {
 /**
  * Manages the number formatting of the price field
  */
+var price_string = $('#id_price').val()
+$('#id_price').val(price_string.replace(/,/g, ''))
 $('#id_price').autoNumeric('init', {
     aSep: ',',
     aDec: '.',
     aSign: '',
-})
+}).focusout()

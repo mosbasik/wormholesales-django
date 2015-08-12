@@ -28,7 +28,8 @@
                             {{ form.system.errors }}
                             <p id="id_system_validation" class="text-danger">Wormhole does not exist.</p>
                             <label for="id_system" class="sr-only">Wormhole J-code:</label>
-                            <input id="id_system" class="form-control" maxlength="7" name="system" type="text" placeholder="Wormhole J-code (required)">
+                            {# <input id="id_system" class="form-control" maxlength="7" name="system" type="text" placeholder="Wormhole J-code (required)"> #}
+                            {{ form.system }}
                             <div id="system-details" class="row">
                                 <div class="col-sm-12">
                                     <div class="panel panel-default">
@@ -40,20 +41,18 @@
                                     </div>
                                 </div>
                             </div>
-                            {{ form.system.errors }}
                         </div>
 
-
                         <div class="form-group">
+                            {{ form.price.errors }}
                             <label for="id_price" class="sr-only">Price</label>
                             {{ form.price }}
-                            {{ form.price.errors }}
                         </div>
 
                         <div class="form-group">
-                            <label for="id_information" class="sr-only">Information</label>
-                            <textarea id="id_information" class="form-control" name="information" type="text" placeholder="Additional information" rows="10"></textarea>
                             {{ form.information.errors }}
+                            <label for="id_information" class="sr-only">Information</label>
+                            {{ form.information }}
                         </div>
 
                         <button class="btn btn-primary pull-right" type="submit">Submit</button>
