@@ -10,7 +10,7 @@
             <div class="col-sm-12">
                 <h2 class="text-center">Order #{{ order.id }}: {{ order.system.space }} {{ order.system.effect.name }}</h2>
                 <hr>
-                
+
                 <div class="row">
 
                     {# Order information block #}
@@ -30,44 +30,46 @@
 
                     <div class="col-sm-6">
 
-                            {# Wormhole effect information block #}
-                            <div class="row">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">{{ order.system.effect.name }}:</div>
-                                    <div class="panel-body">
-                                        {% if order.system.effect.name == 'No Effect' %}
-                                            <p>This wormhole has no special effects.</p>
-                                        {% else %}
-                                            {% for element in order.system.effect.effect_elements.all %}
-                                                <p>{{ element.name }}: {{ element.base|mul:order.system.space.multiplier }}</p>
-                                            {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
+                        {# Wormhole effect information block #}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">{{ order.system.effect.name }}:</div>
+                            <div class="panel-body">
+                                {% if order.system.effect.name == 'No Effect' %}
+                                    <p>This wormhole has no special effects.</p>
+                                {% else %}
+                                    {% for element in order.system.effect.effect_elements.all %}
+                                        <p>{{ element.name }}: {{ element.base|mul:order.system.space.multiplier }}</p>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
+                        </div>
 
                         {# Wormhole statics information block #}
                         {% if order.system.statics.all.count > 0 %}
-                            <div class="row">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">Static wormholes:</div>
-                                    <div class="panel-body">
-                                        {% for static in order.system.statics.all %}
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <p>{{ static.space.name }} ({{ static.name }})</p>
-                                                    <p>{{ order.system.statics.all.0.life }} hour lifetime</p>
-                                                    <p>Total mass: {{static.mass|intcomma }} Kg  ({{ static.mass|div:1000000|floatformat:0 }} Gg)</p>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Static wormholes:</div>
+                                <div id="static-container" class="panel-body">
+                                    {% for static in order.system.statics.all %}
+                                        <div class="static-panel">
+                                            <div class="static-wrapper {{ static.space.abbrev }}">
+                                                <div class="static-title text-center">
+                                                    {{ static.space.abbrev }}
+                                                </div>
+                                                <div class="static-body">
+                                                    <p>Type: {{ static.name }}</p>
+                                                    <p>Lifetime: {{ static.life }} hours</p>
+                                                    <p>Total mass: {{static.mass|intcomma }} Kg ({{ static.mass|div:1000000|floatformat:0 }} Gg)</p>
                                                     <p>Jump mass: {{static.jump|intcomma }} Kg ({{ static.jump|div:1000000|floatformat:0 }} Gg)</p>
                                                 </div>
                                             </div>
-                                        {% endfor %}
-                                    </div>
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         {% endif %}
 
                     </div>
+
                 </div>
             </div>
         </div>
