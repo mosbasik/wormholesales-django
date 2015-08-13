@@ -9,6 +9,12 @@ class Effect(models.Model):
     effect_elements = models.ManyToManyField('main.EffectElement',
                                              related_name='effects')
 
+    @property
+    def blankname(self):
+        if self.name == 'No Effect':
+            return ''
+        return self.name
+
     def __unicode__(self):
         return self.name
 
