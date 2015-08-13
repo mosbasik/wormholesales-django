@@ -195,7 +195,10 @@ html {
     text-align: right;
 }
 
-.col-heading,
+.col-heading {
+    font-weight: bold;
+}
+
 .button-col {
     text-align: center;
 }
@@ -203,7 +206,6 @@ html {
 .table-dropdown {
     background-color: #F7F7F7;
     padding-left: 10px;
-    /*margin-right: 50px;*/
 }
 
 .dropdown-menu-right>li>a,
