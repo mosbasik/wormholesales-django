@@ -17,8 +17,7 @@
             <div class="col-lg-1 hidden-md hidden-sm hidden-xs col-heading"><p>Planets</p></div>
             <div class="col-lg-1 hidden-md hidden-sm hidden-xs col-heading">Title1</div>
             <div class="col-lg-1 hidden-md hidden-sm hidden-xs col-heading">Title2</div>
-            <div class="col-lg-1 hidden-md hidden-sm hidden-xs col-heading">Title3</div>
-            <div class="hidden-lg col-md-1 col-sm-2 col-xs-1 col-heading">More</div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-1 col-heading">More</div>
         </div>
         {% for order in object_list %}
             <div class="row table-row">
@@ -32,18 +31,17 @@
                 <div class="col-lg-1 hidden-md hidden-sm hidden-xs button-col"><a href="{{ order.system.eveplanet_URL }}" target="_blank" class='glyphicon glyphicon-globe btn btn-default'></a></div>
                 <div class="col-lg-1 hidden-md hidden-sm hidden-xs">Filler1</div>
                 <div class="col-lg-1 hidden-md hidden-sm hidden-xs">Filler2</div>
-                <div class="col-lg-1 hidden-md hidden-sm hidden-xs">Filler3</div>
-                <div class="hidden-lg dropdown button-col col-md-1 col-sm-2">
+                <div class="col-lg-1 dropdown button-col col-md-1 col-sm-2">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right table-dropdown" aria-labelledby="dropdownMenu1">
-                        <li class='hidden-md'><p>Posted: <abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></p></li>
-                        <li class='hidden-md'><p>Seller: <a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p></li>
-                        <li class='hidden-md'><p>J-Code: {{ order.system.j_code }}</p></li>
-                        <li class='hidden-md'><p>Planets: <a href="{{ order.system.eveplanet_URL }}" target="_blank" class='glyphicon glyphicon-globe btn btn-default'></a></p></li>
-                        <li class=''><p>Title1: Filler1</p></li>
-                        <li class=''><p>Title2: Filler2</p></li>
+                        <li class='hidden-lg hidden-md'><p>Posted: <abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></p></li>
+                        <li class='hidden-lg hidden-md'><p>Seller: <a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p></li>
+                        <li class='hidden-lg hidden-md'><p>J-Code: {{ order.system.j_code }}</p></li>
+                        <li class='hidden-lg hidden-md'><p>Planets: <a href="{{ order.system.eveplanet_URL }}" target="_blank" class='glyphicon glyphicon-globe btn btn-default'></a></p></li>
+                        <li class='hidden-lg'><p>Title1: Filler1</p></li>
+                        <li class='hidden-lg'><p>Title2: Filler2</p></li>
                         <li class=''><p>Title3: Filler3</p></li>
                     </ul>
                 </div>
