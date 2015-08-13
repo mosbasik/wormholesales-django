@@ -38,7 +38,7 @@
                                     <p>This wormhole has no special effects.</p>
                                 {% else %}
                                     {% for element in order.system.effect.effect_elements.all %}
-                                        <p>{{ element.name }}: {{ element.base|mul:order.system.space.multiplier }}</p>
+                                        <p class="{% if element.bad %}text-danger{% else %}text-success{% endif %}">{{ element.name }}: {{ element.base|mul:order.system.space.multiplier }}</p>
                                     {% endfor %}
                                 {% endif %}
                             </div>
