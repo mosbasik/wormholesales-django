@@ -168,18 +168,6 @@ html {
     display: inline;
 }
 
-/*settings for table style*/
-.table>tbody>tr>td, .table>tbody>tr>th,
-.table>tfoot>tr>td, .table>tfoot>tr>th, 
-.table>thead>tr>td, .table>thead>tr>th {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-table, th, td {
-    border-bottom:1px solid #ccc;
-    border
-}
 .glyphicon-info-sign {
     font-size: 13pt;
     color: #1B63FF;
@@ -210,4 +198,18 @@ table, th, td {
 .col-heading,
 .button-col {
     text-align: center;
+}
+
+.table-dropdown {
+    background-color: #F7F7F7;
+    padding-left: 10px;
+    /*margin-right: 50px;*/
+}
+
+.dropdown-menu-right>li>a,
+.dropdown-menu-right>li>a:focus,
+.dropdown-menu-right>li>a:hover {
+    background-color: #F7F7F7;
+    color: blue;
+    padding-left: 0px;
 }
