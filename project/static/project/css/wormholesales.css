@@ -153,6 +153,7 @@ table, th, td {
     text-align: right;
 }
 
-.col-heading {
+.col-heading,
+.button-col {
     text-align: center;
 }

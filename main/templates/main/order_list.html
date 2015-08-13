@@ -7,32 +7,32 @@
 
     <div class="container">
         <div class="row table-row">
-            <div class="col-md-offset-1 col-sm-offset-1 col-md-1 col-sm-1 col-heading"><p>Info</p></div>
-            <div class="col-md-1 col-sm-1 col-heading"><p>Modified</p></div>
-            <div class="col-md-1 col-sm-1 col-heading"><p>Seller</p></div>
-            <div class="col-md-1 col-sm-1 col-heading"><p>J-code</p></div>
-            <div class="col-md-2 col-sm-2 col-heading"><p>Price</p></div>
-            <div class="col-md-1 col-sm-1 col-heading"><p>Class</p></div>
-            <div class="col-md-2 col-sm-2 col-heading"><p>Effect</p></div>
-            <div class="col-md-1 col-sm-1 col-heading"><p>Planets</p></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-heading"><p>Info</p></div>
+            <div class="col-lg-1 col-md-2 col-sm-2 col-heading"><p>Modified</p></div>
+            <div class="col-lg-1 col-md-2 col-sm-2 col-heading"><p>Seller</p></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-heading"><p>J&#8209;Code</p></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-heading"><p>Price</p></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-heading"><p>Class</p></div>
+            <div class="col-lg-1 col-md-2 col-sm-2 col-heading"><p>Effect</p></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-heading"><p>Planets</p></div>
+            <div class="col-lg-1 col-md-0 col-sm-0">Filler</div>
         </div>
         {% for order in object_list %}
             <div class="row table-row">
-                <form action="{% url 'main:order_details' order.id %}">
-                    <div class="col-md-offset-1 col-sm-offset-1 col-md-1 col-sm-1"><button type='submit' class='glyphicon glyphicon-info-sign btn btn-default'></div>
-                </form>
-                <div class="col-md-1 col-sm-1"><abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></div>
-                <div class="col-md-1 col-sm-1"><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></div>
-                <div class="col-md-1 col-sm-1">{{ order.system.j_code }}</div>
-                <div class="col-md-2 col-sm-2 price-col">{{ order.price|floatformat:2|intcomma }}</div>
-                <div class="col-md-1 col-sm-1">{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</div>
-                <div class="col-md-2 col-sm-2">{{ order.system.effect.name }}</div>
-                <div class="col-md-1 col-sm-1"><a href="{{ order.system.eveplanet_URL }}" target="_blank" class='glyphicon glyphicon-globe btn btn-default' style='text-align: center'></a></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 button-col"><a href="{% url 'main:order_details' order.id %}" class='glyphicon glyphicon-info-sign btn btn-default'></a></div>
+                <div class="col-lg-1 col-md-2 col-sm-2"><abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></div>
+                <div class="col-lg-1 col-md-2 col-sm-2"><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></div>
+                <div class="col-lg-1 col-md-1 col-sm-1">{{ order.system.j_code }}</div>
+                <div class="col-lg-2 col-md-2 col-sm-2 price-col">{{ order.price|floatformat:2|intcomma }}</div>
+                <div class="col-lg-1 col-md-1 col-sm-1">{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</div>
+                <div class="col-lg-1 col-md-2 col-sm-2">{{ order.system.effect.name }}</div>
+                <div class="col-lg-1 col-md-1 col-sm-1 button-col"><a href="{{ order.system.eveplanet_URL }}" target="_blank" class='glyphicon glyphicon-globe btn btn-default'></a></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 collapse">Filler</div>
             </div>
         {% endfor %}
     </div>
 
-    <div class="container">
+    <!--<div class="container">
         <div class="row">
             <div class="col-sm-12">
 
@@ -45,9 +45,9 @@
                         <th>Price</th>
                         <th>Class</th>
                         <th>Effect</th>
-                        <th>Planets</th>
+                        <th>Planets</th>-->
                         <!--<th>Information</th>-->
-                    </tr>
+                    <!--</tr>
                     {% for order in object_list %}
                         <tr>
                             <form action="{% url 'main:order_details' order.id %}">
@@ -60,14 +60,15 @@
                             <td style='vertical-align: middle'>{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</td>
                             <td style='vertical-align: middle'>{{ order.system.effect.name }}</td>
                             <td style='vertical-align: middle'><a href="{{ order.system.eveplanet_URL }}" target="_blank" class='glyphicon glyphicon-globe btn btn-default' style='text-align: center'></a></td>
+                            -->
                             <!--<td>{{ order.information|truncatewords:5 }}</td>-->
-                        </tr>
+                        <!--</tr>
                     {% endfor %}
                 </table>
 
             </div>
         </div>
-    </div>
+    </div>-->
 
 {% endblock content %}
 
