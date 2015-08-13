@@ -139,3 +139,20 @@ table, th, td {
     font-size: 13pt;
     color: #1B63FF;
 }
+
+.table-row:nth-child(even) {
+    background-color: #eee;
+}
+
+.table-row {
+    padding: 7px;
+    border-bottom: 1px solid #ccc;
+}
+
+.price-col {
+    text-align: right;
+}
+
+.col-heading {
+    text-align: center;
+}
