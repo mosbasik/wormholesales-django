@@ -8,25 +8,25 @@
 
     <div class="container">
         <div class="row table-row">
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-heading button-col"><p>Info</p></div>
-            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3 col-heading"><p>Class</p></div>
-            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 col-heading"><p>Effect</p></div>
-            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 col-heading"><p>Price (ISK)</p></div>
-            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs col-heading"><p>Seller</p></div>
-            <div class="col-lg-1 col-md-1 hidden-sm hidden-xs col-heading"><p>J&#8209;Code</p></div>
-            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs col-heading"><p>Modified</p></div>
-            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-1 col-heading button-col"><p>More</p></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-heading button-col table-cell"><p>Order&nbsp;Details</p></div>
+            <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3 col-lg-offset-0 col-md-offset-0 col-sm-offset-1 col-xs-offset-1 col-heading table-cell"><p>Class</p></div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 col-heading table-cell"><p>Effect</p></div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 col-heading table-cell"><p>Price (ISK)</p></div>
+            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs col-heading table-cell"><p>Seller</p></div>
+            <div class="col-lg-1 col-md-1 hidden-sm hidden-xs col-heading table-cell"><p>J&#8209;Code</p></div>
+            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs col-heading table-cell"><p>Modified</p></div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-heading button-col table-cell"><p>More</p></div>
         </div>
         {% for order in object_list %}
             <div class="row table-row">
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 button-col"><a href="{% url 'main:order_details' order.id %}" class='glyphicon glyphicon-info-sign btn btn-default'></a></div>
-                <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3"><p>{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</p></div>
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><p>{{ order.system.effect.name }}</p></div>
-                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 price-col"><p>{{ order.price|sigfigs:4|intword }}</p></div>
-                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs"><p><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p></div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"><p>{{ order.system.j_code }}</p></div>
-                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs"><p><abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></p></div>
-                <div class="col-lg-1 dropdown button-col col-md-1 col-sm-2">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 button-col table-cell"><a href="{% url 'main:order_details' order.id %}" class='glyphicon glyphicon-info-sign btn btn-default'></a></div>
+                <div class="col-lg-1 col-md-1 col-sm-3 col-xs-3 col-lg-offset-0 col-md-offset-0 col-sm-offset-1 col-xs-offset-1 table-cell"><p>{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</p></div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 table-cell"><p>{{ order.system.effect.name }}</p></div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 table-cell" ><p title='{{ order.price|floatformat:2|intcomma }} ISK' data-toggle="tooltip">{{ order.price|sigfigs:4|intword }}</p></div>
+                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs table-cell"><p><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p></div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs table-cell"><p>{{ order.system.j_code }}</p></div>
+                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs table-cell"><p><abbr class="timeago" title="{{ order.modified|date:'c' }}" data-toggle="tooltip"></abbr></p></div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 dropdown button-col table-cell">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="caret"></span>
                     </button>
@@ -53,5 +53,10 @@
       $('.dropdown-menu').on('click', function (e) {
        e.stopPropagation() 
       })
-     </script>
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+    </script>
 {% endblock js %}
