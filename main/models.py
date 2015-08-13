@@ -26,7 +26,7 @@ class Order(models.Model):
     modified = models.DateTimeField(auto_now=True)
     contact_name = models.CharField(max_length=255)
     system = models.ForeignKey('main.System')
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=16, decimal_places=2)
     information = models.TextField(null=True, blank=True)
 
     @property
