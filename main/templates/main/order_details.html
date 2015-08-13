@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load humanize %}
 {% load mathfilters %}
+{% load customfilters %}
 
 {% block content %}
     <div class="container">
@@ -21,7 +22,7 @@
                                 <p class="small">Created: <abbr class="timeago" title="{{ order.created|date:'c' }}"></abbr></p>
                                 <p class="small">Modified: <abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></p>
                                 <p>System: {{ order.system.j_code }}</p>
-                                <p>Price: {{ order.price|floatformat:2|intcomma }} ISK</p>
+                                <p>Price: {{ order.price|sigfigs:4|intword }} ISK</p>
                                 <p>Contact name: <a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p>
                                 <p>Additional Information: {{ order.information }}</p>
                             </div>
