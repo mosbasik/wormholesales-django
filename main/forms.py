@@ -12,7 +12,7 @@ class OrderModelForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = '__all__'
+        exclude = ['user']
 
     # Override contact_name widget to get bootstrap formatting
     contact_name = forms.CharField(
