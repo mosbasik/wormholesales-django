@@ -189,10 +189,19 @@ html {
 .table-row {
     padding: 7px;
     border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    float: left;
+    width: 100%;
 }
 
-.price-col {
-    /*text-align: ;*/
+.table-cell {
+    float: left;
+    width: 100%;
+}
+
+.table-cell p {
+    margin-bottom: 0;
 }
 
 .col-heading {
@@ -214,4 +223,8 @@ html {
     background-color: #F7F7F7;
     color: blue;
     padding-left: 0px;
+}
+
+.caret {
+    color: black;
 }
