@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 import re
@@ -24,6 +25,7 @@ class EffectElement(models.Model):
 class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User)
     contact_name = models.CharField(max_length=255)
     system = models.ForeignKey('main.System')
     price = models.DecimalField(max_digits=16, decimal_places=2)

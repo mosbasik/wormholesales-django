@@ -104,14 +104,14 @@ class LoginView(View):
 
                 # reload login page and display error message
                 context['error'] = 'Account deactivated.'
-                return render(request, 'main/login.html', context)
+                return render(request, 'project/login.html', context)
 
         # if this user doesn't appear in the database
         else:
 
             # reload login page and display error message
             context['error'] = 'Username or password not found'
-            return render(request, 'main/login.html', context)
+            return render(request, 'project/login.html', context)
 
 
 class LogoutView(View):
@@ -151,7 +151,9 @@ class OrderModelFormView(View):
         context = {}
         form = OrderModelForm(request.POST)
         if form.is_valid():
-            form.save()
+            order = form.save(commit=False)
+            order.user = request.user
+            order.save()
             return redirect('main:order_list')
         else:
             context['form'] = form
