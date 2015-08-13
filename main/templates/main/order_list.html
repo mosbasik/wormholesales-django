@@ -10,28 +10,22 @@
         <div class="row table-row">
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-heading button-col"><p>Info</p></div>
             <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3 col-heading"><p>Class</p></div>
-            <div class="col-lg-1 col-md-2 col-sm-3 col-xs-3 col-heading"><p>Effect</p></div>
-            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 col-heading"><p>Price</p></div>
-            <div class="col-lg-1 col-md-2 hidden-sm hidden-xs col-heading"><p>Seller</p></div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 col-heading"><p>Effect</p></div>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 col-heading"><p>Price (ISK)</p></div>
+            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs col-heading"><p>Seller</p></div>
             <div class="col-lg-1 col-md-1 hidden-sm hidden-xs col-heading"><p>J&#8209;Code</p></div>
-            <div class="col-lg-1 col-md-2 hidden-sm hidden-xs col-heading"><p>Modified</p></div>
-            <div class="col-lg-1 hidden-md hidden-sm hidden-xs col-heading button-col"><p>Planets</p></div>
-            <div class="col-lg-1 hidden-md hidden-sm hidden-xs col-heading">Title1</div>
-            <div class="col-lg-1 hidden-md hidden-sm hidden-xs col-heading">Title2</div>
-            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-1 col-heading button-col">More</div>
+            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs col-heading"><p>Modified</p></div>
+            <div class="col-lg-1 col-md-1 col-sm-2 col-xs-1 col-heading button-col"><p>More</p></div>
         </div>
         {% for order in object_list %}
             <div class="row table-row">
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 button-col"><a href="{% url 'main:order_details' order.id %}" class='glyphicon glyphicon-info-sign btn btn-default'></a></div>
-                <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-3">{{ order.system.effect.name }}</div>
-                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 price-col">{{ order.price|sigfigs:4|intword }}</div>
-                <div class="col-lg-1 col-md-2 hidden-sm hidden-xs"><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></div>
-                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">{{ order.system.j_code }}</div>
-                <div class="col-lg-1 col-md-2 hidden-sm hidden-xs"><abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></div>
-                <div class="col-lg-1 hidden-md hidden-sm hidden-xs button-col"><a href="{{ order.system.eveplanet_URL }}" target="_blank" class='glyphicon glyphicon-globe btn btn-default'></a></div>
-                <div class="col-lg-1 hidden-md hidden-sm hidden-xs">Filler1</div>
-                <div class="col-lg-1 hidden-md hidden-sm hidden-xs">Filler2</div>
+                <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3"><p>{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</p></div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3"><p>{{ order.system.effect.name }}</p></div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 price-col"><p>{{ order.price|sigfigs:4|intword }}</p></div>
+                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs"><p><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p></div>
+                <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"><p>{{ order.system.j_code }}</p></div>
+                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs"><p><abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></p></div>
                 <div class="col-lg-1 dropdown button-col col-md-1 col-sm-2">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="caret"></span>
@@ -40,10 +34,10 @@
                         <li class='hidden-lg hidden-md'><p>Posted: <abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></p></li>
                         <li class='hidden-lg hidden-md'><p>Seller: <a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p></li>
                         <li class='hidden-lg hidden-md'><p>J-Code: {{ order.system.j_code }}</p></li>
-                        <li class='hidden-lg hidden-md'><p>Planets: <a href="{{ order.system.eveplanet_URL }}" target="_blank" class='glyphicon glyphicon-globe btn btn-default'></a></p></li>
+                        <li class='hidden-md'><p><a href="{{ order.system.eveplanet_URL }}" target="_blank">Planets</a></p></li>
                         <li class='hidden-lg'><p>Title1: Filler1</p></li>
                         <li class='hidden-lg'><p>Title2: Filler2</p></li>
-                        <li class=''><p>Title3: Filler3</p></li>
+                        <li class=''><p>{{order.system.id}}</p></li>
                     </ul>
                 </div>
             </div>
