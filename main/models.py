@@ -45,6 +45,21 @@ class Space(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
     @property
+    def code(self):
+        '''
+        Returns a one (or two, for shattered holes) character code indicating
+        the type of space ('H', 'L', 'N', '1', '13', etc)
+        '''
+        if self.name == 'High-Sec':
+            return 'H'
+        if self.name == 'Low-Sec':
+            return 'L'
+        if self.name == 'Null-Sec':
+            return 'N'
+        # regex = re.compile(r'[^\d]+')
+        return self.name[6:]
+
+    @property
     def abbrev(self):
         '''
         Returns a two-character string abbreviation of the type of space
@@ -56,7 +71,7 @@ class Space(models.Model):
             return 'Ls'
         if self.name == 'Null-Sec':
             return 'Ns'
-        regex = re.compile(r'[^\d]+')
+        # regex = re.compile(r'[^\d]+')
         return '{0}{1}'.format('C', self.name[6:])
 
     @property
