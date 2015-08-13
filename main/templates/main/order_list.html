@@ -25,7 +25,7 @@
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 button-col"><a href="{% url 'main:order_details' order.id %}" class='glyphicon glyphicon-info-sign btn btn-default'></a></div>
                 <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">{{ order.system.space.abbrev }}: {% for static in order.system.statics.all %}{% if forloop.first %}{% else %}/{% endif %}{{ static.space.abbrev }}{% endfor %}</div>
                 <div class="col-lg-1 col-md-2 col-sm-3 col-xs-3">{{ order.system.effect.name }}</div>
-                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 price-col">{{ order.price|floatformat:2|intcomma }}</div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 price-col">{{ order.price|sigfigs:4|intword }}</div>
                 <div class="col-lg-1 col-md-2 hidden-sm hidden-xs"><a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></div>
                 <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">{{ order.system.j_code }}</div>
                 <div class="col-lg-1 col-md-2 hidden-sm hidden-xs"><abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></div>
