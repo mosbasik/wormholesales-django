@@ -4,6 +4,15 @@ from django.db import models
 import re
 
 
+class Character(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=50)
+    portrait = models.ImageField(null=True, blank=True)
+
+    def __unicode__(self):
+        return self.name
+
+
 class Effect(models.Model):
     name = models.CharField(max_length=30, unique=True)
     effect_elements = models.ManyToManyField('main.EffectElement',

@@ -17,9 +17,10 @@ from django.views.generic import View
 from django.views.generic.list import ListView
 
 from main.forms import OrderModelForm, UserCreationForm
-from main.models import Order, System
+from main.models import Order, System, Character
 from project.settings import EFFECT_CONST
 
+from lxml import etree
 import json
 import requests
 import urllib
@@ -207,13 +208,28 @@ def wormhole_details_json(request, j_code=None):
 
 def validate_contact_name(request):
     if request.method == 'GET':
-        name = urllib.quote(request.GET['name'])
-        url_stub = 'https://gate.eveonline.com/Profile/'
-        response = requests.head(url_stub + name)
+        name = request.GET['name']
 
-        if response.status_code < 400:
-            return HttpResponse(status=200)  # contact name is valid
+        # if name is already in our database, it's valid; return success
+        if Character.objects.filter(name=name).exists():
+            return HttpResponse(status=200)
+
+        # if name is not already cached in our database, check the API
         else:
-            return HttpResponse(status=404)  # contact name is not valid
+            url_stub = 'https://api.eveonline.com/eve/CharacterID.xml.aspx?names='
+            response = requests.get(url_stub + name)
+            tree = etree.XML(response.content)
+            character_id_xpath = '/eveapi/result/rowset/row/@characterID'
+            character_id = int(tree.xpath(character_id_xpath)[0])
+
+            # if the API returns an id of 0, name is invalid;  return failure
+            if character_id == 0:
+                return HttpResponse(status=404)
+
+            # otherwise the name is valid; save it and return success
+            Character.objects.create(id=character_id, name=name)
+            return HttpResponse(status=200)
+
     else:
-        return HttpResponse(status=400)  # client made bad request
+        # client made bad request, return failure
+        return HttpResponse(status=400)
