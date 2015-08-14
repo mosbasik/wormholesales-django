@@ -2,8 +2,9 @@ from django import forms
 from django.core.validators import EmailValidator
 from django.contrib.auth.models import User
 
-from main.models import Order, System
+from main.models import Order, System, Character
 
+from lxml import etree
 import requests
 import urllib
 
@@ -59,14 +60,27 @@ class OrderModelForm(forms.ModelForm):
         code).  If it exists, return without error; otherwise raises a
         ValidationError.
         '''
-        data = self.cleaned_data['contact_name']
-        name = urllib.quote(data)
-        url_stub = 'https://gate.eveonline.com/Profile/'
-        response = requests.head(url_stub + name)
-        if response.status_code < 400:
-            return data
+        name = self.cleaned_data['contact_name']
+
+        # if name is already in our database, it's valid; return success
+        if Character.objects.filter(name=name).exists():
+            return name
+
+        # if name is not already cached in our database, check the API
         else:
-            raise forms.ValidationError('Character does not exist.')
+            url_stub = 'https://api.eveonline.com/eve/CharacterID.xml.aspx?names='
+            response = requests.get(url_stub + name)
+            tree = etree.XML(response.content)
+            character_id_xpath = '/eveapi/result/rowset/row/@characterID'
+            character_id = int(tree.xpath(character_id_xpath)[0])
+
+            # if the API returns an id of 0, name is invalid;  return failure
+            if character_id == 0:
+                raise forms.ValidationError('Character does not exist.')
+
+            # otherwise the name is valid; save it and return success
+            Character.objects.create(id=character_id, name=name)
+            return name
 
     def clean_system(self):
         '''

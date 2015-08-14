@@ -6,7 +6,7 @@ import re
 
 class Character(models.Model):
     id = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     portrait = models.ImageField(null=True, blank=True)
 
     def __unicode__(self):
