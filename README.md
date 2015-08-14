@@ -13,7 +13,7 @@ Proof-of-concept clone of existing site "wormholesales.com".
 
 ## Long-term goals
 
-- [ ] user can register and log in
+- [x] user can register and log in
 - [ ] buyer can post a buy order
 - [ ] user can update the price on a buy or sell order to bump it up in the list
 - [ ] buyer/seller can include occupied wormhole information in order attributes
