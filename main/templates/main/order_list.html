@@ -21,7 +21,7 @@
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-heading button-col table-cell"><p>More</p></div>
         </div>
         {% for order in object_list %}
-            <div class="row table-row">
+            <div class="row table-row {% if user.is_authenticated and user == order.user %}user-table-row{% endif %}">
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 button-col table-cell"><a href="{% url 'main:order_details' order.id %}" class='glyphicon glyphicon-info-sign btn btn-default'></a></div>
                 <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3 table-cell"><p>C{{ order.system.space.code }}{% for static in order.system.statics.all %} / {{ static.space.code }}{% endfor %}</p></div>
                 <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 table-cell"><p>{{ order.system.effect.blankname }}</p></div>
