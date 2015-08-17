@@ -140,13 +140,13 @@ class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput(
                                     attrs={
                                         'class': 'form-control',
-                                        'placeholder': 'Password',
+                                        'placeholder': 'Password (This is private too)',
                                     }))
 
     password2 = forms.CharField(widget=forms.PasswordInput(
                                     attrs={
                                         'class': 'form-control',
-                                        'placeholder': 'Password Verification',
+                                        'placeholder': 'Password Verification (So is this)',
                                     }))
 
     class Meta:

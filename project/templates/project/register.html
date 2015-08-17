@@ -7,9 +7,8 @@
         <div class="row">
             <h1 class="text-center">Wormhole Sales Registration</h1>
         </div>
-        <hr>
 
-        <div id='wrapper' class="row">
+        <div class="row wrapper">
 
             <form action="{% url 'register' %}" id="register-form" method="POST" class="col-sm-offset-3 col-sm-6">
                 {% csrf_token %}
