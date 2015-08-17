@@ -244,6 +244,13 @@ html {
     -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
     box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
+    /*background-color: #E6E6E6;*/
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#E6E6E6), to(#CCCCCC));
+    background-image: -webkit-linear-gradient(top, #E6E6E6, #CCCCCC);
+    background-image: -moz-linear-gradient(top, #E6E6E6, #CCCCCC);
+    background-image: -ms-linear-gradient(top, #E6E6E6, #CCCCCC);
+    background-image: -o-linear-gradient(top, #E6E6E6, #CCCCCC);
+    background-image: linear-gradient(to bottom, #E6E6E6, #CCCCCC);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#E6E6E6, endColorstr=#CCCCCC);
 }
 
 .navbar-btn {
