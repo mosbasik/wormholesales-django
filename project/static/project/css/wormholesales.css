@@ -258,7 +258,9 @@ html {
 }
 
 .navbar-btn {
-    background-color: #F8F8F8;
+    background-color: #50a8dc;
+    color: #f5f5f5;
+    border-color: #f5f5f5
 }
 
 .intro-text {
