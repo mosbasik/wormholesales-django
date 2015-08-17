@@ -7,6 +7,7 @@ from main.views import (
     OrderListView,
     OrderDetails,
     OrderModelFormView,
+    UserOrderListView,
     wormhole_details_json,
     validate_contact_name,
     landing_page,
@@ -16,6 +17,11 @@ urlpatterns = [
     # Home page URLS
     url(r'^$', landing_page, name='home'),
     url(r'^wormholes/$', OrderListView.as_view(), name='order_list'),
+
+    # User order URLS
+    url(r'^user/(?P<set_string>(all|buy|sell))/$',
+        login_required(UserOrderListView.as_view()),
+        name='user_order_list'),
 
     # Order form URLS
     url(r'^order-form/$',

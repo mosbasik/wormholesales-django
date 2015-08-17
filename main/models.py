@@ -51,6 +51,7 @@ class Order(models.Model):
     system = models.ForeignKey('main.System')
     price = models.DecimalField(max_digits=16, decimal_places=2)
     information = models.TextField(null=True, blank=True)
+    is_sell = models.BooleanField()
 
     def __unicode__(self):
         return "{1} :: {0}".format(self.created, self.system.j_code)
