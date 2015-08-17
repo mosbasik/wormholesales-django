@@ -13,7 +13,7 @@ class OrderModelForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        exclude = ['user']
+        exclude = ['user', 'is_sell']
 
     # Override contact_name widget to get bootstrap formatting
     contact_name = forms.CharField(
@@ -68,7 +68,7 @@ class OrderModelForm(forms.ModelForm):
 
             # return the Character object with that name
             # (NOTE: this changes the type from a string to a Character!)
-            return Character.objects.filter(name=name)
+            return Character.objects.get(name=name)
 
         # if name is not already cached in our database, check the API
         else:

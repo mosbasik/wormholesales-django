@@ -158,11 +158,38 @@ class OrderModelFormView(View):
         if form.is_valid():
             order = form.save(commit=False)
             order.user = request.user
+            order.is_sell = True
             order.save()
             return redirect('main:order_list')
         else:
             context['form'] = form
             return render(request, 'main/order_form.html', context)
+
+
+class UserOrderListView(ListView):
+    model = Order
+    template_name = "main/user_order_list.html"
+
+    def get_queryset(self):
+        # CASE: user/buy/
+        if self.kwargs['set_string'] == 'buy':
+            return Order.objects.filter(
+                    user=self.request.user,
+                    is_sell=False).order_by('-modified')
+        # CASE: user/sell/
+        elif self.kwargs['set_string'] == 'sell':
+            return Order.objects.filter(
+                    user=self.request.user,
+                    is_sell=True).order_by('-modified')
+        # CASE: user/all/
+        else:
+            return Order.objects.filter(
+                    user=self.request.user).order_by('-modified')
+
+    def get_context_data(self, **kwargs):
+        context = super(UserOrderListView, self).get_context_data(**kwargs)
+        context['set_string'] = self.kwargs['set_string']
+        return context
 
 
 def wormhole_details_json(request, j_code=None):
