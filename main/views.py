@@ -65,7 +65,7 @@ class RegisterView(View):
             context = {}
             context['error_on_create'] = True
             context['form'] = filled_user_creation_form
-            return render(request, 'main/register.html', context)
+            return render(request, 'project/register.html', context)
 
 
 def landing_page(request):
