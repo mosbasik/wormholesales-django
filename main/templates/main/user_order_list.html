@@ -1,0 +1,34 @@
+{% extends "project/base.html" %}
+
+{% load staticfiles %}
+{% load humanize %}
+{% load customfilters %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <h2>{{ user.username }}</h2>
+            <h1>{{ set_string|title }} Orders</h1>
+            {% for object in object_list %}
+                {{object}} <br>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'main/js/initialize.timeago.js' %}"></script>
+
+    <script type="text/javascript">
+      $('.dropdown-menu').on('click', function (e) {
+       e.stopPropagation() 
+      })
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+    </script>
+{% endblock js %}
