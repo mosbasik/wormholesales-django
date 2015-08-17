@@ -55,16 +55,20 @@ class OrderModelForm(forms.ModelForm):
 
     def clean_contact_name(self):
         '''
-        Gets the contact name from the form data and checks to see if a profile
-        page under this name exists on evegate.com (by checking the response
-        code).  If it exists, return without error; otherwise raises a
+        Gets the contact name from the form data and checks to see if that
+        character exists through Eve's character API. If it exists, that
+        Character object is returned (changing the type from a string to an
+        object to support the foreign key in Order); otherwise raises a
         ValidationError.
         '''
         name = self.cleaned_data['contact_name']
 
-        # if name is already in our database, it's valid; return success
+        # if name is already in our database, it's VALID
         if Character.objects.filter(name=name).exists():
-            return name
+
+            # return the Character object with that name
+            # (NOTE: this changes the type from a string to a Character!)
+            return Character.objects.filter(name=name)
 
         # if name is not already cached in our database, check the API
         else:
@@ -74,12 +78,15 @@ class OrderModelForm(forms.ModelForm):
             character_id_xpath = '/eveapi/result/rowset/row/@characterID'
             character_id = int(tree.xpath(character_id_xpath)[0])
 
-            # if the API returns an id of 0, name is invalid;  return failure
+            # if the API returns an id of 0, name is INVALID; raise an error
             if character_id == 0:
                 raise forms.ValidationError('Character does not exist.')
 
-            # otherwise the name is valid; save it and return success
-            Character.objects.create(id=character_id, name=name)
+            # otherwise the name is VALID; create corresponding character
+            name = Character.objects.create(id=character_id, name=name)
+
+            # return Character object
+            # (NOTE: this changes the type from a string to a Character!)
             return name
 
     def clean_system(self):

@@ -9,6 +9,12 @@ class Character(models.Model):
     name = models.CharField(max_length=50, unique=True)
     portrait = models.ImageField(null=True, blank=True)
 
+    @property
+    def evewho_link(self):
+        url_stub = 'http://evewho.com/pilot/'
+        name = self.name.replace(' ', '+')
+        return url_stub + name
+
     def __unicode__(self):
         return self.name
 
@@ -41,16 +47,10 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
-    contact_name = models.CharField(max_length=255)
+    contact_name = models.ForeignKey('main.Character')
     system = models.ForeignKey('main.System')
     price = models.DecimalField(max_digits=16, decimal_places=2)
     information = models.TextField(null=True, blank=True)
-
-    @property
-    def evewho_link(self):
-        url_stub = 'http://evewho.com/pilot/'
-        name = self.contact_name.replace(' ', '+')
-        return url_stub + name
 
     def __unicode__(self):
         return "{1} :: {0}".format(self.created, self.system.j_code)
