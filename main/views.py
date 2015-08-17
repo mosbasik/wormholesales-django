@@ -68,6 +68,10 @@ class RegisterView(View):
             return render(request, 'main/register.html', context)
 
 
+def landing_page(request):
+    return render(request, 'main/landing_page.html', {})
+
+
 class LoginView(View):
 
     def get(self, request):

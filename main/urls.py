@@ -9,11 +9,12 @@ from main.views import (
     OrderModelFormView,
     wormhole_details_json,
     validate_contact_name,
+    landing_page,
 )
 
 urlpatterns = [
     # Home page URLS
-    url(r'^$', OrderListView.as_view(), name='home'),
+    url(r'^$', landing_page, name='home'),
     url(r'^wormholes/$', OrderListView.as_view(), name='order_list'),
 
     # Order form URLS

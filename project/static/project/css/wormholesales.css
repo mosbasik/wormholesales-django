@@ -228,3 +228,14 @@ html {
 .caret {
     color: black;
 }
+
+/*Landing Page CSS*/
+.landing h1 {
+    text-align: center;
+}
+
+.landing .col-md-6 {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 400px;
+}
