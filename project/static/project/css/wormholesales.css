@@ -282,3 +282,9 @@ html {
 .pagination>.active>span:hover {
     background-color: #50a8dc;
 }
+
+@media (max-width: 768px) {
+    .navbar-nav .btn-group {
+        margin-left: 14px;
+    }
+}
