@@ -9,7 +9,7 @@
         </div>
         <hr>
 
-        <div id='wrapper' class="row">
+        <div class="row wrapper">
             <form action="{% url 'login' %}" id="login-form" method="POST" class="col-sm-offset-3 col-sm-6">
                 {% csrf_token %}
                 <input type='hidden' name='next' value='{{ next }}'>

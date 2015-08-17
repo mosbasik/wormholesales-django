@@ -14,19 +14,17 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="message-board-nav-collapse">
             <ul class="nav navbar-nav">
-                {% if request.path == '/order-form/' %}
-                    <li class="active">
-                {% else %}
-                    <li>
-                {% endif %}
-                    <a href="{% url 'main:order_form' %}">Sell</a>
+                <li>
+                    <span class='btn-group' style='margin-right:8px'>
+                        <a type='button' href="{% url 'main:order_list' %}" class='navbar-btn btn btn-default'>For Sale</a>
+                        <a type='button' href="{% url 'main:order_form' %}" class='navbar-btn btn btn-default'><span class='glyphicon glyphicon-plus'></span></a>
+                    </span>
                 </li>
-                {% if request.path == 'buy-path-here' %}
-                    <li class="active">
-                {% else %}
-                    <li>
-                {% endif %}
-                    <a href="#">Buy</a>
+                <li>
+                <span class='btn-group'>
+                        <a type='button' href="#" class='navbar-btn btn btn-default'>Buy</a>
+                        <a type='button' href="#" class='navbar-btn btn btn-default'><span class='glyphicon glyphicon-plus'></span></a>
+                    </span>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
