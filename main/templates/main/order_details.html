@@ -4,6 +4,7 @@
 {% load humanize %}
 {% load mathfilters %}
 {% load customfilters %}
+{% load nbsp %}
 
 {% block content %}
     <div class="container">
@@ -19,7 +20,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Order information: (last updated: <abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr>)</div>
                             <div  class="panel-body">
-                                <p>Price: {{ order.price|floatformat:2|intcomma }} ISK (about {{ order.price|sigfigs:4|intword }} ISK)</p>
+                                <p>Price: {{ order.price|floatformat:2|intcomma }} ISK (about&nbsp;{{ order.price|sigfigs:4|intword|nbsp }}&nbsp;ISK)</p>
                                 <p>Seller: <a href="{{ order.contact_name.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p>
                                 <p>Originally Posted: <abbr class="timeago" title="{{ order.created|date:'c' }}"></abbr></p>
                                 <div class="order-panel">
@@ -73,8 +74,8 @@
                                                 <div class="static-body">
                                                     <p>Type: {{ static.name }}</p>
                                                     <p>Lifetime: {{ static.life }} hours</p>
-                                                    <p>Total mass: {{static.mass|intcomma }} Kg ({{ static.mass|div:1000000|floatformat:0 }} Gg)</p>
-                                                    <p>Jump mass: {{static.jump|intcomma }} Kg ({{ static.jump|div:1000000|floatformat:0 }} Gg)</p>
+                                                    <p>Total mass: {{static.mass|intcomma }} Kg ({{ static.mass|div:1000000|floatformat:0 }}&nbsp;Gg)</p>
+                                                    <p>Jump mass: {{static.jump|intcomma }} Kg ({{ static.jump|div:1000000|floatformat:0 }}&nbsp;Gg)</p>
                                                 </div>
                                             </div>
                                         </div>
