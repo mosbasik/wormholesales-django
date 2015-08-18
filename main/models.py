@@ -54,7 +54,9 @@ class Order(models.Model):
     is_sell = models.BooleanField()
 
     def __unicode__(self):
-        return "{1} :: {0}".format(self.created, self.system.j_code)
+        return "{1} :: {2} :: {0}".format(self.created,
+                                          self.system.j_code,
+                                          self.system.effect.blankname)
 
 
 class Space(models.Model):

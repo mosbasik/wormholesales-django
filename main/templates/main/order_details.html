@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="text-center">Order #{{ order.id }}: {{ order.system.space }} {{ order.system.effect.name }}</h2>
+                <h2 class="text-center">Order #{{ order.id }}: {{ order.system.space }} {{ order.system.effect.blankname }}</h2>
                 <hr>
 
                 <div class="row">
@@ -17,14 +17,28 @@
                     {# Order information block #}
                     <div class="col-sm-6">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Order information:</div>
-                            <div class="panel-body">
-                                <p class="small">Created: <abbr class="timeago" title="{{ order.created|date:'c' }}"></abbr></p>
-                                <p class="small">Modified: <abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr></p>
-                                <p>System: {{ order.system.j_code }}</p>
-                                <p>Price: {{ order.price|sigfigs:4|intword }} ISK</p>
-                                <p>Contact name: <a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p>
-                                <p>Additional Information: {{ order.information }}</p>
+                            <div class="panel-heading">Order information: (last updated: <abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr>)</div>
+                            <div  class="panel-body">
+                                <p>Price: {{ order.price|floatformat:2|intcomma }} ISK (about {{ order.price|sigfigs:4|intword }} ISK)</p>
+                                <p>Seller: <a href="{{ order.contact_name.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p>
+                                <p>Originally Posted: <abbr class="timeago" title="{{ order.created|date:'c' }}"></abbr></p>
+                                <div class="order-panel">
+                                    <div class="static-wrapper {{ order.system.space.abbrev }}">
+                                        <div class="static-title text-center">
+                                            {{ order.system.space.abbrev }}
+                                        </div>
+                                        <div class="static-body">
+                                            <p>System: {{ order.system.j_code }}</p>
+                                            <p><a href="{{ order.system.eveplanet_URL }}" target="_blank">Planetary Interaction</a></p>
+                                            <p><a href="https://zkillboard.com/system/{{order.system.id}}" target='_blank'>zKillboard Activity</a></p>
+                                            <p><a href="http://wh.pasta.gg/{{order.system.j_code}}" target='_blank'>wh.pasta.gg</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>Additional Information added by seller:</p>
+                                <div class="well well-sm">
+                                    {{ order.information|linebreaks }}
+                                </div>
                             </div>
                         </div>
                     </div>
