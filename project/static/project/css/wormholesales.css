@@ -8,7 +8,7 @@ navbar color #50a8dc
 
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    margin-bottom: 110px;
+    margin-bottom: 70px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -221,8 +221,9 @@ html {
 }
 
 .table-cell {
-    float: left;
-    width: 100%;
+    /*float: left;*/
+    /*width: 100%;*/
+    /*text-align: center;*/
 }
 
 .table-cell p {
@@ -349,6 +350,23 @@ html {
     padding-right: 10px;
 }
 
-.dropdown-menu {
+.nav .dropdown-menu {
     width: 100%;
+    border-top: none;
+}
+
+.dropdown-toggle,
+.dropdown-toggle:hover,
+.dropdown-toggle:focus,
+.btn-default.active.focus,
+.btn-default.active:focus,
+.btn-default.active:hover,
+.btn-default:active.focus,
+.btn-default:active:focus,
+.btn-default:active:hover,
+.open>.dropdown-toggle.btn-default.focus,
+.open>.dropdown-toggle.btn-default:focus,
+.open>.dropdown-toggle.btn-default:hover {
+    background-color: transparent;
+    border: none;
 }
