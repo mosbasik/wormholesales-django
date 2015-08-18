@@ -1,3 +1,11 @@
+/*
+Reference for colors
+Text in nav bar #f5f5f5
+Heading text #317eac
+navbar color #50a8dc
+*/
+
+
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     margin-bottom: 110px;
@@ -312,4 +320,10 @@ html {
     .navbar-nav .btn-group {
         margin-left: 14px;
     }
+}
+
+.btn-group>.btn:focus {
+    border-color: #f5f5f5;
+    background-color: #50a8dc;
+    color: #f5f5f5;
 }
