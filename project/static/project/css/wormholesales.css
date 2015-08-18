@@ -129,7 +129,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-default .navbar-nav>.open>a,
 .navbar-default .navbar-nav>.open>a:focus,
 .navbar-default .navbar-nav>.open>a:hover {
-    background-color: rgba(0,0,0,.1);
+    background-color: #50a8dc;
     color: #f5f5f5;
 }
 
@@ -347,4 +347,8 @@ html {
 .brand-img {
     padding-top: 5px;
     padding-right: 10px;
+}
+
+.dropdown-menu {
+    width: 100%;
 }
