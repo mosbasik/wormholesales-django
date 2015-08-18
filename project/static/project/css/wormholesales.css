@@ -237,7 +237,7 @@ html {
     text-align: center;
 }
 
-.table-row.user-table-row {
+#order-list .table-row.user-table-row {
     background-color: #DAF0FD;
 }
 
