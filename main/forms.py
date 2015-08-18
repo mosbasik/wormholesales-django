@@ -45,7 +45,7 @@ class OrderModelForm(forms.ModelForm):
         widget=forms.Textarea(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Information',
+                'placeholder': 'Additional information (optional)',
                 'rows': '10',
             }))
 
