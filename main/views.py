@@ -31,7 +31,7 @@ class RegisterView(View):
     def get(self, request):
         # if  a user is already logged in, redirect to the order page
         if request.user.is_authenticated():
-            return redirect('main:order_list')
+            return redirect('main:sell_list')
 
         # save a blank user creation form in the context and reload page
         context = {'form': UserCreationForm}
@@ -41,7 +41,7 @@ class RegisterView(View):
 
         # if  a user is already logged in, redirect to the order page
         if request.user.is_authenticated():
-            return redirect('main:order_list')
+            return redirect('main:sell_list')
 
         # get and check if the filled user creation form is valid
         filled_user_creation_form = UserCreationForm(request.POST)
@@ -56,7 +56,7 @@ class RegisterView(View):
 
             # log the new user into the site and redirect to front page
             auth_login(request, user)
-            return redirect('main:order_list')
+            return redirect('main:sell_list')
 
         # if the filled form was invalid
         else:
@@ -84,7 +84,7 @@ class LoginView(View):
 
         # if a user is already logged in, redirect to the order page
         if request.user.is_authenticated():
-            return redirect('main:order_list')
+            return redirect('main:sell_list')
 
         # create blank context dictionary for some reason
         context = {}
@@ -123,7 +123,7 @@ class LogoutView(View):
 
     def get(self, request):
         auth_logout(request)
-        return redirect('main:order_list')
+        return redirect('main:sell_list')
 
 
 class OrderDetails(View):
@@ -137,11 +137,26 @@ class OrderDetails(View):
         pass
 
 
-class OrderListView(ListView):
+# class OrderListView(ListView):
+#     model = Order
+
+#     def get_queryset(self):
+#         return Order.objects.all().order_by('-modified')
+
+
+class SellOrderListView(ListView):
     model = Order
 
     def get_queryset(self):
         return Order.objects.all().order_by('-modified')
+
+
+class BuyOrderListView(ListView):
+    pass
+
+
+def filter_view(request):
+    pass
 
 
 class OrderModelFormView(View):
@@ -160,7 +175,7 @@ class OrderModelFormView(View):
             order.user = request.user
             order.is_sell = True
             order.save()
-            return redirect('main:order_list')
+            return redirect('main:sell_list')
         else:
             context['form'] = form
             return render(request, 'main/order_form.html', context)
