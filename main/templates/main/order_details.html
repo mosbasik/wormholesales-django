@@ -24,7 +24,10 @@
                                 <p>System: {{ order.system.j_code }}</p>
                                 <p>Price: {{ order.price|sigfigs:4|intword }} ISK</p>
                                 <p>Contact name: <a href="{{ order.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p>
-                                <p>Additional Information: {{ order.information }}</p>
+                                <p>Additional Information:</p>
+                                <div class="well well-sm">
+                                    {{ order.information|linebreaks }}
+                                </div>
                             </div>
                         </div>
                     </div>
