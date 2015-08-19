@@ -14,10 +14,10 @@
         <div class="row">
             <h1>Sell Orders</h1>
         </div>
-        <div id='filter-inputs col-md-10'>
+        <div id='filter-inputs'>
             <div class="row">
                 <div class='col-sm-4'>
-                    Desired Class(es):
+                    Classes:
                     <div class="filter-group" data-name="class">
                         <label for="class-1">C1</label>
                         <input type="checkbox" id="class-1" data-value="Class 1">
@@ -40,61 +40,64 @@
                 </div>
 
                 <div class='col-sm-4'>
-                Desired Effect(s):
+                    Effects:
                     <div class="filter-group" data-name="effect">
-                        <label for="pulsar">P</label>
-                        <input type="checkbox" id="pulsar" data-value="Pulsar">
-                        
-                        <label for="cataclysmic-variable">CV</label>
-                        <input type="checkbox" id="cataclysmic-variable" data-value="Cataclysmic Variable">
-
-                        <label for="wolf-rayet-star">W-R</label>
-                        <input type="checkbox" id="wolf-rayet-star" data-value="Wolf-Rayet Star">
+                        <label for="no-effect">None</label>
+                        <input type="checkbox" id="no-effect" data-value="No Effect">
 
                         <label for="black-hole">BH</label>
                         <input type="checkbox" id="black-hole" data-value="Black Hole">
 
+                        <label for="cataclysmic-variable">CV</label>
+                        <input type="checkbox" id="cataclysmic-variable" data-value="Cataclysmic Variable">
+
                         <label for="magnetar">M</label>
                         <input type="checkbox" id="magnetar" data-value="Magnetar">
 
-                        <label for="no-effect">N/A</label>
-                        <input type="checkbox" id="no-effect" data-value="No Effect">
+                        <label for="pulsar">P</label>
+                        <input type="checkbox" id="pulsar" data-value="Pulsar">
+
+                        <label for="red-giant">RG</label>
+                        <input type="checkbox" id="red-giant" data-value="Red Giant">
+
+                        <label for="wolf-rayet-star">W-R</label>
+                        <input type="checkbox" id="wolf-rayet-star" data-value="Wolf-Rayet Star">
                     </div>
                 </div>
         
                 <div class='col-sm-4'>
-                    Special Class(es):
-                    <div class="filter-group" data-name="class">
-                        <label for="class-13">C13</label>
+                    Shattered Wormholes:
+                    <div class="filter-group" data-name="shattered_class">
+                        <label for="class-13">C3 W-R</label>
                         <input type="checkbox" id="class-13" data-value="Class 13">
 
-                        <label for="class-14">C14</label>
-                        <input type="checkbox" id="class-14" data-value="Class 14">
-
-                        <label for="class-15">C15</label>
+                        <label for="class-15">C6 CV</label>
                         <input type="checkbox" id="class-15" data-value="Class 15">
 
-                        <label for="class-16">C16</label>
+                        <label for="class-16">C6 M</label>
                         <input type="checkbox" id="class-16" data-value="Class 16">
 
-                        <label for="class-17">C17</label>
+                        <label for="class-17">C6 P</label>
                         <input type="checkbox" id="class-17" data-value="Class 17">
 
-                        <label for="class-18">C18</label>
+                        <label for="class-14">C6 RG</label>
+                        <input type="checkbox" id="class-14" data-value="Class 14">
+
+                        <label for="class-18">C6 W-R</label>
                         <input type="checkbox" id="class-18" data-value="Class 18">
                     </div>
                 </div>
 
-                <div class='col-sm-6'>
-                    Shattered:
-                    <div class="filter-group" data-name="shattered">
-                        <label for="shattered-1">Yes</label>
-                        <input type="checkbox" id="shattered-1" data-value="shattered-1">
+                {# <div class='col-sm-6'> #}
+                    {# Shattered: #}
+                    {# <div class="filter-group" data-name="shattered"> #}
+                        {# <label for="shattered-1">Yes</label> #}
+                        {# <input type="checkbox" id="shattered-1" data-value="shattered-1"> #}
 
-                        <label for="shattered-0">No</label>
-                        <input type="checkbox" id="shattered-0" data-value="shattered-0">
-                    </div>
-                </div>
+                        {# <label for="shattered-0">No</label> #}
+                        {# <input type="checkbox" id="shattered-0" data-value="shattered-0"> #}
+                    {# </div> #}
+                {# </div> #}
 
             </div>       
             
@@ -104,6 +107,15 @@
                 <div class='col-md-7'>
                     Static 1:
                     <div class="filter-group" data-name="static1">
+                        <label for="static-1-Hs">Hs</label>
+                        <input type="checkbox" id="static-1-Hs" data-value="High-Sec">
+
+                        <label for="static-1-Ls">Ls</label>
+                        <input type="checkbox" id="static-1-Ls" data-value="Low-Sec">
+
+                        <label for="static-1-Ns">Ns</label>
+                        <input type="checkbox" id="static-1-Ns" data-value="Null-Sec">
+
                         <label for="static-1-c1">C1</label>
                         <input type="checkbox" id="static-1-c1" data-value="Class 1">
 
@@ -121,15 +133,6 @@
 
                         <label for="static-1-c6">C6</label>
                         <input type="checkbox" id="static-1-c6" data-value="Class 6">
-
-                        <label for="static-1-Hs">Hs</label>
-                        <input type="checkbox" id="static-1-Hs" data-value="High-Sec">
-
-                        <label for="static-1-Ls">Ls</label>
-                        <input type="checkbox" id="static-1-Ls" data-value="Low-Sec">
-
-                        <label for="static-1-Ns">Ns</label>
-                        <input type="checkbox" id="static-1-Ns" data-value="Null-Sec">
                     </div>
                 </div>
 

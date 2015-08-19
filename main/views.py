@@ -212,38 +212,26 @@ def filter_view(request):
 
         # the list of user-submitted filters
         filters = {
-            'class': g.getlist('class[]'),
+            'normal_class': g.getlist('class[]'),
+            'shattered_class': g.getlist('shattered_class[]'),
             'effect': g.getlist('effect[]'),
             'static1': g.getlist('static1[]'),
             'mass': [int(x) for x in g.getlist('mass[]')],
             'jump': [int(x) for x in g.getlist('jump[]')],
         }
 
-        # convert 'shattered-1' to True and everything else to False using
-        # the GET request data, unless shattered status was not passed, in
-        # which case use the master shattered filter
-        # 'shattered': [True if x == 'shattered-1' else False
-        #               for x in g.getlist('shattered[]')],
-
-        # if g.getlist('shattered[]'):
+        filters['class'] = filters['normal_class'] + filters['shattered_class']
 
         temp = System.objects.all()
         if filters['class']:
             temp = temp.filter(space__name__in=filters['class'])
         if filters['effect']:
             temp = temp.filter(effect__name__in=filters['effect'])
+        if filters['static1']:
+            temp = temp.filter(statics__space__name__in=filters['static1'])
 
-        # shattered_classes = ['Class 13', 'Class 14', 'Class 15', 'Class 16',
-        #                      'Class 17', 'Class 18'],
-        # if filters['shattered']:
-        #     temp = temp.filter(space__name__in=filters['effect'])
-
-
-
-        # for category in filters.keys():
-            # for e in filters[category]
-
-
+        # static1
+        temp = temp.filter(statics__space__name='Class 2')
 
 
         print '\n'
@@ -252,7 +240,7 @@ def filter_view(request):
             print "{} - {}".format(category, filters[category])
 
         for s in temp:
-            print s
+            print s, [x.space.name for x in s.statics.all()]
 
         print '\n'
         return HttpResponse(status=200)

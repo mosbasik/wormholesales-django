@@ -11,6 +11,8 @@ var filter_category_names = $('#filter-inputs .filter-group').map(function() {
     return $(this).attr('data-name')
 }).get()
 
+console.log(filter_category_names)
+
 
 /**
  * Returns an object containing lists of all the data value attributes of the
