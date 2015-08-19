@@ -45,12 +45,14 @@ function get_checked_values () {
 $('#filter-inputs input').on('change', function() {
     var checked_value_list = get_checked_values()
     console.log(checked_value_list)
+    console.log(JSON.stringify(checked_value_list))
     $.ajax({
         url: '/sell/filter/',
         method: 'GET',
-        data: {
-            filters: checked_value_list,
-        },
+        contentType: 'application/json',
+        // dataType: 'json',
+        data: checked_value_list,
+        // data: JSON.stringify(checked_value_list),
         success: function() {
             console.log('success!')
         },
