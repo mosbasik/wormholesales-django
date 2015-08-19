@@ -14,9 +14,9 @@
         <div class="row">
             <h1>Sell Orders</h1>
         </div>
-        <div id='filter-inputs'>
+        <div id='filter-inputs col-md-10'>
             <div class="row">
-                <div class='col-sm-6'>
+                <div class='col-sm-4'>
                     Desired Class(es):
                     <div class="filter-group" data-name="class">
                         <label for="class-1">C1</label>
@@ -39,30 +39,7 @@
                     </div>
                 </div>
 
-                <div class='col-sm-6'>
-                    Special Class(es):
-                    <div class="filter-group" data-name="class">
-                        <label for="class-13">C13</label>
-                        <input type="checkbox" id="class-13" data-value="Class 13">
-
-                        <label for="class-14">C14</label>
-                        <input type="checkbox" id="class-14" data-value="Class 14">
-
-                        <label for="class-15">C15</label>
-                        <input type="checkbox" id="class-15" data-value="Class 15">
-
-                        <label for="class-16">C16</label>
-                        <input type="checkbox" id="class-16" data-value="Class 16">
-
-                        <label for="class-17">C17</label>
-                        <input type="checkbox" id="class-17" data-value="Class 17">
-
-                        <label for="class-18">C18</label>
-                        <input type="checkbox" id="class-18" data-value="Class 18">
-                    </div>
-                </div>
-
-                <div class='col-sm-6'>
+                <div class='col-sm-4'>
                 Desired Effect(s):
                     <div class="filter-group" data-name="effect">
                         <label for="pulsar">P</label>
@@ -82,6 +59,29 @@
 
                         <label for="no-effect">N/A</label>
                         <input type="checkbox" id="no-effect" data-value="No Effect">
+                    </div>
+                </div>
+        
+                <div class='col-sm-4'>
+                    Special Class(es):
+                    <div class="filter-group" data-name="class">
+                        <label for="class-13">C13</label>
+                        <input type="checkbox" id="class-13" data-value="Class 13">
+
+                        <label for="class-14">C14</label>
+                        <input type="checkbox" id="class-14" data-value="Class 14">
+
+                        <label for="class-15">C15</label>
+                        <input type="checkbox" id="class-15" data-value="Class 15">
+
+                        <label for="class-16">C16</label>
+                        <input type="checkbox" id="class-16" data-value="Class 16">
+
+                        <label for="class-17">C17</label>
+                        <input type="checkbox" id="class-17" data-value="Class 17">
+
+                        <label for="class-18">C18</label>
+                        <input type="checkbox" id="class-18" data-value="Class 18">
                     </div>
                 </div>
 
@@ -206,6 +206,12 @@
             <hr>
 
         </div>
+
+        {# <div class="col-md-2" id="info-box"> #}
+            {# <div class="row"> #}
+                {# <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi veniam officia ipsa animi tempore reprehenderit ratione non perferendis architecto nihil voluptatem earum quos quas maiores dolor, et, minima pariatur, rerum!</p> #}
+            {# </div> #}
+        {# </div> #}
         <br>
 
         {% include "main/table_base.html" %}
