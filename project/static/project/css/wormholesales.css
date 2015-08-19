@@ -355,18 +355,12 @@ html {
     border-top: none;
 }
 
-.dropdown-toggle,
-.dropdown-toggle:hover,
-.dropdown-toggle:focus,
-.btn-default.active.focus,
-.btn-default.active:focus,
-.btn-default.active:hover,
-.btn-default:active.focus,
-.btn-default:active:focus,
-.btn-default:active:hover,
-.open>.dropdown-toggle.btn-default.focus,
-.open>.dropdown-toggle.btn-default:focus,
-.open>.dropdown-toggle.btn-default:hover {
-    background-color: transparent;
-    border: none;
+.glyphicon-chevron-down,
+.glyphicon-chevron-down:hover {
+    font-size: 20px;
+    color: black;
+}
+
+.price-textbox {
+    display: none;
 }
