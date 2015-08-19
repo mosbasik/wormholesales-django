@@ -355,18 +355,52 @@ html {
     border-top: none;
 }
 
-.dropdown-toggle,
-.dropdown-toggle:hover,
-.dropdown-toggle:focus,
-.btn-default.active.focus,
-.btn-default.active:focus,
-.btn-default.active:hover,
-.btn-default:active.focus,
-.btn-default:active:focus,
-.btn-default:active:hover,
-.open>.dropdown-toggle.btn-default.focus,
-.open>.dropdown-toggle.btn-default:focus,
-.open>.dropdown-toggle.btn-default:hover {
-    background-color: transparent;
-    border: none;
+.glyphicon-chevron-down,
+.glyphicon-chevron-down:hover {
+    font-size: 20px;
+    color: black;
 }
+
+.price-textbox {
+    display: none;
+}
+
+/*Styles for filter checkboxes*/
+.ui-button-text-only .ui-button-text {
+    font-size: 14px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 6px;
+    padding-left: 6px;
+    font-weight: normal;
+}
+
+.ui-state-default {
+    border-color: #888;
+    color: black;
+}
+
+.ui-state-focus, .ui-state-hover {
+    background-color: #f6f6f6;
+}
+
+.ui-state-active {
+    background-color: #50a8dc;
+    border-color: #50a8dc;
+    border-right-color: #f5f5f5;
+    border-left-color: #f5f5f5;
+    color: #f5f5f5;
+}
+
+.ui-corner-right.ui-state-active {
+    border-right-color: #50a8dc;
+}
+
+.ui-corner-left.ui-state-active {
+    border-left-color: #50a8dc;
+}
+
+/*.ui-state-focus :not(.ui-state-active) {
+    background-color: #f6f6f6;
+}*/
+
