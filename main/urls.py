@@ -23,7 +23,7 @@ urlpatterns = [
     # Public order page (and filtering) URLS
     url(r'^sell/$', SellOrderListView.as_view(), name='sell_list'),
     url(r'^buy/$', BuyOrderListView.as_view(), name='buy_list'),
-    url(r'^(sell|buy)/filter/$', filter_view, name='filter'),
+    url(r'^sell/filter/$', filter_view, name='filter'),
 
     # User order URLS
     url(r'^user/(?P<set_string>(all|buy|sell))/$',
