@@ -69,7 +69,10 @@ class RegisterView(View):
 
 
 def landing_page(request):
-    return render(request, 'main/landing_page.html', {})
+    context = {}
+    context['sell_count'] = Order.objects.filter(is_sell=True).count()
+    context['buy_count'] = Order.objects.filter(is_sell=False).count()
+    return render(request, 'main/landing_page.html', context)
 
 
 class LoginView(View):

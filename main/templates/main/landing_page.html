@@ -18,6 +18,7 @@
             <div class="col-sm-6">
                 <a href="{% url 'main:sell_list' %}" class="btn btn-block btn-default landing-btn">
                     <h1>Sell Orders</h1>
+                    <h4>There are {{ sell_count }} Sell Orders</h4>
                     <span>Explore the ready-to-buy listings.</span>
                     <p>Find a hole to your specifications.</p>
                 </a>
@@ -25,6 +26,7 @@
             <div class="col-sm-6">
                 <a href="#" class="btn btn-block btn-default landing-btn">
                     <h1>Buy Orders (WIP)</h1>
+                    <h4>There are {{ buy_count }} Buy Orders</h4>
                     <span>Explore what people want to buy.</span>
                     <p>See if anyone wants the hole you just found.</p>
                 </a>

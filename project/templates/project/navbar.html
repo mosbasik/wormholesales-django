@@ -11,8 +11,8 @@
                 <span class="icon-bar"></span>
             </button>
             
-            <a class="brand-name" href="{% url 'main:home' %}">
-                <img class='brand-img' src="{% static 'main/img/brand.png' %}" alt="">
+            <a class="navbar-brand{# brand-name #}" href="{% url 'main:home' %}">
+                {# <img class='brand-img' src="{% static 'main/img/brand.png' %}" alt=""> #}
                 New Wormhole Sales
             </a>
             
@@ -37,9 +37,11 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logged in as {{ user.username }} <span class="caret nav-caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User tools for {{ user.username }} <span class="caret nav-caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="{% url 'main:user_order_list' 'all' %}">My Orders</a></li>
+                            <li><a href="{% url 'main:user_order_list' 'sell' %}">My Sell Orders</a></li>
+                            <li><a href="{% url 'main:user_order_list' 'buy' %}">My Buy Orders</a></li>
                             <li><a href="{% url 'logout' %}">Logout</a></li>
                             <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
                         </ul>
