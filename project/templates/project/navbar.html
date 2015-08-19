@@ -42,8 +42,9 @@
                             <li><a href="{% url 'main:user_order_list' 'all' %}">My Orders</a></li>
                             <li><a href="{% url 'main:user_order_list' 'sell' %}">My Sell Orders</a></li>
                             <li><a href="{% url 'main:user_order_list' 'buy' %}">My Buy Orders</a></li>
-                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="{% url 'password_reset' %}">Reset Password</a></li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
                         </ul>
                     </li>
                 {% else %}
