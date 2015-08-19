@@ -1,0 +1,211 @@
+{% extends "project/base.html" %}
+
+{% load staticfiles %}
+{% load humanize %}
+{% load customfilters %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main/css/jquery-ui.min.css' %}">
+{% endblock css %}
+
+{% block content %}
+
+    <div id='order-list' class="container">
+        <div class="row">
+            <h1>Sell Orders</h1>
+        </div>
+        <div id='filter-inputs' class="row">
+            <div class="col-md-4">
+
+                Desired Class(es):
+                <div class="filter-group" data-name="class">
+                    <label for="class-1">C1</label>
+                    <input type="checkbox" id="class-1" data-value="Class 1">
+
+                    <label for="class-2">C2</label>
+                    <input type="checkbox" id="class-2" data-value="Class 2">
+
+                    <label for="class-3">C3</label>
+                    <input type="checkbox" id="class-3" data-value="Class 3">
+
+                    <label for="class-4">C4</label>
+                    <input type="checkbox" id="class-4" data-value="Class 4">
+
+                    <label for="class-5">C5</label>
+                    <input type="checkbox" id="class-5" data-value="Class 5">
+
+                    <label for="class-6">C6</label>
+                    <input type="checkbox" id="class-6" data-value="Class 6">
+                </div>
+
+                Special Class(es):
+                <div class="filter-group" data-name="class">
+                    <label for="class-13">C13</label>
+                    <input type="checkbox" id="class-13" data-value="Class 13">
+
+                    <label for="class-14">C14</label>
+                    <input type="checkbox" id="class-14" data-value="Class 14">
+
+                    <label for="class-15">C15</label>
+                    <input type="checkbox" id="class-15" data-value="Class 15">
+
+                    <label for="class-16">C16</label>
+                    <input type="checkbox" id="class-16" data-value="Class 16">
+
+                    <label for="class-17">C17</label>
+                    <input type="checkbox" id="class-17" data-value="Class 17">
+
+                    <label for="class-18">C18</label>
+                    <input type="checkbox" id="class-18" data-value="Class 18">
+                </div>
+
+                Desired Effect(s):
+                <div class="filter-group" data-name="effect">
+                    <label for="pulsar">P</label>
+                    <input type="checkbox" id="pulsar" data-value="Pulsar">
+                    
+                    <label for="cataclysmic-variable">CV</label>
+                    <input type="checkbox" id="cataclysmic-variable" data-value="Cataclysmic Variable">
+
+                    <label for="wolf-rayet-star">W-R</label>
+                    <input type="checkbox" id="wolf-rayet-star" data-value="Wolf-Rayet Star">
+
+                    <label for="black-hole">BH</label>
+                    <input type="checkbox" id="black-hole" data-value="Black Hole">
+
+                    <label for="magnetar">M</label>
+                    <input type="checkbox" id="magnetar" data-value="Magnetar">
+
+                    <label for="no-effect">N/A</label>
+                    <input type="checkbox" id="no-effect" data-value="No Effect">
+                </div>
+
+                Shattered:
+                <div class="filter-group" data-name="shattered">
+                    <label for="shattered-1">Yes</label>
+                    <input type="checkbox" id="shattered-1" data-value="shattered-1">
+
+                    <label for="shattered-0">No</label>
+                    <input type="checkbox" id="shattered-0" data-value="shattered-0">
+                </div>
+
+            </div>       
+
+            <div class="col-md-4">
+
+                Static 1:
+                <div class="filter-group" data-name="static1">
+                    <label for="static-1-c1">C1</label>
+                    <input type="checkbox" id="static-1-c1" data-value="Class 1">
+
+                    <label for="static-1-c2">C2</label>
+                    <input type="checkbox" id="static-1-c2" data-value="Class 2">
+
+                    <label for="static-1-c3">C3</label>
+                    <input type="checkbox" id="static-1-c3" data-value="Class 3">
+
+                    <label for="static-1-c4">C4</label>
+                    <input type="checkbox" id="static-1-c4" data-value="Class 4">
+
+                    <label for="static-1-c5">C5</label>
+                    <input type="checkbox" id="static-1-c5" data-value="Class 5">
+
+                    <label for="static-1-c6">C6</label>
+                    <input type="checkbox" id="static-1-c6" data-value="Class 6">
+
+                    <label for="static-1-Hs">Hs</label>
+                    <input type="checkbox" id="static-1-Hs" data-value="High-Sec">
+
+                    <label for="static-1-Ls">Ls</label>
+                    <input type="checkbox" id="static-1-Ls" data-value="Low-Sec">
+
+                    <label for="static-1-Ns">Ns</label>
+                    <input type="checkbox" id="static-1-Ns" data-value="Null-Sec">
+                </div>
+
+                Lifetime:
+                <div class="filter-group" data-name="life">
+                    <label for="16-hours">16h</label>
+                    <input type="checkbox" id="16-hours" data-value="16">
+
+                    <label for="24-hours">24h</label>
+                    <input type="checkbox" id="24-hours" data-value="24">
+
+                    <label for="48-hours">48h</label>
+                    <input type="checkbox" id="48-hours" data-value="48">
+                </div>
+
+                Total Mass:
+                <div class="filter-group" data-name="mass">
+                    <label for="regen">Regen</label>
+                    <input type="checkbox" id="regen" data-value="-1">
+
+                    <label for="mass-100-gg">100 Gg</label>
+                    <input type="checkbox" id="mass-100-gg" data-value="100000000">
+
+                    <label for="mass-500-gg">500 Gg</label>
+                    <input type="checkbox" id="mass-500-gg" data-value="500000000">
+
+                    <label for="mass-750-gg">750 Gg</label>
+                    <input type="checkbox" id="mass-750-gg" data-value="750000000">
+
+                    <label for="mass-1000-gg">1000 Gg</label>
+                    <input type="checkbox" id="mass-1000-gg" data-value="1000000000">
+
+                    <label for="mass-2000-gg">2000 Gg</label>
+                    <input type="checkbox" id="mass-2000-gg" data-value="2000000000">
+
+                    <label for="mass-3000-gg">3000 Gg</label>
+                    <input type="checkbox" id="mass-3000-gg" data-value="3000000000">
+
+                    <label for="mass-5000-gg">5000 Gg</label>
+                    <input type="checkbox" id="mass-5000-gg" data-value="5000000000">
+                </div>
+
+                Max Jump Mass:
+                <div class="filter-group" data-name="jump">
+                    <label for="jump-20-gg">20 Gg</label>
+                    <input type="checkbox" id="jump-20-gg" data-value="20000000">
+
+                    <label for="3jump-00-gg">300 Gg</label>
+                    <input type="checkbox" id="3jump-00-gg" data-value="300000000">
+
+                    <label for="10jump-00-gg">1000 Gg</label>
+                    <input type="checkbox" id="10jump-00-gg" data-value="1000000000">
+
+                    <label for="13jump-50-gg">1350 Gg</label>
+                    <input type="checkbox" id="13jump-50-gg" data-value="1350000000">
+
+                    <label for="18jump-00-gg">1800 Gg</label>
+                    <input type="checkbox" id="18jump-00-gg" data-value="1800000000">
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+            </div>
+        </div>
+        <br>
+
+        {% include "main/table_base.html" %}
+        
+    </div>
+
+{% endblock content %}
+
+{% block js %}
+    <script type="text/javascript" src="{% static 'main/js/jquery-ui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/filter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/initialize.timeago.js' %}"></script>
+
+    <script type="text/javascript">
+      $('.dropdown-menu').on('click', function (e) {
+       e.stopPropagation() 
+      })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+    </script>
+{% endblock js %}

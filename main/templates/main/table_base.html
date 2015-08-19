@@ -12,6 +12,7 @@
     <div class="col-lg-1 col-md-1 col-sm-2 hidden-xs col-heading table-cell"><p>J&#8209;Code</p></div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-heading button-col table-cell"><p>More</p></div>
 </div>
+{# <span> #}
 {% for order in object_list %}
     <div class="row table-row {% if user.is_authenticated and user == order.user %}user-table-row{% endif %}">
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 button-col table-cell"><a href="{% url 'main:order_details' order.id %}" class='glyphicon glyphicon-info-sign btn btn-default'></a></div>
@@ -37,6 +38,7 @@
         </div>
     </div>
 {% endfor %}
+{# </span> #}
 <nav>
     <ul class="pagination">
         <li>

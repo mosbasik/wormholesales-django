@@ -137,15 +137,9 @@ class OrderDetails(View):
         pass
 
 
-# class OrderListView(ListView):
-#     model = Order
-
-#     def get_queryset(self):
-#         return Order.objects.all().order_by('-modified')
-
-
 class SellOrderListView(ListView):
     model = Order
+    template_name = 'main/sell_list.html'
 
     def get_queryset(self):
         return Order.objects.all().order_by('-modified')
@@ -156,7 +150,7 @@ class BuyOrderListView(ListView):
 
 
 def filter_view(request):
-    pass
+    return HttpResponse(status=200)
 
 
 class OrderModelFormView(View):
