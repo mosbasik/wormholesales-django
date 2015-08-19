@@ -14,7 +14,14 @@
         <div class="row">
             <h1>Sell Orders</h1>
         </div>
-        <div id='filter-inputs col-md-10'>
+        <div id="filter-cover" class='row'>
+            <a id='show-filter-inputs' href=''>Search Sell Orders</a>
+        </div>
+        <div id='filter-inputs'>
+            <div class="row">
+                <a id='hide-filter-inputs' href="#">Hide Search</a>
+            </div>
+            <br>
             <div class="row">
                 <div class='col-sm-4'>
                     <span class='title-format'>Desired Class(es):</span>
@@ -234,5 +241,24 @@
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip(); 
         });
+    </script>
+    <script>
+        $('#show-filter-inputs').click(function(e){
+            e.preventDefault();
+
+            $('#filter-cover').fadeOut(function(){
+                $('#filter-inputs').fadeIn()
+            });
+            
+        })
+
+        $('#hide-filter-inputs').click(function(e){
+            e.preventDefault();
+
+            $('#filter-inputs').fadeOut(function(){
+                $('#filter-cover').fadeIn()
+            });
+            
+        })
     </script>
 {% endblock js %}
