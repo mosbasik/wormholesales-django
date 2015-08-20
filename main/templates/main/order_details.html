@@ -18,11 +18,11 @@
                     {# Order information block #}
                     <div class="col-sm-6">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Order information: (last updated: <abbr class="timeago" title="{{ order.modified|date:'c' }}"></abbr>)</div>
+                            <div class="panel-heading">Order information (last updated <time class="timeago" datetime="{{ order.created|date:'c' }}" title='{{ order.modified|date:'Y-m-d  G:i' }}' data-toggle="tooltip"></time>)</div>
                             <div  class="panel-body">
                                 <p>Price: {{ order.price|floatformat:2|intcomma }} ISK (about&nbsp;{{ order.price|sigfigs:4|intword|nbsp }}&nbsp;ISK)</p>
                                 <p>Seller: <a href="{{ order.contact_name.evewho_link }}" target="_blank">{{ order.contact_name }}</a></p>
-                                <p>Originally Posted: <abbr class="timeago" title="{{ order.created|date:'c' }}"></abbr></p>
+                                <p>Originally Posted: <time class="timeago" datetime="{{ order.created|date:'c' }}" title='{{ order.modified|date:'Y-m-d  G:i' }}' data-toggle="tooltip"></time></p>
                                 <div class="order-panel">
                                     <div class="static-wrapper {{ order.system.space.abbrev }}">
                                         <div class="static-title text-center">
@@ -48,7 +48,7 @@
 
                         {# Wormhole effect information block #}
                         <div class="panel panel-default">
-                            <div class="panel-heading">Effect: {{ order.system.effect.blankname }}</div>
+                            <div class="panel-heading">Effect {{ order.system.effect.blankname }}</div>
                             <div class="panel-body">
                                 {% if order.system.effect.name == 'No Effect' %}
                                     <p>This wormhole has no special effects.</p>
@@ -63,7 +63,7 @@
                         {# Wormhole statics information block #}
                         {% if order.system.statics.all.count > 0 %}
                             <div class="panel panel-default">
-                                <div class="panel-heading">Static wormholes:</div>
+                                <div class="panel-heading">Static wormholes</div>
                                 <div id="static-container" class="panel-body">
                                     {% for static in order.system.statics.all %}
                                         <div class="static-panel">
@@ -94,4 +94,10 @@
 
 {% block js %}
     <script type="text/javascript" src="{% static 'main/js/initialize.timeago.js' %}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); 
+        });
+    </script>
 {% endblock js %}
