@@ -17,302 +17,277 @@
         <div id="filter-cover" class='row'>
             <a id='show-filter-inputs' href=''>Search Sell Orders</a>
         </div>
-        <div id='filter-inputs'>
+
+        <div id='filter-inputs' class="row"> {# row containing all filter groups #}
+
             <div class="row">
                 <a id='hide-filter-inputs' href="#">Hide Search</a>
             </div>
+
             <br>
-            <div class="row">
-                <div class='col-sm-4'>
-                    <span class='title-format'>Class:</span>
-                    <div class="filter-group" data-name="normal_class">
-                        <label for="class-1">C1</label>
-                        <input type="checkbox" id="class-1" data-value="Class 1">
-
-                        <label for="class-2">C2</label>
-                        <input type="checkbox" id="class-2" data-value="Class 2">
-
-                        <label for="class-3">C3</label>
-                        <input type="checkbox" id="class-3" data-value="Class 3">
-
-                        <label for="class-4">C4</label>
-                        <input type="checkbox" id="class-4" data-value="Class 4">
-
-                        <label for="class-5">C5</label>
-                        <input type="checkbox" id="class-5" data-value="Class 5">
-
-                        <label for="class-6">C6</label>
-                        <input type="checkbox" id="class-6" data-value="Class 6">
-                    </div>
-                </div>
-
-                <div class='col-sm-4'>
-                    <span class='title-format'>Effect:</span>
-                    <div class="filter-group" data-name="effect">
-                        <label for="no-effect">No Effect</label>
-                        <input type="checkbox" id="no-effect" data-value="No Effect">
-
-                        <label for="black-hole">BH</label>
-                        <input type="checkbox" id="black-hole" data-value="Black Hole">
-
-                        <label for="cataclysmic-variable">CV</label>
-                        <input type="checkbox" id="cataclysmic-variable" data-value="Cataclysmic Variable">
-
-                        <label for="magnetar">M</label>
-                        <input type="checkbox" id="magnetar" data-value="Magnetar">
-
-                        <label for="pulsar">P</label>
-                        <input type="checkbox" id="pulsar" data-value="Pulsar">
-
-                        <label for="red-giant">RG</label>
-                        <input type="checkbox" id="red-giant" data-value="Red Giant">
-
-                        <label for="wolf-rayet-star">W-R</label>
-                        <input type="checkbox" id="wolf-rayet-star" data-value="Wolf-Rayet Star">
-                    </div>
-                </div>
-        
-                <div class='col-sm-4'>
-                    <span class='title-format'>Shattered Wormholes:</span>
-                    <div class="filter-group" data-name="shattered_class">
-                        <label for="class-13">C13</label>
-                        <input type="checkbox" id="class-13" data-value="Class 13">
-
-                        <label for="class-15">C6 CV</label>
-                        <input type="checkbox" id="class-15" data-value="Class 15">
-
-                        <label for="class-16">C6 M</label>
-                        <input type="checkbox" id="class-16" data-value="Class 16">
-
-                        <label for="class-17">C6 P</label>
-                        <input type="checkbox" id="class-17" data-value="Class 17">
-
-                        <label for="class-14">C6 RG</label>
-                        <input type="checkbox" id="class-14" data-value="Class 14">
-
-                        <label for="class-18">C6 W-R</label>
-                        <input type="checkbox" id="class-18" data-value="Class 18">
-                    </div>
-                </div>
-            </div>       
             
-            <hr>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class='col-md-5 col-lg-4'>
+                        <span class='title-format'>Class</span>
+                        <div class="filter-group" data-name="normal_class">
+                            <label for="class-1">C1</label>
+                            <input type="checkbox" id="class-1" data-value="Class 1">
 
-            <div id="static-group-wrapper"> <!-- Start of all static filter groups -->
+                            <label for="class-2">C2</label>
+                            <input type="checkbox" id="class-2" data-value="Class 2">
 
-                <div class="row static-group" data-name="static-1"> <!-- Static 1 filter groups -->
+                            <label for="class-3">C3</label>
+                            <input type="checkbox" id="class-3" data-value="Class 3">
 
-                    <div class='col-md-6'>
-                        <span class='title-format'>Static 1:</span>
-                        <div class="filter-group" data-name="class">
-                            <label for="static-1-c1">C1</label>
-                            <input type="checkbox" id="static-1-c1" data-value="Class 1">
+                            <label for="class-4">C4</label>
+                            <input type="checkbox" id="class-4" data-value="Class 4">
 
-                            <label for="static-1-c2">C2</label>
-                            <input type="checkbox" id="static-1-c2" data-value="Class 2">
+                            <label for="class-5">C5</label>
+                            <input type="checkbox" id="class-5" data-value="Class 5">
 
-                            <label for="static-1-c3">C3</label>
-                            <input type="checkbox" id="static-1-c3" data-value="Class 3">
-
-                            <label for="static-1-c4">C4</label>
-                            <input type="checkbox" id="static-1-c4" data-value="Class 4">
-
-                            <label for="static-1-c5">C5</label>
-                            <input type="checkbox" id="static-1-c5" data-value="Class 5">
-
-                            <label for="static-1-c6">C6</label>
-                            <input type="checkbox" id="static-1-c6" data-value="Class 6">
-
-                            <label for="static-1-Hs">Hs</label>
-                            <input type="checkbox" id="static-1-Hs" data-value="High-Sec">
-
-                            <label for="static-1-Ls">Ls</label>
-                            <input type="checkbox" id="static-1-Ls" data-value="Low-Sec">
-
-                            <label for="static-1-Ns">Ns</label>
-                            <input type="checkbox" id="static-1-Ns" data-value="Null-Sec">
-                        </div>
-
-                    </div>
-
-                    <div class='col-md-6'>
-                        <span class='title-format'>Lifetime:</span>
-                        <div class="filter-group" data-name="life">
-                            <label for="static-1-16-hours">16h</label>
-                            <input type="checkbox" id="static-1-16-hours" data-value="16">
-
-                            <label for="static-1-24-hours">24h</label>
-                            <input type="checkbox" id="static-1-24-hours" data-value="24">
-
-                            <label for="static-1-48-hours">48h</label>
-                            <input type="checkbox" id="static-1-48-hours" data-value="48">
+                            <label for="class-6">C6</label>
+                            <input type="checkbox" id="class-6" data-value="Class 6">
                         </div>
                     </div>
 
-                    <div class='col-md-6'>
-                        <span class='title-format'>Total Mass:</span>
-                        <div class="filter-group" data-name="mass">
-                            <label for="static-1-regen">Regen</label>
-                            <input type="checkbox" id="static-1-regen" data-value="-1">
+                    <div class="col-md-6 col-lg-4">
+                        <span class='title-format'>Effect</span>
+                        <div class="filter-group" data-name="effect">
+                            <label for="no-effect">No Effect</label>
+                            <input type="checkbox" id="no-effect" data-value="No Effect">
 
-                            <label for="static-1-mass-100-gg">100 Gg</label>
-                            <input type="checkbox" id="static-1-mass-100-gg" data-value="100000000">
+                            <label for="black-hole">BH</label>
+                            <input type="checkbox" id="black-hole" data-value="Black Hole">
 
-                            <label for="static-1-mass-500-gg">500 Gg</label>
-                            <input type="checkbox" id="static-1-mass-500-gg" data-value="500000000">
+                            <label for="cataclysmic-variable">CV</label>
+                            <input type="checkbox" id="cataclysmic-variable" data-value="Cataclysmic Variable">
 
-                            <label for="static-1-mass-750-gg">750 Gg</label>
-                            <input type="checkbox" id="static-1-mass-750-gg" data-value="750000000">
+                            <label for="magnetar">M</label>
+                            <input type="checkbox" id="magnetar" data-value="Magnetar">
 
-                            <label for="static-1-mass-1000-gg">1000 Gg</label>
-                            <input type="checkbox" id="static-1-mass-1000-gg" data-value="1000000000">
+                            <label for="pulsar">P</label>
+                            <input type="checkbox" id="pulsar" data-value="Pulsar">
 
-                            <label for="static-1-mass-2000-gg">2000 Gg</label>
-                            <input type="checkbox" id="static-1-mass-2000-gg" data-value="2000000000">
+                            <label for="red-giant">RG</label>
+                            <input type="checkbox" id="red-giant" data-value="Red Giant">
 
-                            <label for="static-1-mass-3000-gg">3000 Gg</label>
-                            <input type="checkbox" id="static-1-mass-3000-gg" data-value="3000000000">
-
-                            <label for="static-1-mass-5000-gg">5000 Gg</label>
-                            <input type="checkbox" id="static-1-mass-5000-gg" data-value="5000000000">
+                            <label for="wolf-rayet-star">W-R</label>
+                            <input type="checkbox" id="wolf-rayet-star" data-value="Wolf-Rayet Star">
                         </div>
                     </div>
 
-                    <div class='col-md-6'>
-                        <span class='title-format'>Max Jump Mass:</span>
-                        <div class="filter-group" data-name="jump">
-                            <label for="static-1-jump-20-gg">20 Gg</label>
-                            <input type="checkbox" id="static-1-jump-20-gg" data-value="20000000">
+                    <div class="col-sm-12 col-lg-4">
+                        <span class='title-format'>Shattered Wormholes</span>
+                        <div class="filter-group" data-name="shattered_class">
+                            <label for="class-13">C13</label>
+                            <input type="checkbox" id="class-13" data-value="Class 13">
 
-                            <label for="static-1-jump-300-gg">300 Gg</label>
-                            <input type="checkbox" id="static-1-jump-300-gg" data-value="300000000">
+                            <label for="class-15">C6 CV</label>
+                            <input type="checkbox" id="class-15" data-value="Class 15">
 
-                            <label for="static-1-jump-1000-gg">1000 Gg</label>
-                            <input type="checkbox" id="static-1-jump-1000-gg" data-value="1000000000">
+                            <label for="class-16">C6 M</label>
+                            <input type="checkbox" id="class-16" data-value="Class 16">
 
-                            <label for="static-1-jump-1350-gg">1350 Gg</label>
-                            <input type="checkbox" id="static-1-jump-1350-gg" data-value="1350000000">
+                            <label for="class-17">C6 P</label>
+                            <input type="checkbox" id="class-17" data-value="Class 17">
 
-                            <label for="static-1-jump-1800-gg">1800 Gg</label>
-                            <input type="checkbox" id="static-1-jump-1800-gg" data-value="1800000000">
+                            <label for="class-14">C6 RG</label>
+                            <input type="checkbox" id="class-14" data-value="Class 14">
+
+                            <label for="class-18">C6 W-R</label>
+                            <input type="checkbox" id="class-18" data-value="Class 18">
                         </div>
                     </div>
-
-                </div> <!-- End Static 1 filter groups -->
+                </div>
 
                 <hr>
 
-                <div class="row static-group" data-name="static-2"> <!-- Static 2 filter groups -->
+                <div id="static-group-wrapper">
+                    <div class="row static-group" data-name="static-1">
+                        <div class="col-sm-7 col-lg-4">
+                            <span class='title-format'>Static 1</span>
+                            <div class="filter-group" data-name="class">
+                                <label for="static-1-c1">C1</label>
+                                <input type="checkbox" id="static-1-c1" data-value="Class 1">
 
-                    <div class='col-md-6'>
-                        <span class='title-format'>Static 2 (Optional):</span>
-                        <div class="filter-group" data-name="class">
-                            <label for="static-2-c1">C1</label>
-                            <input type="checkbox" id="static-2-c1" data-value="Class 1">
+                                <label for="static-1-c2">C2</label>
+                                <input type="checkbox" id="static-1-c2" data-value="Class 2">
 
-                            <label for="static-2-c2">C2</label>
-                            <input type="checkbox" id="static-2-c2" data-value="Class 2">
+                                <label for="static-1-c3">C3</label>
+                                <input type="checkbox" id="static-1-c3" data-value="Class 3">
 
-                            <label for="static-2-c3">C3</label>
-                            <input type="checkbox" id="static-2-c3" data-value="Class 3">
+                                <label for="static-1-c4">C4</label>
+                                <input type="checkbox" id="static-1-c4" data-value="Class 4">
 
-                            <label for="static-2-c4">C4</label>
-                            <input type="checkbox" id="static-2-c4" data-value="Class 4">
+                                <label for="static-1-c5">C5</label>
+                                <input type="checkbox" id="static-1-c5" data-value="Class 5">
 
-                            <label for="static-2-c5">C5</label>
-                            <input type="checkbox" id="static-2-c5" data-value="Class 5">
+                                <label for="static-1-c6">C6</label>
+                                <input type="checkbox" id="static-1-c6" data-value="Class 6">
 
-                            <label for="static-2-c6">C6</label>
-                            <input type="checkbox" id="static-2-c6" data-value="Class 6">
+                                <label for="static-1-Hs">Hs</label>
+                                <input type="checkbox" id="static-1-Hs" data-value="High-Sec">
 
-                            <label for="static-2-Hs">Hs</label>
-                            <input type="checkbox" id="static-2-Hs" data-value="High-Sec">
+                                <label for="static-1-Ls">Ls</label>
+                                <input type="checkbox" id="static-1-Ls" data-value="Low-Sec">
 
-                            <label for="static-2-Ls">Ls</label>
-                            <input type="checkbox" id="static-2-Ls" data-value="Low-Sec">
-
-                            <label for="static-2-Ns">Ns</label>
-                            <input type="checkbox" id="static-2-Ns" data-value="Null-Sec">
+                                <label for="static-1-Ns">Ns</label>
+                                <input type="checkbox" id="static-1-Ns" data-value="Null-Sec">
+                            </div>
                         </div>
 
-                    </div>
+                        <div class="col-sm-5 col-lg-2">
+                            <span class='title-format'>Lifetime</span>
+                            <div class="filter-group" data-name="life">
+                                <label for="static-1-16-hours">16h</label>
+                                <input type="checkbox" id="static-1-16-hours" data-value="16">
 
-                    <div class='col-md-6'>
-                        <span class='title-format'>Lifetime:</span>
-                        <div class="filter-group" data-name="life">
-                            <label for="static-2-16-hours">16h</label>
-                            <input type="checkbox" id="static-2-16-hours" data-value="16">
-
-                            <label for="static-2-24-hours">24h</label>
-                            <input type="checkbox" id="static-2-24-hours" data-value="24">
-
-                            <label for="static-2-48-hours">48h</label>
-                            <input type="checkbox" id="static-2-48-hours" data-value="48">
+                                <label for="static-1-24-hours">24h</label>
+                                <input type="checkbox" id="static-1-24-hours" data-value="24">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class='col-md-6'>
-                        <span class='title-format'>Total Mass:</span>
-                        <div class="filter-group" data-name="mass">
-                            <label for="static-2-regen">Regen</label>
-                            <input type="checkbox" id="static-2-regen" data-value="-1">
+                        <div class="col-sm-6 col-lg-3">
+                            <span class='title-format'>Jump Mass (Gg)</span>
+                            <div class="filter-group" data-name="jump">
+                                <label for="static-1-jump-20-gg">20</label>
+                                <input type="checkbox" id="static-1-jump-20-gg" data-value="20000000">
 
-                            <label for="static-2-mass-100-gg">100 Gg</label>
-                            <input type="checkbox" id="static-2-mass-100-gg" data-value="100000000">
+                                <label for="static-1-jump-300-gg">300</label>
+                                <input type="checkbox" id="static-1-jump-300-gg" data-value="300000000">
 
-                            <label for="static-2-mass-500-gg">500 Gg</label>
-                            <input type="checkbox" id="static-2-mass-500-gg" data-value="500000000">
-
-                            <label for="static-2-mass-750-gg">750 Gg</label>
-                            <input type="checkbox" id="static-2-mass-750-gg" data-value="750000000">
-
-                            <label for="static-2-mass-1000-gg">1000 Gg</label>
-                            <input type="checkbox" id="static-2-mass-1000-gg" data-value="1000000000">
-
-                            <label for="static-2-mass-2000-gg">2000 Gg</label>
-                            <input type="checkbox" id="static-2-mass-2000-gg" data-value="2000000000">
-
-                            <label for="static-2-mass-3000-gg">3000 Gg</label>
-                            <input type="checkbox" id="static-2-mass-3000-gg" data-value="3000000000">
-
-                            <label for="static-2-mass-5000-gg">5000 Gg</label>
-                            <input type="checkbox" id="static-2-mass-5000-gg" data-value="5000000000">
+                                <label for="static-1-jump-1350-gg">1350</label>
+                                <input type="checkbox" id="static-1-jump-1350-gg" data-value="1350000000">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class='col-md-6'>
-                        <span class='title-format'>Max Jump Mass:</span>
-                        <div class="filter-group" data-name="jump">
-                            <label for="static-2-jump-20-gg">20 Gg</label>
-                            <input type="checkbox" id="static-2-jump-20-gg" data-value="20000000">
+                        <div class="col-sm-5 col-lg-3">
+                            <span class='title-format'>Total Mass (Gg)</span>
+                            <div class="filter-group" data-name="mass">
 
-                            <label for="static-2-jump-300-gg">300 Gg</label>
-                            <input type="checkbox" id="static-2-jump-300-gg" data-value="300000000">
+                                <label for="static-1-mass-500-gg">500</label>
+                                <input type="checkbox" id="static-1-mass-500-gg" data-value="500000000">
 
-                            <label for="static-2-jump-1000-gg">1000 Gg</label>
-                            <input type="checkbox" id="static-2-jump-1000-gg" data-value="1000000000">
+                                <label for="static-1-mass-1000-gg">1000</label>
+                                <input type="checkbox" id="static-1-mass-1000-gg" data-value="1000000000">
 
-                            <label for="static-2-jump-1350-gg">1350 Gg</label>
-                            <input type="checkbox" id="static-2-jump-1350-gg" data-value="1350000000">
+                                <label for="static-1-mass-2000-gg">2000</label>
+                                <input type="checkbox" id="static-1-mass-2000-gg" data-value="2000000000">
 
-                            <label for="static-2-jump-1800-gg">1800 Gg</label>
-                            <input type="checkbox" id="static-2-jump-1800-gg" data-value="1800000000">
+                                <label for="static-1-mass-3000-gg">3000</label>
+                                <input type="checkbox" id="static-1-mass-3000-gg" data-value="3000000000">
+
+                                <label for="static-1-mass-5000-gg">5000</label>
+                                <input type="checkbox" id="static-1-mass-5000-gg" data-value="5000000000">
+                            </div>
                         </div>
                     </div>
 
-                </div> <!-- End Static 1 filter groups -->
+                    <hr>
 
-            </div> <!-- End of all static filter groups -->
+                    <div class="row static-group" data-name="static-2">
+                        <div class="col-sm-5 col-lg-4">
+                           <span class='title-format'>Static 2 (Optional)</span>
+                            <div class="filter-group" data-name="class">
+                                <label for="static-2-c1">C1</label>
+                                <input type="checkbox" id="static-2-c1" data-value="Class 1">
 
-            <hr>
+                                <label for="static-2-c2">C2</label>
+                                <input type="checkbox" id="static-2-c2" data-value="Class 2">
 
-        </div>
+                                <label for="static-2-c3">C3</label>
+                                <input type="checkbox" id="static-2-c3" data-value="Class 3">
 
-        <br>
+                                <label for="static-2-c4">C4</label>
+                                <input type="checkbox" id="static-2-c4" data-value="Class 4">
+
+                                <label for="static-2-c5">C5</label>
+                                <input type="checkbox" id="static-2-c5" data-value="Class 5">
+
+                                <label for="static-2-c6">C6</label>
+                                <input type="checkbox" id="static-2-c6" data-value="Class 6">
+
+                                <label for="static-2-Hs">Hs</label>
+                                <input type="checkbox" id="static-2-Hs" data-value="High-Sec">
+
+                                <label for="static-2-Ls">Ls</label>
+                                <input type="checkbox" id="static-2-Ls" data-value="Low-Sec">
+
+                                <label for="static-2-Ns">Ns</label>
+                                <input type="checkbox" id="static-2-Ns" data-value="Null-Sec">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-lg-2">
+                            <span class='title-format'>Lifetime</span>
+                            <div class="filter-group" data-name="life">
+                                <label for="static-2-16-hours">16h</label>
+                                <input type="checkbox" id="static-2-16-hours" data-value="16">
+
+                                <label for="static-2-24-hours">24h</label>
+                                <input type="checkbox" id="static-2-24-hours" data-value="24">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <span class='title-format'>Jump Mass (Gg)</span>
+                            <div class="filter-group" data-name="jump">
+                                <label for="static-2-jump-20-gg">20</label>
+                                <input type="checkbox" id="static-2-jump-20-gg" data-value="20000000">
+
+                                <label for="static-2-jump-300-gg">300</label>
+                                <input type="checkbox" id="static-2-jump-300-gg" data-value="300000000">
+
+                                <label for="static-2-jump-1350-gg">1350</label>
+                                <input type="checkbox" id="static-2-jump-1350-gg" data-value="1350000000">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-9 col-lg-3">
+                            <span class='title-format'>Total Mass (Gg)</span>
+                            <div class="filter-group" data-name="mass">
+
+                                <label for="static-2-mass-500-gg">500</label>
+                                <input type="checkbox" id="static-2-mass-500-gg" data-value="500000000">
+
+                                <label for="static-2-mass-1000-gg">1000</label>
+                                <input type="checkbox" id="static-2-mass-1000-gg" data-value="1000000000">
+
+                                <label for="static-2-mass-2000-gg">2000</label>
+                                <input type="checkbox" id="static-2-mass-2000-gg" data-value="2000000000">
+
+                                <label for="static-2-mass-3000-gg">3000</label>
+                                <input type="checkbox" id="static-2-mass-3000-gg" data-value="3000000000">
+
+                                <label for="static-2-mass-5000-gg">5000</label>
+                                <input type="checkbox" id="static-2-mass-5000-gg" data-value="5000000000">
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <hr>
+
+                </div> {# end of static group #}
+            </div> {# end of non sidebar group #}
+            <div class="col-sm-2"> {# start of sidebar #}
+                
+
+                <br>
+                <ul>
+                    <li>dfagagdfg</li>
+                    <li>sdfgsdgffdg</li>
+                    <li>lorem</li>
+                    <li>sdfgdsfgdsgf</li>
+                </ul>
+            </div>
+        </div> {# end of filter inputs #}
 
         {% include "main/table_base.html" %}
-        
-    </div>
+
+    </div> {# end of container #}
 
 {% endblock content %}
 

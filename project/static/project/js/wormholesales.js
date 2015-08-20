@@ -32,8 +32,8 @@ $('.glyphicon-pencil').click(function(e){
     e.preventDefault();
 
     var id = $(this).parents('.table-cell').attr('id')
-    console.log(id)
 
+    $('#'+id).children('.glyphicon-pencil').fadeOut()
     $('#'+id).children('.price-display').fadeOut(function(){
         $('#'+id).children('.price-textbox').fadeIn()
     });
@@ -45,11 +45,14 @@ $('.glyphicon-floppy-disk').click(function(e){
 
     var id = $(this).parents('.table-cell').attr('id')
     console.log(id)
-    var price = $('#'+id).children('.price-textbox').children('input').attr('value')
-    // $('#'+id).children('.price-display').html()
+    var new_price = $('#'+id).children('.price-textbox').children('input').val()
+    // var new_price = $('#'+id).children('')
+    $('#'+id).children('.price-display').attr('data-original-title', new_price)
+    $('#'+id).children('.price-display').text(new_price)
 
     $('#'+id).children('.price-textbox').fadeOut(function(){
         $('#'+id).children('.price-display').fadeIn()
+        $('#'+id).children('.glyphicon-pencil').fadeIn()
     });
     
 })
