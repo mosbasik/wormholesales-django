@@ -192,16 +192,23 @@ def filter_view(request):
                     static_qs = static_qs.filter(
                             statics__jump__in=[int(x) for x in statics_1['jump']])
 
-        for s in static_qs:
-            listing = ''
-            listing += str(s)
-            listing += str([x.space.name for x in s.statics.all()])
-            listing += str([x.life for x in s.statics.all()])
-            listing += str([x.mass for x in s.statics.all()])
-            print listing
+        # for s in static_qs:
+        #     listing = ''
+        #     listing += str(s)
+        #     listing += str([x.space.name for x in s.statics.all()])
+        #     listing += str([x.life for x in s.statics.all()])
+        #     listing += str([x.mass for x in s.statics.all()])
+        #     listing += str([x.jump for x in s.statics.all()])
+        #     print listing
 
         print '\n'
-        return HttpResponse(status=200)
+
+        # use everything we just made to make a json file to be returned
+        data = json.dumps({
+            'count': static_qs.count(),
+            'j_codes': [sys.j_code for sys in static_qs.order_by('j_code')],
+        })
+        return HttpResponse(data, content_type='application/json')
 
     else:
         # bad request by client

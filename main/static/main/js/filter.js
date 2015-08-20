@@ -110,8 +110,8 @@ $('#filter-inputs input').on('change', function() {
         data: {
             filters: JSON.stringify(checked_value_list),
         },
-        success: function() {
-            console.log('success!')
+        success: function(data) {
+            console.log(data)
         },
         error: function() {
             console.log('failure.')
