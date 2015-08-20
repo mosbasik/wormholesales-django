@@ -1,17 +1,20 @@
-/**
- * Style all checkboxes in the filter group like buttons.
- */
+// Style all checkboxes in the filter group like buttons.
 $('.filter-group').buttonset()
 
+// Get all order level filter elements on page load and save them into a list.
+var order_filters = $('#filter-inputs .filter-group')
+                        .not('.static-group .filter-group')
+                        .map(function() {
+                            return this //$(this).attr('data-name')
+                        })
 
-/**
- * Get all of the filter categories on page load and save them into a list.
- */
-var filter_category_names = $('#filter-inputs .filter-group').map(function() {
-    return $(this).attr('data-name')
-}).get()
+// Get all static group elements on page load and save them into a list
+var static_groups = $('#filter-inputs .static-group')
+                        .map(function() {
+                            return this // $(this).attr('data-name')
+                        })
 
-console.log(filter_category_names)
+var foo = get_checked_values()
 
 
 /**
@@ -20,21 +23,76 @@ console.log(filter_category_names)
  */
 function get_checked_values () {
 
-    // create result object with empty category entries
-    var result = {}
-    for (var i=0; i<filter_category_names.length; i++) {
-        result[filter_category_names[i]] = []
-    }
+    result = {}
 
-    // populate result object lists with checked boxes
-    var inputs = $('#filter-inputs input')
-    for (var i=0; i<inputs.length; i++) {
-        if ($(inputs[i]).is(':checked')) {
-            var category = $(inputs[i]).parent().attr('data-name')
-            var value = $(inputs[i]).attr('data-value')
-            result[category].push(value)
-        }
-    }
+    // Eventual structure of "result":
+    //
+    // result = {
+    //     "normal_class": [],
+    //     "shattered_class": [],
+    //     "effect": [],
+    //     "statics": {
+    //         "static-1": {
+    //             "class": [],
+    //             "life": [],
+    //             "mass": [],
+    //             "jump": [],
+    //         },
+    //         "static-2": {
+    //             "class": [],
+    //             "life": [],
+    //             "mass": [],
+    //             "jump": [],
+    //         },
+    //     },
+    // }
+
+    // iterate over all order-level filter groups
+    order_filters.each(function() {
+
+        // get the filter group name and initialize a blank list for it
+        var category = $(this).attr('data-name')
+        result[category] = []
+
+        // iterate over all inputs in filter group
+        $(this).find('input').each(function () {
+
+            // if the input is checked, push value to result keyed on group
+            if ($(this).is(':checked')) {
+                var value = $(this).attr('data-value')
+                result[category].push(value)
+            }
+        })
+    })
+
+    // in result, initialize blank statics dictionary
+    result['statics'] = {}
+
+    // iterate over all static-level groups
+    static_groups.each(function() {
+
+        // get the static group name and initialize blank dictionary for it
+        var static_name = $(this).attr('data-name')
+        result['statics'][static_name] = {}
+
+        // iterate over all static-group-level inputs
+        $(this).find('.filter-group').each(function() {
+
+            // get the the filter group name and initialize a blank list for it
+            var category = $(this).attr('data-name')
+            result['statics'][static_name][category] = []
+
+            // iterate over all inputs in the filter group
+            $(this).find('input').each(function() {
+
+                // if the input is checked, push value to result keyed on group
+                if ($(this).is(':checked')) {
+                    var value = $(this).attr('data-value')
+                    result['statics'][static_name][category].push(value)
+                }
+            })
+        })
+    })
 
     // return the filled object
     return result
@@ -46,8 +104,8 @@ function get_checked_values () {
  */
 $('#filter-inputs input').on('change', function() {
     var checked_value_list = get_checked_values()
-    console.log(checked_value_list)
-    console.log(JSON.stringify(checked_value_list))
+    // console.log(checked_value_list)
+    // console.log(JSON.stringify(checked_value_list, null, '\t'))
     $.ajax({
         url: '/sell/filter/',
         method: 'GET',

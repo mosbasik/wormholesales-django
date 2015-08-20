@@ -215,7 +215,7 @@ def filter_view(request):
 
         # the list of user-submitted filters
         filters = {
-            'normal_class': g.getlist('class[]'),
+            'normal_class': g.getlist('normal_class[]'),
             'shattered_class': g.getlist('shattered_class[]'),
             'effect': g.getlist('effect[]'),
             'static1': g.getlist('static1[]'),
@@ -242,8 +242,8 @@ def filter_view(request):
         for category in filters:
             print "{} - {}".format(category, filters[category])
 
-        for s in temp:
-            print s, [x.space.name for x in s.statics.all()]
+        # for s in temp:
+        #     print s, [x.space.name for x in s.statics.all()]
 
         print '\n'
         return HttpResponse(status=200)
