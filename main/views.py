@@ -155,95 +155,50 @@ class BuyOrderListView(ListView):
 def filter_view(request):
 
     if request.method == 'GET':
+        print '\n'
 
-        g = request.GET
-
-        # the master list of all possible filters
-        # master_filters = {
-        #     'class': ['Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5',
-        #               'Class 6', 'Class 13', 'Class 14', 'Class 15',
-        #               'Class 16', 'Class 17', 'Class 18'],
-        #     'effect': ['Pulsar', 'Cataclysmic Variable', 'Wolf-Rayet Star',
-        #                'Black Hole', 'Magnetar', 'No Effect'],
-        #     'shattered': [True, False],
-        #     'static1': ['Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5',
-        #                 'Class 6', 'High-Sec', 'Low-Sec', 'Null-Sec'],
-        #     'mass': [-1, 100000000, 500000000, 750000000, 1000000000,
-        #              2000000000, 3000000000, 5000000000],
-        #     'jump': [20000000, 300000000, 1000000000, 1350000000, 1800000000]
-        # }
-
-        # # the list of user-submitted filters
-        # filters = {
-        #     # use the classes in the GET request unless no classes were passed,
-        #     # in which case use the master classes filter
-        #     'class': g.getlist('class[]'),
-        #     # 'class': g.getlist('class[]', master_filters['class']),
-
-        #     # use the effects in the GET request unless no effects were passed,
-        #     # in which case use the master effects filter
-        #     'effect': g.getlist('effect[]'),
-        #     # 'effect': g.getlist('effect[]', master_filters['effect']),
-
-        #     # convert 'shattered-1' to True and everything else to False using
-        #     # the GET request data, unless shattered status was not passed, in
-        #     # which case use the master shattered filter
-        #     'shattered': [True if x == 'shattered-1' else False
-        #                   for x in g.getlist('shattered[]')],
-        #                   # if g.getlist('shattered[]')
-        #                   # else master_filters['shattered'],
-
-        #     # use the statics in the GET request unless no statics were passed,
-        #     # in which case use the master statics filter
-        #     'static1': g.getlist('static1[]'),
-        #     # 'static1': g.getlist('static1[]', master_filters['static1']),
-
-        #     # use the masses in the GET request (casting to Integers on the
-        #     # fly) unless no masses were passed, in which case use the master
-        #     # masses filter
-        #     'mass': [int(x) for x in g.getlist('mass[]')],
-        #              # if g.getlist('mass[]')
-        #              # else master_filters['mass'],
-
-        #     # use the jumps in the GET request (casting to Integers on the fly)
-        #     # unless no jumps were passed, in which case use the master jumps
-        #     # filter
-        #     'jump': [int(x) for x in g.getlist('jump[]')],
-        #              # if g.getlist('jump[]')
-        #              # else master_filters['jump'],
-        # }
-
-        # the list of user-submitted filters
-        filters = {
-            'normal_class': g.getlist('normal_class[]'),
-            'shattered_class': g.getlist('shattered_class[]'),
-            'effect': g.getlist('effect[]'),
-            'static1': g.getlist('static1[]'),
-            'mass': [int(x) for x in g.getlist('mass[]')],
-            'jump': [int(x) for x in g.getlist('jump[]')],
-        }
+        f = request.GET.get('filters', None)
+        filters = json.loads(f)
 
         filters['class'] = filters['normal_class'] + filters['shattered_class']
 
-        temp = System.objects.all()
+        import pprint; pprint.pprint(filters)
+
+        order_qs = System.objects.all()
         if filters['class']:
-            temp = temp.filter(space__name__in=filters['class'])
+            order_qs = order_qs.filter(space__name__in=filters['class'])
         if filters['effect']:
-            temp = temp.filter(effect__name__in=filters['effect'])
-        if filters['static1']:
-            temp = temp.filter(statics__space__name__in=filters['static1'])
+            order_qs = order_qs.filter(effect__name__in=filters['effect'])
 
-        # static1
-        temp = temp.filter(statics__space__name='Class 2')
+        static_qs = order_qs
+        if filters['statics']:
 
+            if filters['statics']['static-1']:
+                statics_1 = filters['statics']['static-1']
 
-        print '\n'
-        print request.GET
-        for category in filters:
-            print "{} - {}".format(category, filters[category])
+                if statics_1['class']:
+                    static_qs = static_qs.filter(
+                            statics__space__name__in=statics_1['class'])
 
-        # for s in temp:
-        #     print s, [x.space.name for x in s.statics.all()]
+                if statics_1['life']:
+                    static_qs = static_qs.filter(
+                            statics__life__in=statics_1['life'])
+
+                if statics_1['mass']:
+                    static_qs = static_qs.filter(
+                            statics__mass__in=[int(x) for x in statics_1['mass']])
+
+                if statics_1['jump']:
+                    static_qs = static_qs.filter(
+                            statics__jump__in=[int(x) for x in statics_1['jump']])
+
+        for s in static_qs:
+            listing = ''
+            listing += str(s)
+            listing += str([x.space.name for x in s.statics.all()])
+            listing += str([x.life for x in s.statics.all()])
+            listing += str([x.mass for x in s.statics.all()])
+            print listing
 
         print '\n'
         return HttpResponse(status=200)
