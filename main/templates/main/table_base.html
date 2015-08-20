@@ -36,7 +36,7 @@
             
 
             <div class="col-lg-2 col-md-2 hidden-sm hidden-xs table-cell"><p><a href="{{ order.contact_name.evewho_link }}" target="_blank">{{ order.contact_name.name }}</a></p></div>
-            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs table-cell"><p><time class="timeago" datetime="{{ order.modified|date:'c' }}" title='{{ order.modified|date:'Y-m-d  G:i' }}' data-toggle="tooltip"></time></p></div>
+            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs table-cell"><p><time class="timeago" datetime="{{ order.modified|date:'c' }}" title='{{ order.modified|date:'Y-m-d  H:i' }}' data-toggle="tooltip"></time></p></div>
             <div class="col-lg-1 col-md-1 col-sm-2 hidden-xs table-cell"><p>{{ order.system.j_code }}</p></div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 dropdown button-col table-cell">
                 <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
