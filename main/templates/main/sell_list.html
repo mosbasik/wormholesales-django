@@ -26,9 +26,9 @@
 
             <br>
             
-            <div class="col-sm-10">
+            <div class="col-sm-9">
                 <div class="row">
-                    <div class='col-md-5 col-lg-4'>
+                    <div class='col-md-12 col-lg-3'>
                         <span class='title-format'>Class</span>
                         <div class="filter-group" data-name="normal_class">
                             <label for="class-1">C1</label>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-12 col-lg-4">
                         <span class='title-format'>Effect</span>
                         <div class="filter-group" data-name="effect">
                             <label for="no-effect">No Effect</label>
@@ -77,10 +77,10 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 col-lg-4">
+                    <div class="col-md-12 col-lg-5">
                         <span class='title-format'>Shattered Wormholes</span>
                         <div class="filter-group" data-name="shattered_class">
-                            <label for="class-13">C13</label>
+                            <label for="class-13">C3 W-R</label>
                             <input type="checkbox" id="class-13" data-value="Class 13">
 
                             <label for="class-15">C6 CV</label>
@@ -105,7 +105,7 @@
 
                 <div id="static-group-wrapper">
                     <div class="row static-group" data-name="static-1">
-                        <div class="col-sm-7 col-lg-4">
+                        <div class="col-sm-5 col-md-5 col-lg-4">
                             <span class='title-format'>Static 1</span>
                             <div class="filter-group" data-name="class">
                                 <label for="static-1-c1">C1</label>
@@ -137,7 +137,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-5 col-lg-2">
+                        <div class="col-sm-7 col-md-7 col-lg-2">
                             <span class='title-format'>Lifetime</span>
                             <div class="filter-group" data-name="life">
                                 <label for="static-1-16-hours">16h</label>
@@ -148,7 +148,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-lg-3">
+                        <div class="col-sm-3 col-md-3 col-lg-2">
                             <span class='title-format'>Jump Mass (Gg)</span>
                             <div class="filter-group" data-name="jump">
                                 <label for="static-1-jump-20-gg">20</label>
@@ -162,7 +162,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-5 col-lg-3">
+                        <div class="col-sm-9 col-md-9 col-lg-4">
                             <span class='title-format'>Total Mass (Gg)</span>
                             <div class="filter-group" data-name="mass">
 
@@ -187,7 +187,7 @@
                     <hr>
 
                     <div class="row static-group" data-name="static-2">
-                        <div class="col-sm-5 col-lg-4">
+                        <div class="col-sm-5 col-md-5 col-lg-4">
                            <span class='title-format'>Static 2 (Optional)</span>
                             <div class="filter-group" data-name="class">
                                 <label for="static-2-c1">C1</label>
@@ -219,7 +219,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3 col-lg-2">
+                        <div class="col-sm-7 col-md-7 col-lg-2">
                             <span class='title-format'>Lifetime</span>
                             <div class="filter-group" data-name="life">
                                 <label for="static-2-16-hours">16h</label>
@@ -230,7 +230,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-lg-3">
+                        <div class="col-sm-3 col-md-3 col-lg-2">
                             <span class='title-format'>Jump Mass (Gg)</span>
                             <div class="filter-group" data-name="jump">
                                 <label for="static-2-jump-20-gg">20</label>
@@ -244,7 +244,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-9 col-lg-3">
+                        <div class="col-sm-9 col-md-9 col-lg-4">
                             <span class='title-format'>Total Mass (Gg)</span>
                             <div class="filter-group" data-name="mass">
 
@@ -264,24 +264,19 @@
                                 <input type="checkbox" id="static-2-mass-5000-gg" data-value="5000000000">
                             </div>
                         </div>
-
-                        
-                    </div>
+                    </div> {# end of static 2 #}
 
                     <hr>
 
                 </div> {# end of static group #}
             </div> {# end of non sidebar group #}
-            <div class="col-sm-2"> {# start of sidebar #}
-                
+            <div class="col-sm-3" style='border-left: 2px solid #ccc'> {# start of sidebar #}
+                <h3>Info</h3>
 
-                <br>
-                <ul>
-                    <li>dfagagdfg</li>
-                    <li>sdfgsdgffdg</li>
-                    <li>lorem</li>
-                    <li>sdfgdsfgdsgf</li>
-                </ul>
+                <hr>
+
+                <div class="sidebar-info"></div>
+
             </div>
         </div> {# end of filter inputs #}
 
