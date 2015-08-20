@@ -9,6 +9,9 @@ navbar color #50a8dc
     display: none;
 }
 
+.price-textbox {
+    display: none;
+}
 
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -363,10 +366,6 @@ html {
 .glyphicon-chevron-down:hover {
     font-size: 20px;
     color: black;
-}
-
-.price-textbox {
-    display: none;
 }
 
 /*Styles for filter checkboxes*/

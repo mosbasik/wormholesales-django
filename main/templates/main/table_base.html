@@ -20,15 +20,19 @@
             <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3 col-lg-offset-0 col-md-offset-0 col-sm-offset-1 col-xs-offset-1 table-cell"><p>C{{ order.system.space.code }}{% for static in order.system.statics.all %}&nbsp;/&nbsp;{{ static.space.code }}{% endfor %}</p></div>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 table-cell"><p>{{ order.system.effect.blankname }}</p></div>
 
-            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 table-cell">
-                <p class='price-display' title='{{ order.price|floatformat:2|intcomma }} ISK' data-toggle="tooltip">{{ order.price|sigfigs:4|intword }}{% if user.is_authenticated and user == order.user %}&nbsp;
-                    <span class='glyphicon glyphicon-pencil'></span>{% endif %}
+            <div id='{{ forloop.counter }}' class="col-lg-2 col-md-2 col-sm-3 col-xs-3 table-cell">
+                <p class='price-display' title='{{ order.price|floatformat:2|intcomma }} ISK' data-toggle="tooltip">{{ order.price|sigfigs:4|intword }}
+                    {% if user.is_authenticated and user == order.user %}
+                        <span class='glyphicon glyphicon-pencil'></span>
+                    {% endif %}
                 </p>
-                <p class='price-textbox'>
-                    {# form code goes here #}
-                    <input type="text" class='form-control'>
-                    <span class='glyphicon glyphicon-floppy-disk'></span>
-                </p>
+                {% if user.is_authenticated and user = order.user %}
+                    <p class='price-textbox'>
+                        {# form code goes here #}
+                        <input type="text" class='form-control' value='{{ order.price }}'>
+                        <span class='glyphicon glyphicon-floppy-disk'></span>
+                    </p>
+                {% endif %}
             </div>
             
 
