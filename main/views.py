@@ -1,7 +1,12 @@
+# django imports
+from django.contrib.humanize.templatetags.humanize import intword, intcomma
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.template.defaultfilters import date
+from django.views.generic import View
+from django.views.generic.list import ListView
 
-# user authentication
+# django user authentication imports
 from django.contrib.auth.decorators import (
     login_required,
     user_passes_test,
@@ -13,13 +18,14 @@ from django.contrib.auth import (
     logout as auth_logout,
 )
 
-from django.views.generic import View
-from django.views.generic.list import ListView
-
+# project imports
 from main.forms import OrderModelForm, UserCreationForm
 from main.models import Order, System, Character
+from main.templatetags.customfilters import sigfigs
+from main.templatetags.nbsp import nbsp
 from project.settings import EFFECT_CONST
 
+# python imports
 from lxml import etree
 import json
 import requests
@@ -226,7 +232,7 @@ def filter_view(request):
                     static = statics['static-1']
                     if static[master_key]:
                         filter_1 = static[master_key]
-                print filter_1
+                # print filter_1
 
                 # filter on membership in filter 1
                 static_double_qs = static_double_qs.filter(**{query: filter_1})
@@ -237,7 +243,7 @@ def filter_view(request):
                     static = statics['static-2']
                     if static[master_key]:
                         filter_2 = statics['static-2'][master_key]
-                print filter_2
+                # print filter_2
 
                 # filter on membership in filter 2
                 static_double_qs = static_double_qs.filter(**{query: filter_2})
@@ -251,13 +257,13 @@ def filter_view(request):
                 for f in master_filter:
                     if f not in filter_mask:
                         filter_negative.append(f)
-                print filter_negative
+                # print filter_negative
 
                 # exclude results that match the negative filter
                 static_double_qs = static_double_qs.exclude(
                     **{query: filter_negative})
 
-                print '\n'
+                # print '\n'
 
             # now you have the matching two static holes
             static_double_qs = static_double_qs.distinct()
@@ -271,13 +277,52 @@ def filter_view(request):
         #     listing += str([x.jump for x in s.statics.all()])
         #     print listing
 
-        print '\n'
 
-        # use everything we just made to make a json file to be returned
-        data = json.dumps({
-            'count': static_double_qs.count(),
-            'j_codes': [sys.j_code for sys in static_double_qs.order_by('j_code')],
-        })
+        # filter for systems that exist in sell orders
+        existing_systems = static_double_qs
+        open_orders = Order.objects.filter(is_sell=True)
+        systems_with_orders = existing_systems.filter(orders__in=open_orders)
+        matching_orders = open_orders.filter(system__in=systems_with_orders)
+
+        # use everything we just figured out to create a dictionary
+        data = {
+            'existing_count': existing_systems.count(),
+            'order_count': matching_orders.count(),
+            'j_codes': [sys.j_code for sys in existing_systems.order_by('j_code')],
+            'orders': [],
+        }
+        for order in matching_orders:
+            sigfig_price = sigfigs(order.price, 4)
+            json_order = {
+                'id': order.pk,
+                'modified': date(order.modified, 'c'),
+                'system': {
+                    'class': order.system.class_slash_static,
+                    'effect': order.system.effect.blankname,
+                    'j_code': order.system.j_code,
+                    'eveplanet_URL': order.system.eveplanet_URL,
+                    'zkillboard_URL': order.system.zkillboard_URL,
+                    'whpastagg_URL': order.system.whpastagg_URL,
+                },
+                'price': {
+                    'int': int(order.price),
+                    'comma': intcomma(sigfig_price),
+                    'word': intword(sigfig_price),
+                },
+                'contact': {
+                    'name': order.contact_name.name,
+                    'evewho_URL': order.contact_name.evewho_link,
+                },
+            }
+            data['orders'].append(json_order)
+
+        print '\n'
+        import pprint; pprint.pprint(data)
+
+        # convert that dictionary to a json object to be returned
+        data = json.dumps(data)
+
+        print '\n'
         return HttpResponse(data, content_type='application/json')
 
     else:
