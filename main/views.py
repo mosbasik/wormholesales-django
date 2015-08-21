@@ -219,7 +219,6 @@ def filter_view(request):
             }
 
             for master_key, (query, master_filter) in master_filters.items():
-                # print "{} / {} / {}".format(master_key, query, master_filter)
 
                 # get the list of filters for static 1, if any
                 filter_1 = master_filter
@@ -263,39 +262,14 @@ def filter_view(request):
             # now you have the matching two static holes
             static_double_qs = static_double_qs.distinct()
 
-
-
-
-        # static_qs = order_qs
-        # if filters['statics']:
-
-        #     if filters['statics']['static-1']:
-        #         statics_1 = filters['statics']['static-1']
-
-        #         if statics_1['class']:
-        #             static_qs = static_qs.filter(
-        #                     statics__space__name__in=statics_1['class'])
-
-        #         if statics_1['life']:
-        #             static_qs = static_qs.filter(
-        #                     statics__life__in=statics_1['life'])
-
-        #         if statics_1['mass']:
-        #             static_qs = static_qs.filter(
-        #                     statics__mass__in=[int(x) for x in statics_1['mass']])
-
-        #         if statics_1['jump']:
-        #             static_qs = static_qs.filter(
-        #                     statics__jump__in=[int(x) for x in statics_1['jump']])
-
-        for s in static_double_qs:
-            listing = ''
-            listing += str(s)
-            listing += str([x.space.name for x in s.statics.all()])
-            listing += str([x.life for x in s.statics.all()])
-            listing += str([x.mass for x in s.statics.all()])
-            listing += str([x.jump for x in s.statics.all()])
-            print listing
+        # for s in static_double_qs:
+        #     listing = ''
+        #     listing += str(s)
+        #     listing += str([x.space.name for x in s.statics.all()])
+        #     listing += str([x.life for x in s.statics.all()])
+        #     listing += str([x.mass for x in s.statics.all()])
+        #     listing += str([x.jump for x in s.statics.all()])
+        #     print listing
 
         print '\n'
 
