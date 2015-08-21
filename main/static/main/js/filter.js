@@ -102,7 +102,8 @@ function get_checked_values () {
 /**
  * When a filter checkbox is changed, sends an updated request to the server.
  */
-$('#filter-inputs input').on('change', function() {
+$('#search-button').click(function() {
+// $('#filter-inputs input').on('change', function() {
     var checked_value_list = get_checked_values()
     $.ajax({
         url: '/sell/filter/',
@@ -122,12 +123,10 @@ $('#filter-inputs input').on('change', function() {
             
             $.each(data.j_codes, function(index, value) {
                 if (index%2 === 0) {
-                    HTMLarray.push("<li>" + value);
-                } else {
-                    HTMLarray.push(", " + value + "</li>");
+                    HTMLarray.push(value + '\n');
                 }
             });
-            $('#sidebar-dropdown').html(HTMLarray.join(""));
+            $('#jcode-box').html(HTMLarray.join(""));
             $('#exists').text(count)
         },
         error: function() {

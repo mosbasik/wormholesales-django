@@ -26,7 +26,7 @@
 
             <br>
             
-            <div class="col-sm-9">
+            <div class="col-sm-9 filter-body">
                 <div class="row">
                     <div class='col-md-12 col-lg-3'>
                         <span class='title-format'>Class</span>
@@ -270,28 +270,33 @@
 
                 </div> {# end of static group #}
             </div> {# end of non sidebar group #}
-            <div class="col-sm-3" style='border-left: 2px solid #ccc'> {# start of sidebar #}
-                <h3>Info</h3>
+            <div class="col-sm-3 filter-sidebar"> {# start of sidebar #}
+                <div class="row">
+                    <div class="col-xs-3 col-sm-7 col-lg-6">
+                        <button id='search-button' class='btn btn-default'>Search</button>
 
-                <hr>
+                        <div id="sidebar-info">
+                            <p>
+                                <span>Exists:</span>
+                                <span id='exists'></span>
+                            </p>
+                            <p>
+                                <span>For Sale:</span>
+                                <span id='for_sale'></span>
+                            </p>
+                        </div>
 
-                <div id="sidebar-info">
-                    <p>
-                        <span>Exists: </span>
-                        <span id='exists'></span>
-                    </p>
-                    <p>
-                        <span>For Sale:</span>
-                        <span id='for_sale'></span>
-                    </p>
+                    </div>
+                    <div class=" col-xs-9 col-sm-5 col-lg-6 jcode-bar">
+                        <span class='title-format'>J&#8209;Codes</span>
+                        <div id="jcode-box"></div>
+                    </div>
 
-                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        J-Codes<span class="caret"></span>
-                    </a>
-                    <ul id='sidebar-dropdown' class="dropdown-menu table-dropdown" aria-labelledby="dropdownMenu1">
-                        
-                    </ul>
+                    
+
                 </div>
+
+                
 
                 <br>
 

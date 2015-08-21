@@ -327,15 +327,6 @@ html {
     background-color: #50a8dc;
 }
 
-@media (max-width: 768px) {
-    .navbar-nav .btn-group {
-        margin-left: 14px;
-    }
-    .brand-img {
-        padding-left: 5px;
-    }
-}
-
 .btn-group>.btn:focus {
     border-color: #f5f5f5;
     background-color: #50a8dc;
@@ -405,4 +396,53 @@ html {
 
 .ui-corner-left.ui-state-active {
     border-left-color: #50a8dc;
+}
+
+#search-button {
+    font-size: 14pt;
+    color: #f5f5f5;
+    background-color: #50a8dc;
+    border-color: #50a8dc;
+    margin-bottom: 10px;
+}
+
+#search-button.btn:focus {
+    outline: none;
+}
+
+.filter-body {
+    border-right: 2px solid #ccc;
+}
+
+.filter-sidebar {
+    height: 270px;
+}
+
+#sidebar-info {
+    white-space: nowrap;
+}
+
+.jcode-bar>span {
+    padding-left: 0px;
+}
+
+#jcode-box {
+    padding-left: 5px;
+    height: 190px;
+    width: 80px;
+    border-left: 1px solid #ccc;
+    overflow: auto;
+}
+
+/*NEEDS TO BE AT BOTTOM OF FILE*/
+@media (max-width: 768px) {
+    .navbar-nav .btn-group {
+        margin-left: 14px;
+    }
+    .brand-img {
+        padding-left: 5px;
+    }
+    .filter-body {
+        border-right: none;
+    }
 }
