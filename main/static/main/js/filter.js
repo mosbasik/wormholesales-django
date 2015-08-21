@@ -103,6 +103,7 @@ function get_checked_values () {
  * When a filter checkbox is changed, sends an updated request to the server.
  */
 $('#search-button').click(function() {
+    $('#filter-overlay').show()
 // $('#filter-inputs input').on('change', function() {
     var checked_value_list = get_checked_values()
     $.ajax({
@@ -114,20 +115,21 @@ $('#search-button').click(function() {
         success: function(data) {
             console.log(data)
             var count = data.count
-            var jcodes = data.j_codes;
-            var HTMLarray = [];
+            $('#exists').text(count)
+            $('#filter-overlay').hide()
+            // var jcodes = data.j_codes;
+            // var HTMLarray = [];
 
             // var forsale = data.for_sale;
             // $('#for_sale').text()
             // if you add for sale count to data
             
-            $.each(data.j_codes, function(index, value) {
-                if (index%2 === 0) {
-                    HTMLarray.push(value + '\n');
-                }
-            });
-            $('#jcode-box').html(HTMLarray.join(""));
-            $('#exists').text(count)
+            // $.each(data.j_codes, function(index, value) {
+            //     if (index%2 === 0) {
+            //         HTMLarray.push(value + '\n');
+            //     }
+            // });
+            // $('#jcode-box').html(HTMLarray.join(""));
         },
         error: function() {
             console.log('failure.')
