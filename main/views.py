@@ -170,43 +170,139 @@ def filter_view(request):
         if filters['effect']:
             order_qs = order_qs.filter(effect__name__in=filters['effect'])
 
-        static_qs = order_qs
+        # Assume we have saved all the systems with two statics in this qs:
+        static_double_qs = order_qs
+
         if filters['statics']:
+            statics = filters['statics']
 
-            if filters['statics']['static-1']:
-                statics_1 = filters['statics']['static-1']
+            master_filters = {
+                'class': (
+                    'statics__space__name__in',
+                    [
+                        'Class 1',
+                        'Class 2',
+                        'Class 3',
+                        'Class 4',
+                        'Class 5',
+                        'Class 6',
+                        'High-Sec',
+                        'Low-Sec',
+                        'Null-Sec',
+                    ],
+                ),
+                'life': (
+                    'statics__life__in',
+                    [
+                        '16',
+                        '24',
+                    ],
+                ),
+                'mass': (
+                    'statics__mass__in',
+                    [
+                        '500000000',
+                        '1000000000',
+                        '2000000000',
+                        '3000000000',
+                        '5000000000',
+                    ],
+                ),
+                'jump': (
+                    'statics__jump__in',
+                    [
+                        '20000000',
+                        '300000000',
+                        '1350000000',
+                    ],
+                ),
+            }
 
-                if statics_1['class']:
-                    static_qs = static_qs.filter(
-                            statics__space__name__in=statics_1['class'])
+            for master_key, (query, master_filter) in master_filters.items():
+                # print "{} / {} / {}".format(master_key, query, master_filter)
 
-                if statics_1['life']:
-                    static_qs = static_qs.filter(
-                            statics__life__in=statics_1['life'])
+                # get the list of filters for static 1, if any
+                filter_1 = master_filter
+                if statics['static-1']:
+                    static = statics['static-1']
+                    if static[master_key]:
+                        filter_1 = static[master_key]
+                print filter_1
 
-                if statics_1['mass']:
-                    static_qs = static_qs.filter(
-                            statics__mass__in=[int(x) for x in statics_1['mass']])
+                # filter on membership in filter 1
+                static_double_qs = static_double_qs.filter(**{query: filter_1})
 
-                if statics_1['jump']:
-                    static_qs = static_qs.filter(
-                            statics__jump__in=[int(x) for x in statics_1['jump']])
+                # get the list of filters for static 2, if any
+                filter_2 = master_filter
+                if statics['static-2']:
+                    static = statics['static-2']
+                    if static[master_key]:
+                        filter_2 = statics['static-2'][master_key]
+                print filter_2
 
-        # for s in static_qs:
-        #     listing = ''
-        #     listing += str(s)
-        #     listing += str([x.space.name for x in s.statics.all()])
-        #     listing += str([x.life for x in s.statics.all()])
-        #     listing += str([x.mass for x in s.statics.all()])
-        #     listing += str([x.jump for x in s.statics.all()])
-        #     print listing
+                # filter on membership in filter 2
+                static_double_qs = static_double_qs.filter(**{query: filter_2})
+
+                # make a mask by concatenating filter 1 and filter 2
+                filter_mask = filter_1 + filter_2
+
+                # add every member of the master filter that's NOT in the mask
+                # to a negative filter
+                filter_negative = []
+                for f in master_filter:
+                    if f not in filter_mask:
+                        filter_negative.append(f)
+                print filter_negative
+
+                # exclude results that match the negative filter
+                static_double_qs = static_double_qs.exclude(
+                    **{query: filter_negative})
+
+                print '\n'
+
+            # now you have the matching two static holes
+            static_double_qs = static_double_qs.distinct()
+
+
+
+
+        # static_qs = order_qs
+        # if filters['statics']:
+
+        #     if filters['statics']['static-1']:
+        #         statics_1 = filters['statics']['static-1']
+
+        #         if statics_1['class']:
+        #             static_qs = static_qs.filter(
+        #                     statics__space__name__in=statics_1['class'])
+
+        #         if statics_1['life']:
+        #             static_qs = static_qs.filter(
+        #                     statics__life__in=statics_1['life'])
+
+        #         if statics_1['mass']:
+        #             static_qs = static_qs.filter(
+        #                     statics__mass__in=[int(x) for x in statics_1['mass']])
+
+        #         if statics_1['jump']:
+        #             static_qs = static_qs.filter(
+        #                     statics__jump__in=[int(x) for x in statics_1['jump']])
+
+        for s in static_double_qs:
+            listing = ''
+            listing += str(s)
+            listing += str([x.space.name for x in s.statics.all()])
+            listing += str([x.life for x in s.statics.all()])
+            listing += str([x.mass for x in s.statics.all()])
+            listing += str([x.jump for x in s.statics.all()])
+            print listing
 
         print '\n'
 
         # use everything we just made to make a json file to be returned
         data = json.dumps({
-            'count': static_qs.count(),
-            'j_codes': [sys.j_code for sys in static_qs.order_by('j_code')],
+            'count': static_double_qs.count(),
+            'j_codes': [sys.j_code for sys in static_double_qs.order_by('j_code')],
         })
         return HttpResponse(data, content_type='application/json')
 
