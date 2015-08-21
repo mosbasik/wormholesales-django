@@ -1,7 +1,11 @@
+# django imports
+from django.db.models import Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.views.generic import View
+from django.views.generic.list import ListView
 
-# user authentication
+# djanog user authentication imports
 from django.contrib.auth.decorators import (
     login_required,
     user_passes_test,
@@ -13,13 +17,12 @@ from django.contrib.auth import (
     logout as auth_logout,
 )
 
-from django.views.generic import View
-from django.views.generic.list import ListView
-
+# project imports
 from main.forms import OrderModelForm, UserCreationForm
 from main.models import Order, System, Character
 from project.settings import EFFECT_CONST
 
+# python imports
 from lxml import etree
 import json
 import requests
@@ -164,14 +167,46 @@ def filter_view(request):
 
         import pprint; pprint.pprint(filters)
 
-        order_qs = System.objects.all()
-        if filters['class']:
-            order_qs = order_qs.filter(space__name__in=filters['class'])
-        if filters['effect']:
-            order_qs = order_qs.filter(effect__name__in=filters['effect'])
+        query_dict = {
+            'order': {
+                'class': {
+                    'space__name__in': filters['class'],
+                },
+                'effect': {
+                    'effect__name__in': filters['effect'],
+                },
+                'class_effect': {
+                    'space__name__in': filters['class'],
+                    'effect__name__in': filters['effect'],
+                }
+            },
+            'system': {},
+            'static': {},
+        }
 
-        # Assume we have saved all the systems with two statics in this qs:
-        static_double_qs = order_qs
+        order_qs = System.objects.all()
+        # if filters['class']:
+        #     order_qs = order_qs.filter(space__name__in=filters['class'])
+        # if filters['effect']:
+        #     order_qs = order_qs.filter(effect__name__in=filters['effect'])
+        if filters['class'] and not filters['effect']:
+            order_qs = order_qs.filter(**query_dict['order']['class'])
+        elif filters['effect'] and not filters['class']:
+            order_qs = order_qs.filter(**query_dict['order']['effect'])
+        elif filters['class'] and filters['effect']:
+            order_qs = order_qs.filter(**query_dict['order']['class_effect'])
+
+        # annotate the queryset with the number of statics each system has
+        order_qs = order_qs.annotate(num_statics=Count('statics'))
+
+        # get querysets for the zero, single and double static cases:
+        static_zero_qs = order_qs.filter(num_statics=0).distinct()
+        static_single_qs = order_qs.filter(num_statics=1).distinct()
+        static_double_qs = order_qs.filter(num_statics=2).distinct()
+
+        print "0 statics: {} systems".format(static_zero_qs.count())
+        print "1 statics: {} systems".format(static_single_qs.count())
+        print "2 statics: {} systems\n".format(static_double_qs.count())
 
         if filters['statics']:
             statics = filters['statics']
@@ -262,7 +297,10 @@ def filter_view(request):
             # now you have the matching two static holes
             static_double_qs = static_double_qs.distinct()
 
-        # for s in static_double_qs:
+        # result_qs = static_double_qs
+        result_qs = static_zero_qs | static_double_qs
+
+        # for s in result_qs:
         #     listing = ''
         #     listing += str(s)
         #     listing += str([x.space.name for x in s.statics.all()])
@@ -275,8 +313,8 @@ def filter_view(request):
 
         # use everything we just made to make a json file to be returned
         data = json.dumps({
-            'count': static_double_qs.count(),
-            'j_codes': [sys.j_code for sys in static_double_qs.order_by('j_code')],
+            'count': result_qs.count(),
+            'j_codes': [sys.j_code for sys in result_qs.order_by('j_code')],
         })
         return HttpResponse(data, content_type='application/json')
 

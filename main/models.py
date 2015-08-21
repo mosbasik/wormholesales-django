@@ -48,7 +48,7 @@ class Order(models.Model):
     modified = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
     contact_name = models.ForeignKey('main.Character')
-    system = models.ForeignKey('main.System')
+    system = models.ForeignKey('main.System', related_name='orders')
     price = models.DecimalField(max_digits=16, decimal_places=2)
     information = models.TextField(null=True, blank=True)
     is_sell = models.BooleanField()
