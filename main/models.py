@@ -48,7 +48,7 @@ class Order(models.Model):
     modified = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User)
     contact_name = models.ForeignKey('main.Character')
-    system = models.ForeignKey('main.System')
+    system = models.ForeignKey('main.System', related_name='orders')
     price = models.DecimalField(max_digits=16, decimal_places=2)
     information = models.TextField(null=True, blank=True)
     is_sell = models.BooleanField()
@@ -116,8 +116,25 @@ class System(models.Model):
     statics = models.ManyToManyField('main.Wormhole', related_name='systems')
 
     @property
+    def class_slash_static(self):
+        result = self.space.abbrev
+        for static in self.statics.all():
+            result += ' / {}'.format(static.space.code)
+        return result
+
+    @property
     def eveplanet_URL(self):
         url_stub = 'http://eveplanets.com/eve/system/index/?show='
+        return url_stub + self.j_code
+
+    @property
+    def zkillboard_URL(self):
+        url_stub = 'https://zkillboard.com/system/'
+        return url_stub + str(self.id)
+
+    @property
+    def whpastagg_URL(self):
+        url_stub = 'http://wh.pasta.gg/'
         return url_stub + self.j_code
 
     def __unicode__(self):
