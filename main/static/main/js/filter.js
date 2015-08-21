@@ -112,6 +112,23 @@ $('#filter-inputs input').on('change', function() {
         },
         success: function(data) {
             console.log(data)
+            var count = data.count
+            var jcodes = data.j_codes;
+            var HTMLarray = [];
+
+            // var forsale = data.for_sale;
+            // $('#for_sale').text()
+            // if you add for sale count to data
+            
+            $.each(data.j_codes, function(index, value) {
+                if (index%2 === 0) {
+                    HTMLarray.push("<li>" + value);
+                } else {
+                    HTMLarray.push(", " + value + "</li>");
+                }
+            });
+            $('#sidebar-dropdown').html(HTMLarray.join(""));
+            $('#exists').text(count)
         },
         error: function() {
             console.log('failure.')
