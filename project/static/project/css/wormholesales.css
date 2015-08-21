@@ -9,6 +9,10 @@ navbar color #50a8dc
     display: none;
 }*/
 
+#filter-overlay {
+    display: none;
+}
+
 .price-textbox {
     display: none;
 }
@@ -432,6 +436,26 @@ html {
     width: 80px;
     border-left: 1px solid #ccc;
     overflow: auto;
+}
+
+#filter-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(238, 238, 238, .8);
+    border-radius: 5px;
+}
+
+#filter-overlay>img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    margin-top: -60px; /* Half the height */
+    margin-left: -60px; /* Half the width */
 }
 
 /*NEEDS TO BE AT BOTTOM OF FILE*/
