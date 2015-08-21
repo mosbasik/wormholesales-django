@@ -114,9 +114,14 @@ $('#search-button').click(function() {
         },
         success: function(data) {
             console.log(data)
-            var count = data.count
-            $('#exists').text(count)
-            $('#filter-overlay').hide()
+            var count = data.count;
+            $('#exists').text(count);
+
+            // var orders = data.orders;
+            // $.each(orders, function(index, value) {
+
+            // });
+
             // var jcodes = data.j_codes;
             // var HTMLarray = [];
 
@@ -130,6 +135,7 @@ $('#search-button').click(function() {
             //     }
             // });
             // $('#jcode-box').html(HTMLarray.join(""));
+            $('#filter-overlay').hide()
         },
         error: function() {
             console.log('failure.')

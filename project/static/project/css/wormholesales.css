@@ -404,8 +404,8 @@ html {
 
 #search-button {
     font-size: 14pt;
-    color: #f5f5f5;
-    background-color: #50a8dc;
+    /*color: #f5f5f5;*/
+    background-color: #f5f5f5;
     border-color: #50a8dc;
     margin-bottom: 10px;
 }
