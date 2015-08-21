@@ -114,8 +114,10 @@ $('#search-button').click(function() {
         },
         success: function(data) {
             console.log(data)
-            var count = data.count;
+            var count = data.existing_count;
             $('#exists').text(count);
+            var order_count = data.order_count;
+            $('#for_sale').text(order_count)
 
             // var orders = data.orders;
             // $.each(orders, function(index, value) {
