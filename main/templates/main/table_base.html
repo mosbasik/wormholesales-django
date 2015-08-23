@@ -3,7 +3,7 @@
 {% load customfilters %}
 {% load nbsp %}
 
-<div class="table-all">
+<div id="order-table" class="table-all">
     <div class="row table-row">
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 col-heading button-col table-cell"><p>Details</p></div>
         <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3 col-lg-offset-0 col-md-offset-0 col-sm-offset-1 col-xs-offset-1 col-heading table-cell"><p>Class</p></div>
@@ -54,7 +54,11 @@
             </div>
         </div>
     {% endfor %}
+    <span id="existing_count" hidden>{{ existing_count }}</span>
+    <span id="order_count" hidden>{{ order_count }}</span>
 </div>
+
+<!--
 <nav>
     <ul class="pagination">
         <li>
@@ -75,3 +79,4 @@
         <li><span><-- Non Functional</span></li>
     </ul>
 </nav>
+-->

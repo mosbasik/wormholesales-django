@@ -1,8 +1,8 @@
 # django imports
-from django.contrib.humanize.templatetags.humanize import intword, intcomma
+# from django.contrib.humanize.templatetags.humanize import intword, intcomma
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.template.defaultfilters import date
+from django.shortcuts import render, redirect, render_to_response
+# from django.template.defaultfilters import date
 from django.views.generic import View
 from django.views.generic.list import ListView
 
@@ -21,8 +21,8 @@ from django.contrib.auth import (
 # project imports
 from main.forms import OrderModelForm, UserCreationForm
 from main.models import Order, System, Character
-from main.templatetags.customfilters import sigfigs
-from main.templatetags.nbsp import nbsp
+# from main.templatetags.customfilters import sigfigs
+# from main.templatetags.nbsp import nbsp
 from project.settings import EFFECT_CONST
 
 # python imports
@@ -161,27 +161,45 @@ class BuyOrderListView(ListView):
 def filter_view(request):
 
     if request.method == 'GET':
-        print '\n'
+        # print '\n'
 
+        # make a blank context dict
+        context = {}
+
+        # get the data from the request and load it into a filters dict
         f = request.GET.get('filters', None)
         filters = json.loads(f)
 
+        # combine "normal" wormhole class group and "shattered" wormhole class
+        # group into one "class" group so that selections from both groups are
+        # OR'ed together (instead of AND'ed, which is the default behavior for
+        # buttons in different groups.)
         filters['class'] = filters['normal_class'] + filters['shattered_class']
 
-        import pprint; pprint.pprint(filters)
+        # import pprint; pprint.pprint(filters)
 
-        order_qs = System.objects.all()
+        # get the queryset of all existing wormhole systems
+        system_qs = System.objects.all()
+
+        # apply the wormhole-level filters (the simplest filters, that are only
+        # concerned with the basic attributes of the wormhole being sold)
+        wormhole_qs = system_qs
         if filters['class']:
-            order_qs = order_qs.filter(space__name__in=filters['class'])
+            wormhole_qs = wormhole_qs.filter(space__name__in=filters['class'])
         if filters['effect']:
-            order_qs = order_qs.filter(effect__name__in=filters['effect'])
+            wormhole_qs = wormhole_qs.filter(effect__name__in=filters['effect'])
 
         # Assume we have saved all the systems with two statics in this qs:
-        static_double_qs = order_qs
+        static_double_qs = wormhole_qs
 
+        # precaution: only continue if a list of static filters was received
         if filters['statics']:
             statics = filters['statics']
 
+            # create master_filters dict containing all of the possible values
+            # for all the possible groups that statics can be filtered on,
+            # coupled with the strings used to perform the Django ORM queries
+            # that actually apply those filters to a System queryset.
             master_filters = {
                 'class': (
                     'statics__space__name__in',
@@ -224,6 +242,9 @@ def filter_view(request):
                 ),
             }
 
+            # iterate over each filter group in the master_filters dict and
+            # unpack the name of the group, the query it needs, and the master
+            # list of filters for that group.
             for master_key, (query, master_filter) in master_filters.items():
 
                 # get the list of filters for static 1, if any
@@ -234,9 +255,6 @@ def filter_view(request):
                         filter_1 = static[master_key]
                 # print filter_1
 
-                # filter on membership in filter 1
-                static_double_qs = static_double_qs.filter(**{query: filter_1})
-
                 # get the list of filters for static 2, if any
                 filter_2 = master_filter
                 if statics['static-2']:
@@ -245,21 +263,16 @@ def filter_view(request):
                         filter_2 = statics['static-2'][master_key]
                 # print filter_2
 
-                # filter on membership in filter 2
-                static_double_qs = static_double_qs.filter(**{query: filter_2})
-
-                # make a mask by concatenating filter 1 and filter 2
-                filter_mask = filter_1 + filter_2
-
-                # add every member of the master filter that's NOT in the mask
-                # to a negative filter
-                filter_negative = []
-                for f in master_filter:
-                    if f not in filter_mask:
-                        filter_negative.append(f)
+                # get the list of filters not in filter 1 OR filter 2
+                filter_negative = set(master_filter).difference(
+                    filter_1 + filter_2)
                 # print filter_negative
 
-                # exclude results that match the negative filter
+                # filter on membership in filter 1 AND filter_2
+                static_double_qs = static_double_qs.filter(
+                    **{query: filter_1, query: filter_2})
+
+                # exclude on membership in the negative filter
                 static_double_qs = static_double_qs.exclude(
                     **{query: filter_negative})
 
@@ -277,53 +290,18 @@ def filter_view(request):
         #     listing += str([x.jump for x in s.statics.all()])
         #     print listing
 
-
         # filter for systems that exist in sell orders
         existing_systems = static_double_qs
         open_orders = Order.objects.filter(is_sell=True)
         systems_with_orders = existing_systems.filter(orders__in=open_orders)
         matching_orders = open_orders.filter(system__in=systems_with_orders)
 
-        # use everything we just figured out to create a dictionary
-        data = {
-            'existing_count': existing_systems.count(),
-            'order_count': matching_orders.count(),
-            'j_codes': [sys.j_code for sys in existing_systems.order_by('j_code')],
-            'orders': [],
-        }
-        for order in matching_orders:
-            sigfig_price = sigfigs(order.price, 4)
-            json_order = {
-                'id': order.pk,
-                'modified': date(order.modified, 'c'),
-                'system': {
-                    'class': order.system.class_slash_static,
-                    'effect': order.system.effect.blankname,
-                    'j_code': order.system.j_code,
-                    'eveplanet_URL': order.system.eveplanet_URL,
-                    'zkillboard_URL': order.system.zkillboard_URL,
-                    'whpastagg_URL': order.system.whpastagg_URL,
-                },
-                'price': {
-                    'int': int(order.price),
-                    'comma': intcomma(sigfig_price),
-                    'word': intword(sigfig_price),
-                },
-                'contact': {
-                    'name': order.contact_name.name,
-                    'evewho_URL': order.contact_name.evewho_link,
-                },
-            }
-            data['orders'].append(json_order)
+        # populate the context dict with relevant information
+        context['object_list'] = matching_orders
+        context['existing_count'] = existing_systems.count()
+        context['order_count'] = matching_orders.count()
 
-        print '\n'
-        import pprint; pprint.pprint(data)
-
-        # convert that dictionary to a json object to be returned
-        data = json.dumps(data)
-
-        print '\n'
-        return HttpResponse(data, content_type='application/json')
+        return render_to_response('main/table_base.html', context)
 
     else:
         # bad request by client
