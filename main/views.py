@@ -1,11 +1,11 @@
 # django imports
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.views.generic import View
 from django.views.generic.list import ListView
 
-# djanog user authentication imports
+# django user authentication imports
 from django.contrib.auth.decorators import (
     login_required,
     user_passes_test,
@@ -158,60 +158,47 @@ class BuyOrderListView(ListView):
 def filter_view(request):
 
     if request.method == 'GET':
-        print '\n'
+        # print '\n'
 
+        # make a blank context dict
+        context = {}
+
+        # get the data from the request and load it into a filters dict
         f = request.GET.get('filters', None)
         filters = json.loads(f)
 
+        # combine "normal" wormhole class group and "shattered" wormhole class
+        # group into one "class" group so that selections from both groups are
+        # OR'ed together (instead of AND'ed, which is the default behavior for
+        # buttons in different groups.)
         filters['class'] = filters['normal_class'] + filters['shattered_class']
 
-        import pprint; pprint.pprint(filters)
+        # import pprint; pprint.pprint(filters); print '\n'
 
-        query_dict = {
-            'order': {
-                'class': {
-                    'space__name__in': filters['class'],
-                },
-                'effect': {
-                    'effect__name__in': filters['effect'],
-                },
-                'class_effect': {
-                    'space__name__in': filters['class'],
-                    'effect__name__in': filters['effect'],
-                }
-            },
-            'system': {},
-            'static': {},
-        }
+        # get the queryset of all existing wormhole systems
+        system_qs = System.objects.all()
 
-        order_qs = System.objects.all()
-        # if filters['class']:
-        #     order_qs = order_qs.filter(space__name__in=filters['class'])
-        # if filters['effect']:
-        #     order_qs = order_qs.filter(effect__name__in=filters['effect'])
-        if filters['class'] and not filters['effect']:
-            order_qs = order_qs.filter(**query_dict['order']['class'])
-        elif filters['effect'] and not filters['class']:
-            order_qs = order_qs.filter(**query_dict['order']['effect'])
-        elif filters['class'] and filters['effect']:
-            order_qs = order_qs.filter(**query_dict['order']['class_effect'])
+        # apply the wormhole-level filters (the simplest filters, that are only
+        # concerned with the primary attributes of the wormhole being sold)
+        if filters['class']:
+            system_qs = system_qs.filter(
+                space__name__in=filters['class'])
+        if filters['effect']:
+            system_qs = system_qs.filter(
+                effect__name__in=filters['effect'])
 
         # annotate the queryset with the number of statics each system has
-        order_qs = order_qs.annotate(num_statics=Count('statics'))
+        system_qs = system_qs.annotate(num_statics=Count('statics'))
 
-        # get querysets for the zero, single and double static cases:
-        static_zero_qs = order_qs.filter(num_statics=0).distinct()
-        static_single_qs = order_qs.filter(num_statics=1).distinct()
-        static_double_qs = order_qs.filter(num_statics=2).distinct()
-
-        print "0 statics: {} systems".format(static_zero_qs.count())
-        print "1 statics: {} systems".format(static_single_qs.count())
-        print "2 statics: {} systems\n".format(static_double_qs.count())
-
+        # precaution: only continue if a list of static filters was received
         if filters['statics']:
             statics = filters['statics']
 
-            master_filters = {
+            # create master_filters dict containing all of the possible values
+            # for all the possible groups that statics can be filtered on,
+            # coupled with the strings used to perform the Django ORM queries
+            # that actually apply those filters to a System queryset.
+            filter_dict = {
                 'class': (
                     'statics__space__name__in',
                     [
@@ -253,54 +240,67 @@ def filter_view(request):
                 ),
             }
 
-            for master_key, (query, master_filter) in master_filters.items():
+            # iterate over each filter group in the filter_dict and unpack the
+            # name of the group, the query it needs, and the master list of
+            # filters for that group.
+            for name, (query, master_filter) in filter_dict.items():
 
                 # get the list of filters for static 1, if any
                 filter_1 = master_filter
                 if statics['static-1']:
-                    static = statics['static-1']
-                    if static[master_key]:
-                        filter_1 = static[master_key]
-                print filter_1
-
-                # filter on membership in filter 1
-                static_double_qs = static_double_qs.filter(**{query: filter_1})
+                    if statics['static-1'][name]:
+                        filter_1 = statics['static-1'][name]
+                # print filter_1
 
                 # get the list of filters for static 2, if any
                 filter_2 = master_filter
                 if statics['static-2']:
-                    static = statics['static-2']
-                    if static[master_key]:
-                        filter_2 = statics['static-2'][master_key]
-                print filter_2
+                    if statics['static-2'][name]:
+                        filter_2 = statics['static-2'][name]
+                # print filter_2
 
-                # filter on membership in filter 2
-                static_double_qs = static_double_qs.filter(**{query: filter_2})
+                # default assumption: filters were given for only one static
+                have_filters_for_two_statics = False
 
-                # make a mask by concatenating filter 1 and filter 2
-                filter_mask = filter_1 + filter_2
+                # if one or the other of the groups has no filters applied,
+                # then ignore the empty group when making the mask.  otherwise,
+                # the mask is the union of the two groups' filters.
+                if filter_1 == master_filter:
+                    filter_both = filter_2
 
-                # add every member of the master filter that's NOT in the mask
-                # to a negative filter
-                filter_negative = []
-                for f in master_filter:
-                    if f not in filter_mask:
-                        filter_negative.append(f)
-                print filter_negative
+                elif filter_2 == master_filter:
+                    filter_both = filter_1
 
-                # exclude results that match the negative filter
-                static_double_qs = static_double_qs.exclude(
-                    **{query: filter_negative})
+                else:
+                    # set flag indicating filters for two statics were given
+                    have_filters_for_two_statics = True
+                    filter_both = set(filter_1 + filter_2)
 
-                print '\n'
+                # print filter_both
 
-            # now you have the matching two static holes
-            static_double_qs = static_double_qs.distinct()
+                # get the list of filters not in filter 1 OR filter 2
+                filter_negative = set(master_filter).difference(filter_both)
+                # print filter_negative
 
-        # result_qs = static_double_qs
-        result_qs = static_zero_qs | static_double_qs
+                # print have_filters_for_two_statics; print '\n'
 
-        # for s in result_qs:
+                # apply positive filters
+                system_qs = system_qs.filter(
+                    Q(num_statics=0) |
+                    (Q(num_statics__gt=0) & Q(**{query: filter_both}))
+                )
+
+                # if flag was set (indicating filters for two statics were
+                # given) then apply negative filter as well
+                if have_filters_for_two_statics:
+                    system_qs = system_qs.exclude(
+                        Q(num_statics=2) & Q(**{query: filter_negative}),
+                    )
+
+        # now we have all existing systems that match the passed filters
+        existing_systems = system_qs.distinct()
+
+        # for s in existing_systems:
         #     listing = ''
         #     listing += str(s)
         #     listing += str([x.space.name for x in s.statics.all()])
@@ -308,15 +308,21 @@ def filter_view(request):
         #     listing += str([x.mass for x in s.statics.all()])
         #     listing += str([x.jump for x in s.statics.all()])
         #     print listing
+        # print '\n'
 
-        print '\n'
+        # filter for systems that exist in sell orders
+        open_orders = Order.objects.filter(is_sell=True)
+        systems_with_orders = existing_systems.filter(orders__in=open_orders)
+        matching_orders = open_orders.filter(system__in=systems_with_orders)
 
-        # use everything we just made to make a json file to be returned
-        data = json.dumps({
-            'count': result_qs.count(),
-            'j_codes': [sys.j_code for sys in result_qs.order_by('j_code')],
-        })
-        return HttpResponse(data, content_type='application/json')
+        # populate the context dict with relevant information
+        context['object_list'] = matching_orders
+        context['existing_count'] = existing_systems.count()
+        context['order_count'] = matching_orders.count()
+        context['user'] = request.user
+
+        # render template to string using this context dict and return it
+        return render_to_response('main/table_base.html', context)
 
     else:
         # bad request by client
