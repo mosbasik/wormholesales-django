@@ -319,6 +319,7 @@ def filter_view(request):
         context['object_list'] = matching_orders
         context['existing_count'] = existing_systems.count()
         context['order_count'] = matching_orders.count()
+        context['user'] = request.user
 
         # render template to string using this context dict and return it
         return render_to_response('main/table_base.html', context)

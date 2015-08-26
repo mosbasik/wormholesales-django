@@ -117,25 +117,7 @@ $('#search-button').click(function() {
             $('#order-table').html(data)
             $('#exists').text($('#existing_count').text())
             $('#for_sale').text($('#order_count').text())
-
-            // var orders = data.orders;
-            // $.each(orders, function(index, value) {
-
-            // });
-
-            // var jcodes = data.j_codes;
-            // var HTMLarray = [];
-
-            // var forsale = data.for_sale;
-            // $('#for_sale').text()
-            // if you add for sale count to data
-            
-            // $.each(data.j_codes, function(index, value) {
-            //     if (index%2 === 0) {
-            //         HTMLarray.push(value + '\n');
-            //     }
-            // });
-            // $('#jcode-box').html(HTMLarray.join(""));
+            jQuery("time.timeago").timeago()
             $('#filter-overlay').hide()
         },
         error: function() {
